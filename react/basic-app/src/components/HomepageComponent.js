@@ -6,22 +6,22 @@ class HomepageComponent extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      data:[]
+      text:[]
     }
   }
 
   componentDidMount(){
     console.log('I was triggered during componentDidMount');
     HomepageService.getData().then((response) => {
-            this.setState({ data: response.data})
+            this.setState({ text: response.data})
         });
-    console.log(this.state.data)
+    console.log(this.state.text)
   }
 
   render(){
     return(
       <div>
-        <h1 className = "text-center">Test</h1>
+        <h1 className = "text-center">{this.state.text.success}</h1>
       </div>
     )
   }

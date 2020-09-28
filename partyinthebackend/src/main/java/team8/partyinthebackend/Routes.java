@@ -24,6 +24,6 @@ public class Routes {
     @GetMapping("/test")
     public String test() {
     	//StringResponse jsonCreator = new StringResponse("Hello React");
-    	return "{\"success\":1}"; //jasonCreator.StringResponse("Hello React");
+    	return "{\"success\":\"Hello React\"}"; //jasonCreator.StringResponse("Hello React");
     }
 }
