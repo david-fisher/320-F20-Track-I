@@ -11,6 +11,7 @@ You need node.js latest version: https://nodejs.org/en/
 
 * Run springboot server
 * Then navigate to project directory 'react/basic-app'
+* `npm install` to download necessary libraries and files
 * `npm start`
 * Open http://localhost:3000/
 
