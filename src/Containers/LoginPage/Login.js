@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Row, Col, Form, Input, Button } from 'antd';
+import './index.css'
+
 
 //function component
 const Login = () => {
@@ -14,24 +17,37 @@ const Login = () => {
 
 
     return (
-        <div className="container-fluid" style={{ backgroundColor: "#881C1C" }}>
-            <div className="row">
-                <div className="col">
-                    <img src="/img/students.jpeg" alt="students working" className="img-fluid" />
-                </div>
-                <div className="col align-self-center text-center">
-                    <p className="lead text-white">LOGIN</p>
-                    <form>
-                        <div className="form-group">
-                            <input type="email" id="email" className="form-control" onChange={e => setUsername(e.target.value)} placeholder="Enter email" />
-                        </div>
-                        <div className="form-group">
-                            <input type="password" id="password" className="form-control" onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
-                        </div>
-                        <button type="button" className="btn btn-danger">Let's Go!</button>
-                    </form>
-                </div>
-            </div>
+        <div className="login">
+            <Row align="middle">
+                <Col xs={0} sm={0} md={8} lg={12} style={{ height: "100vh" }}>
+                    <div className="image-container" />
+                </Col>
+                <Col sm={24} md={16} lg={12} style={{ height: "100vh" }}>
+                    <div className="form">
+                        <div><h1 className="header-text">LOGIN</h1></div>
+                        <Form align="middle">
+                            <Form.Item
+                                name="username"
+                                rules={[{ required: true, message: 'Please input your username!' }]}
+                            >
+                                <Input type="email" id="email" className="form-control" onChange={e => setUsername(e.target.value)} placeholder="Enter email" />
+                            </Form.Item>
+                            <Form.Item
+                                name="password"
+                                rules={[{ required: true, message: 'Please input your password!' }]}
+                            >
+                                <Input.Password onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
+                            </Form.Item>
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit">
+                                    Submit
+                        </Button>
+                            </Form.Item>
+                        </Form>
+                    </div>
+
+                </Col>
+            </Row>
         </div>
     );
 

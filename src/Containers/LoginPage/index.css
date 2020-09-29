@@ -1,0 +1,35 @@
+.login {
+	height: 100vh;
+	overflow: hidden;
+	background-color: #881c1c;
+}
+
+h1 {
+	color: white !important;
+}
+
+.image-container {
+	height: 100vh;
+	background-image: url('/img/students.jpeg');
+	background-position: top top; /* Center the image */
+	background-size: cover;
+}
+
+.image {
+	height: 100vh;
+}
+
+.form {
+	height: 100%;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+@media (max-width: 576px) {
+	.form {
+		width: 100vw;
+	}
+}
