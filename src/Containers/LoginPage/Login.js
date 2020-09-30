@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Form, Input, Button } from 'antd';
 import './index.css'
+import { useHistory } from "react-router-dom";
+
 
 
 //function component
 const Login = () => {
+
+    const history = useHistory()
 
     //state hooks
     const [username, setUsername] = useState("")
@@ -39,9 +43,7 @@ const Login = () => {
                                 <Input.Password onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
                             </Form.Item>
                             <Form.Item >
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                        </Button>
+                                <Button type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>Submit</Button>
                             </Form.Item>
                         </Form>
                     </div>
