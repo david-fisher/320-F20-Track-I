@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Form, Input, Button } from 'antd';
+import { FormInput } from '../../component/Input'
 import './index.css'
 import { useHistory } from "react-router-dom";
 
@@ -34,13 +35,13 @@ const Login = () => {
                                 name="username"
                                 rules={[{ required: true, message: 'Please input your username!' }]}
                             >
-                                <Input type="email" id="email" className="form-control" onChange={e => setUsername(e.target.value)} placeholder="Enter email" />
+                                <FormInput type="email" id="email" className="form-control login-input" onChange={e => setUsername(e.target.value)} placeholder="Enter email" />
                             </Form.Item>
                             <Form.Item
                                 name="password"
                                 rules={[{ required: true, message: 'Please input your password!' }]}
                             >
-                                <Input.Password onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
+                                <FormInput type="password" onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
                             </Form.Item>
                             <Form.Item >
                                 <Button type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>Submit</Button>
