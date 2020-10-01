@@ -1,0 +1,12 @@
+.email,
+.password {
+	background-color: transparent !important;
+	border: none !important;
+	border-bottom: 3px solid white !important;
+	width: 500px !important;
+	color: white !important;
+}
+
+.password input {
+	background-color: transparent !important;
+}
