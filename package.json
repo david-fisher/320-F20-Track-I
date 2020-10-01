@@ -33,5 +33,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "css-loader": "^4.3.0",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.44.2"
   }
 }
