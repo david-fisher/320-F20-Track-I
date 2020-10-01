@@ -2,13 +2,6 @@ import React from 'react';
 import { Input } from 'antd';
 import './index.css'
 
-const style = {
-   // backgroundColor: 'black',
-   // border: 'none',
-   // borderBottom: '3px solid white',
-   // width: '500px',
-   // color: 'white'
-}
 export const FormInput = (props) => {
    if (props.type === 'email') {
       return (
