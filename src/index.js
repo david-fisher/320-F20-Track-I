@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './containers/App/App';
+import App from './Containers/App/App';
 import 'antd/dist/antd.css'
 
 ReactDOM.render(
