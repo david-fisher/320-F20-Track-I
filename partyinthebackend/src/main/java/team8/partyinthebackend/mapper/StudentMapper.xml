@@ -9,4 +9,26 @@
     select * from students
   </select>
 
+  <!-- select one student from database by id-->
+  <select id="selectById" resultType="team8.partyinthebackend.model.Student">
+    SELECT * FROM students WHERE id = #{id}
+  </select>
+
+  <!-- create a student-->
+  <select id="create" resultType="team8.partyinthebackend.model.Student">
+    INSERT INTO students(name, major) VALUES (#{name}, #{major})
+  </select>
+
+<!--  <update id="update" parameterType="team8.partyinthebackend.model.Student">-->
+<!--    <set>-->
+<!--      <if test="name != null">name=#{name},</if>-->
+<!--      <if test="major != null">major=#{major},</if>-->
+<!--    </set>-->
+<!--    where id=#{id}-->
+<!--  </update>-->
+
+<!--  <delete id="delete">-->
+<!--        delete from t_user where id=#{id}-->
+<!--    </delete>-->
+
 </mapper>

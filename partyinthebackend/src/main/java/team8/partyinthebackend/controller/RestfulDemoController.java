@@ -1,11 +1,16 @@
 package team8.partyinthebackend.controller;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import team8.partyinthebackend.mapper.StudentMapper;
 import team8.partyinthebackend.model.Student;
+import team8.partyinthebackend.utils.MybatisUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,46 +20,41 @@ import java.util.Map;
 
 @RestController
 public class RestfulDemoController {
-    private static Map<String, Student> studentRepo = new HashMap<>();
-    static {
-        Student Jack = new Student();
-        Jack.setId("1");
-        Jack.setName("Jack");
-        studentRepo.put(Jack.getId(), Jack);
+    //GET
+    @GetMapping(value = "/students")
+    public List<Student> getAllStudents(){
+        try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
 
-        Student Fiona = new Student();
-        Fiona.setId("2");
-        Fiona.setName("Fiona");
-        studentRepo.put(Fiona.getId(), Fiona);
+            StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+
+            return mapper.selectAll();
+        }
     }
 
     //GET
-    @RequestMapping(value = "/students")
-    public ResponseEntity<Object> getStudent() {
-        return new ResponseEntity<>(studentRepo.values(), HttpStatus.OK);
+    @GetMapping(value = "/students/{id}")
+    public List<Student> getOneStudent(@PathVariable Long id){
+        try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
+            StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+            return mapper.selectById(id);
+        }
     }
 
     //POST
-    @PostMapping(value = "/students")
-    public ResponseEntity<Object> createStudent(@RequestBody Student student) {
-        studentRepo.put(student.getId(), student);
-        return new ResponseEntity<>("Student is created successfully", HttpStatus.CREATED);
+    @PostMapping(value = "/students", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addOneStudent(@RequestBody Student student){
+        try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
+            StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+            mapper.create(student);
+        }
     }
 
-    //PUT
-    @RequestMapping(value = "/students/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateStudent(@PathVariable("id") String id, @RequestBody Student student) {
-        studentRepo.remove(id);
-        student.setId(id);
-        studentRepo.put(id, student);
-        return new ResponseEntity<>("Student is updated successfully", HttpStatus.OK);
-    }
+//    //PUT
+//    @RequestMapping(value = "/students/{id}", method = RequestMethod.PUT)
+//
+//
+//    //DELETE
+//    @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
 
-    //DELETE
-    @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
-        studentRepo.remove(id);
-        return new ResponseEntity<>("Student is deleted successfully", HttpStatus.OK);
-    }
 
 }
