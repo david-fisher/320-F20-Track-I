@@ -3,6 +3,7 @@ import Dashboard from '../Dashboard/Dashboard'
 import {BrowserRouter as Router,Switch,Route,Redirect} from "react-router-dom";
 import Login from "../LoginPage/Login"
 import Introduction from '../Introduction/Introduction';
+import Disclosure from "../Disclosure/Disclosure"
 
 function App() {
 
@@ -16,10 +17,9 @@ function App() {
           {loggedIn ? <Redirect to="/dashboard" /> : <Redirect to="/login"/>}
         </Route>
         <Route path="/login" component={Login} />
-        <Route path="/dashboard" component={Dashboard}>
-         </Route>
-         
-         <Route path="/introduction" component={Introduction} />
+        <Route path="/dashboard" component={Dashboard} />         
+        <Route path="/introduction" component={Introduction} />
+        <Route path="/disclosure" component={Disclosure} />
        </Switch>   
      </Router>
   )

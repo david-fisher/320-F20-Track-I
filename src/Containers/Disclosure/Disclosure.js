@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Typography, Avatar, Card} from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import {BrowserRouter as Router,Route,Switch,Link,Redirect} from "react-router-dom";
-import './Disclosure.css';
 
 //function component
 const Disclosure= () => {

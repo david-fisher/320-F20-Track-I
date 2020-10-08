@@ -32,7 +32,7 @@ function Classes() {
           Software Enginnering
           <Form>
             <Form.Item >
-                <Button type="primary" htmlType="submit" onClick={() => history.push("/introdcution")}>start</Button>
+                <Button type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>start</Button>
             </Form.Item>
           </Form>
           {/* <Route exact path="/" component{Introduction} /> */}
