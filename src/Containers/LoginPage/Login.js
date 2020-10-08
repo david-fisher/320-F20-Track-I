@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 
 
+
 //function component
 const Login = () => {
 
@@ -44,7 +45,7 @@ const Login = () => {
                                 <FormInput type="password" onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
                             </Form.Item>
                             <Form.Item >
-                                <Button type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>Submit</Button>
+                                <Button type="primary" htmlType="submit" onClick={() => history.push("/dashboard")}>Submit</Button>
                             </Form.Item>
                         </Form>
                     </div>

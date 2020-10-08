@@ -3,7 +3,7 @@ import { Row, Col, Typography, Image } from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 
 //function component
-const Introduction = () => {
+const Disclosure = () => {
 
     const { Title, Paragraph } = Typography;
 
@@ -18,7 +18,6 @@ const Introduction = () => {
                 </Col>
             </Row>
             <Row justify="start">
-                
                 <Col span={20} offset={1}>
                     <Paragraph style={{ fontSize: "30px", lineHeight: "38px" }}>
                         You will be taking part of a simulation to test your ethical awareness.
@@ -36,7 +35,7 @@ const Introduction = () => {
             </Row>
             <Row justify="start">
                 <Col span={2} offset={22}>
-                    <ArrowRightOutlined style={{ fontSize: "50px" }} onClick={() => console.log("triggered")} />
+                    <ArrowRightOutlined style={{ fontSize: "50px" }} onClick={() => history.push("/dashboard")} />
                 </Col>
             </Row>
         </div>
@@ -44,4 +43,4 @@ const Introduction = () => {
 
 }
 
-export default Introduction
+export default Disclosure
