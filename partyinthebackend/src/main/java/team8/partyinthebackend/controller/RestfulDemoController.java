@@ -41,20 +41,42 @@ public class RestfulDemoController {
     }
 
     //POST
-    @PostMapping(value = "/students", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addOneStudent(@RequestBody Student student){
+    @GetMapping(value = "/addone")
+    public List<Student> addOneStudent(){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
-            mapper.create(student);
+            Student newStudent = new Student();
+            newStudent.setId(5);
+            newStudent.setName("Andy");
+            newStudent.setMajor("cs");
+            mapper.create(newStudent);
+            return mapper.selectAll();
         }
     }
 
-//    //PUT
-//    @RequestMapping(value = "/students/{id}", method = RequestMethod.PUT)
-//
-//
-//    //DELETE
-//    @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
+    //UPDATE
+    @GetMapping(value = "/update")
+    public List<Student> updateOneStudent(){
+        try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
+            StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+            Student updatedStudent = new Student();
+            updatedStudent.setName("Tim");
+            updatedStudent.setMajor("math");
+            updatedStudent.setId(2);
+            mapper.update(updatedStudent);
+            return mapper.selectAll();
+        }
+    }
+
+    //DELETE
+    @GetMapping(value = "/delete/{id}")
+    public List<Student> deleteOneStudent(@PathVariable Long id){
+        try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
+            StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+            mapper.delete(id);
+            return mapper.selectAll();
+        }
+    }
 
 
 }

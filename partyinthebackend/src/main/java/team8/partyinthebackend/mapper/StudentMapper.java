@@ -6,15 +6,15 @@ import team8.partyinthebackend.model.Student;
 
 public interface StudentMapper {
     //select all students
-    List<Student> selectAll();
+    public List<Student> selectAll();
 
-    List<Student> selectById(long id);
+    public List<Student> selectById(long id);
 
-    void create(Student student);
+    public void create(Student student);
 
-    void update(Student t);
+    public void update(Student t);
 
-    void delete(long id);
+    public void delete(long id);
 
 
 }

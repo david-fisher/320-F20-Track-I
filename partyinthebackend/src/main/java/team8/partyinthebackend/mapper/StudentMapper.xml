@@ -6,29 +6,29 @@
 
   <!-- select all students from database -->
   <select id="selectAll" resultType="team8.partyinthebackend.model.Student">
-    select * from students
+    select * from students;
   </select>
 
-  <!-- select one student from database by id-->
+  <!-- select one student from database by id -->
   <select id="selectById" resultType="team8.partyinthebackend.model.Student">
-    SELECT * FROM students WHERE id = #{id}
+    SELECT * FROM students WHERE id = #{id};
   </select>
 
-  <!-- create a student-->
+  <!-- create a student -->
   <select id="create" resultType="team8.partyinthebackend.model.Student">
-    INSERT INTO students(name, major) VALUES (#{name}, #{major})
+    INSERT INTO students(id, name, major) VALUES (#{id}, #{name}, #{major});
   </select>
 
-<!--  <update id="update" parameterType="team8.partyinthebackend.model.Student">-->
-<!--    <set>-->
-<!--      <if test="name != null">name=#{name},</if>-->
-<!--      <if test="major != null">major=#{major},</if>-->
-<!--    </set>-->
-<!--    where id=#{id}-->
-<!--  </update>-->
+<update id="update" parameterType="team8.partyinthebackend.model.Student">
+  UPDATE students SET 
+    name = #{name},
+    major = #{major}
+  WHERE id = #{id};
+</update>
 
-<!--  <delete id="delete">-->
-<!--        delete from t_user where id=#{id}-->
-<!--    </delete>-->
+<!-- delete a student -->
+<delete id="delete" parameterType = "long">
+  DELETE FROM students WHERE id = #{id};
+</delete>
 
 </mapper>
