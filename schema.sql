@@ -5,6 +5,14 @@ CREATE TABLE students
 	PRIMARY KEY(S_ID)
 );
 
+CREATE TABLE assigned_to
+(
+	Student		INTEGER REFERENCES students(S_ID),
+	Scenario	INTEGER	REFERENCES scenarios(E_ID),
+	ScenarioVer	INTEGER REFERENCES scenarios(V_ID),
+	PRIMARY KEY(Student,Scenario,ScenarioVer)
+);
+
 CREATE TABLE students_in
 (
 	S_ID INTEGER REFERENCES students(S_ID),
@@ -120,13 +128,13 @@ CREATE TABLE choices_for(
 	CHOICES TEXT
 	PRIMARY KEY(E_ID, CHOICES)
 );
-/*
+
 CREATE TABLE scenarios_for(
 	E_ID 	INTEGER REFERENCES scenarios(E_ID),
 	C_ID	INTEGER REFERENCES courses(C_ID)
 	PRIMARY KEY(E_ID, C_ID)
 );
-*/
+
 CREATE TABLE stakeholders_in(
 	STAKEHOLDER 	INTEGER REFERENCES stakeholders(STK_ID),
 	E_ID 		INTEGER REFERENCES scenarios(E_ID)
