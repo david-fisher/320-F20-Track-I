@@ -1,11 +1,12 @@
 import React from 'react';
 import { Row, Col, Typography, Avatar, Card} from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
-import {BrowserRouter as Router,Route,Switch,Link,Redirect} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 //function component
 const Disclosure= () => {
 
+    const history = useHistory()
     const { Title, Paragraph } = Typography;
     return (   
             <div className="Disclosure">
@@ -45,7 +46,7 @@ const Disclosure= () => {
                 </Card>
             </div>
             </Row>
-            <ArrowRightOutlined style={{ fontSize: "50px",paddingLeft:1850 }} onClick={() => console.log("triggered")} />
+            <ArrowRightOutlined style={{ fontSize: "50px",paddingLeft:1850 }} onClick={() => history.push("/scenario/")} />
         </div>
     );
 

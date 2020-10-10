@@ -7,6 +7,8 @@ import { IconContext } from 'react-icons';
 function Navbar() {
   
 
+  //Data for navbar should be taken in as a prop
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>

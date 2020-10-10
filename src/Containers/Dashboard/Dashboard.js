@@ -6,7 +6,7 @@ import Classes from './pages/Classes';
 import Results from './pages/Results';
 import Support from './pages/Support';
 
-function App() {
+const Dashboard = () => {
     return (
       <>
         <Navbar />
@@ -19,4 +19,4 @@ function App() {
     );
   }
   
-  export default App;
+  export default Dashboard;
