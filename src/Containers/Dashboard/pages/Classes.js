@@ -1,76 +1,47 @@
-import React, { useEffect, useState } from 'react';
-// import { Row, Col, Form, Input, Button } from 'antd';
+import React from 'react';
+import { Row, Col, Button } from 'antd';
 import './Classes.css';
-import { Form, Button } from 'antd';
-import { FormInput } from '../../../component/Input'
-import { Route, useHistory } from "react-router-dom";
-import Introduction from '../../Introduction/Introduction'
+import { useHistory } from "react-router-dom";
 
 
 function Classes() {
   
   let history = useHistory();
-  
-  function handleClick() {
-    history.push("/introduction");
-  }
+
+  //This would be recieved from the backend
+  let classesObject = [
+    {
+      classNumber: "CS320",
+      classTitle: "Software Engineering"
+    },
+    {
+      classNumber: "CS311",
+      classTitle: "Algorithms"
+    },
+    {
+      classNumber: "CS589",
+      classTitle: "Machine Learning"
+    },
+    {
+      classNumber: "CS240",
+      classTitle: "Reasoning Under Uncertainty"
+    }
+]
 
   return (
-    
-
-    
-    <div class="row">
-      <div class ="col">
-          <div class="box"></div>
-      </div>
-      <div class ="col">
-          <div class="box"></div>
-      </div>
-      <div class ="col">
-          <div class="box">
-          CS320 <br></br>
-          Software Enginnering
-          <Form>
-            <Form.Item >
+    <Row gutter={16}>
+        {classesObject.map((c, index) => {
+          return(
+            <Col offset={index == 0 ? 5 : 0} key={index}>
+              <div className="box" style={{backgroundColor: index % 2 ==0 ? "#2A9D8F" : "#5b7f95"}}>
+                {c.classNumber} <br/>
+                {c.classTitle}
                 <Button type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>start</Button>
-            </Form.Item>
-          </Form>
-          {/* <Route exact path="/" component{Introduction} /> */}
-          {/* <button type="button" onClick={handleClick}>
-            Start
-          </button> */}
-          </div>
-          
-      </div>
-      <div class ="col">
-          <div class="boxDone">
-          CS311 <br></br>
-            Algorithms
-          </div>
-      </div>
-    </div>
-    
-
-    // <div className='classes'>
-    //     <div className="notdoneclass">
-    //       CS320 <br></br>
-    //       <div className="description">
-    //         Computer Engineering <br></br>
-    //       </div>
-    //       <div className="start">
-    //         start
-    //       </div>
-    //     </div>
-
-    //     <div className="doneclass">
-    //       CS311 <br></br>
-    //       <div className="description">
-    //         Algorithms
-    //       </div>
-    //     </div>
-          
-        
-    // </div>
+              </div>
+            </Col>
+          )
+        })}
+    </Row>
   );
 }
 export default Classes;

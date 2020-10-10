@@ -45,19 +45,11 @@
     width: 100px;
     height: 100px;
     margin: 0 auto;
-    background-color: #5b7f95;
     border-radius: 25px;
     text-align: center;
+    line-height: 100%;
 }
-.boxDone{
-    border: 2px solid rgb(0, 0, 0);
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    background-color: #2A9D8F;
-    border-radius: 25px;
-    text-align: center;
-}
+
 .col:first-child .box {
     margin-left: 0;
 }
