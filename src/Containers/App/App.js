@@ -21,7 +21,7 @@ function App() {
         <Route path="/dashboard" component={Dashboard} />         
         <Route path="/introduction" component={Introduction} />
         <Route path="/disclosure" component={Disclosure} />
-        <Route path="/scenario/" component={ScenarioRouter} />
+        <Route path="/scenario" component={ScenarioRouter} />
        </Switch>   
      </Router>
   )

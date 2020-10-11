@@ -23,20 +23,21 @@
 
 import React from 'react';
 import Navbar from '../../component/dashboarditems/Navbar';
-import { BrowserRouter as Switch, Route } from 'react-router-dom';
+import {SidebarDataScenario} from "../../component/dashboarditems/SidebarDataScenario"
+import { BrowserRouter as Switch, Route, withRouter } from 'react-router-dom';
 import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
 import ProjectTask from "./ProjectTask/ProjectTask"
 
 const ScenarioRouter = () => {
     return (
       <>
-        <Navbar />
-        <Switch>
-          <Route exact path='/scenario' component={ScenarioIntro} /> 
-          <Route path='/scenario/project-task' component={ProjectTask} />               
-        </Switch>
+          <Navbar data={SidebarDataScenario}/>
+          <Switch>
+            <Route exact path='/scenario' component={ScenarioIntro} /> 
+            <Route path='/scenario/project-task' component={ProjectTask} />               
+          </Switch>
       </>
     );
   }
   
-  export default ScenarioRouter;
+  export default ScenarioRouter

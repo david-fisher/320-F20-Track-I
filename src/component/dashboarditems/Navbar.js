@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 
-function Navbar() {
+
+const Navbar = (props) => {
   
 
   //Data for navbar should be taken in as a prop
@@ -15,7 +15,7 @@ function Navbar() {
         
         <nav className = 'nav-menu active'>
           <ul className='nav-menu-items'>
-            {SidebarData.map((item, index) => {
+            {props.data.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>

@@ -46,7 +46,7 @@ const Disclosure= () => {
                 </Card>
             </div>
             </Row>
-            <ArrowRightOutlined style={{ fontSize: "50px",paddingLeft:1850 }} onClick={() => history.push("/scenario/")} />
+            <ArrowRightOutlined style={{ fontSize: "50px",paddingLeft:1850 }} onClick={() => history.push("/scenario")} />
         </div>
     );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
-export const SidebarData = [
+export const SidebarDataDashboard = [
   {
     title: 'Classes',
     path: '/dashboard',
