@@ -1,4 +1,38 @@
-//****intro - no inputs, can go back
+import  React, {useEffect, useState } from 'react';
+import Navbar from '../../component/dashboarditems/Navbar';
+import {SidebarDataScenario} from "../../component/dashboarditems/SidebarDataScenario"
+import { BrowserRouter as Switch, Route, withRouter } from 'react-router-dom';
+import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
+import ProjectTask from "./ProjectTask/ProjectTask"
+import InitialReflection from "./InitialReflection/InitialReflection"
+import InitialAction from "./InitialAction/InitialAction"
+import GatherInformation from './GatherInformation/GatherInformation';
+
+const ScenarioRouter = () => {
+
+    const [sideBarData,setSideBarData] = useState([])
+
+    useEffect(() => {
+      console.log(sideBarData)
+    },[sideBarData])
+
+    return (
+      <>
+        <Switch>
+          <Route exact path='/scenario'> <ScenarioIntro data={sideBarData} setData={setSideBarData} /> </Route> 
+          <Route path='/scenario/project-task'> <ProjectTask data={sideBarData} setData={setSideBarData} /> </Route>   
+          <Route path='/scenario/initial-reflection'> <InitialReflection data={sideBarData}/></Route>
+          <Route path='/scenario/initial-action'> <InitialAction data={sideBarData}/></Route>
+          <Route path='/scenario/gather-information'> <GatherInformation data={sideBarData} setData={setSideBarData}/></Route>
+
+        </Switch>
+      </>
+    );
+  }
+  
+  export default withRouter(ScenarioRouter)
+
+  //****intro - no inputs, can go back
 //****project task - no inputs, can go back
 
 //reflection questions - does not appear in navbar, cant go back
@@ -20,24 +54,3 @@
 //reflection questions on consequences
 
 //conclusion - questions
-
-import React from 'react';
-import Navbar from '../../component/dashboarditems/Navbar';
-import {SidebarDataScenario} from "../../component/dashboarditems/SidebarDataScenario"
-import { BrowserRouter as Switch, Route, withRouter } from 'react-router-dom';
-import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
-import ProjectTask from "./ProjectTask/ProjectTask"
-
-const ScenarioRouter = () => {
-    return (
-      <>
-          <Navbar data={SidebarDataScenario}/>
-          <Switch>
-            <Route exact path='/scenario' component={ScenarioIntro} /> 
-            <Route path='/scenario/project-task' component={ProjectTask} />               
-          </Switch>
-      </>
-    );
-  }
-  
-  export default ScenarioRouter

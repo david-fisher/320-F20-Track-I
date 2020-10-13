@@ -26,7 +26,7 @@ function Classes() {
       classNumber: "CS240",
       classTitle: "Reasoning Under Uncertainty"
     }
-]
+  ]
 
   return (
     <Row gutter={16}>

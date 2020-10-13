@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import { withRouter } from "react-router";
 
 
 const Navbar = (props) => {
@@ -17,7 +18,7 @@ const Navbar = (props) => {
           <ul className='nav-menu-items'>
             {props.data.map((item, index) => {
               return (
-                <li key={index} className={item.cName}>
+                <li key={index} className="nav-text">
                   <Link to={item.path}>
                     {item.icon}&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
@@ -33,4 +34,4 @@ const Navbar = (props) => {
   );
 }
 
-export default Navbar;
+export default withRouter(Navbar);
