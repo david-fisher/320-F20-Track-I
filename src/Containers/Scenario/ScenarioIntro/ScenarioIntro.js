@@ -63,22 +63,22 @@ const ScenarioIntro = (props) => {
             <p>            
             You have been hired by the company as a junior data scientist and have been assigned to the project.
             </p>
-          
+            <Row>
+            <Col offset={21}><div></div></Col>
+            <Col><Button type="primary" htmlType="submit" 
+            onClick={() => {
+              history.push("/scenario/project-task")
+              props.setData(props.data.concat(  {
+                title: 'Introduction',
+                path: '/scenario',
+                icon: <AiIcons.AiFillHome />
+              }))
+            }}
+              >next</Button></Col>
+          </Row>
           </Card>
       </Row>
-      <Row>
-          <Col offset={17}><div></div></Col>
-          <Col><Button type="primary" htmlType="submit" 
-          onClick={() => {
-            history.push("/scenario/project-task")
-            props.setData(props.data.concat(  {
-              title: 'Introduction',
-              path: '/scenario',
-              icon: <AiIcons.AiFillHome />
-            }))
-          }}
-            >next</Button></Col>
-      </Row>
+      
     </>
   );
 }
