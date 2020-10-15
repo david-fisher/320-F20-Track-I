@@ -10,16 +10,16 @@ const Disclosure= () => {
     const { Title, Paragraph } = Typography;
     return (   
             <div className="Disclosure">
-            <Row justify="center" style={{ marginBottom: "30px" }}>
+            <Row justify="center">
                 <Col>
                     <div style={{ backgroundColor: "#881C1C", height: "170px", width: "100vw" }}>
-                        <Title level={2} style={{ textAlign: "center", lineHeight: "200px", color: "white",fontSize:40 }}>Disclosure</Title>
+                        <Title level={2} style={{ textAlign: "center", lineHeight: "170px", color: "white",fontSize:40 }}>Disclosure</Title>
                     </div>
                 </Col>
             </Row>
             <Row justify="start">
-            <div style={{ background: '#ECECEC',padding:'30px'}}>
-                <Card bodyStyle={{paddingLeft:150,paddingRight:150}} bordered={false} style={{textAlign:"center", width: '1860px', fontSize:26}} > 
+            <div style={{ background: '#ECECEC'}}>
+                <Card bodyStyle={{paddingLeft:150,paddingRight:150}} bordered={false} style={{textAlign:"center", width: '100vw', fontSize:22}} > 
                     <p>
                     What about you is being reported to your professor:
                     </p>
@@ -30,8 +30,6 @@ const Disclosure= () => {
                     answers to the questions, as well as answers to any supplemental questions
                     that your professor may add.
                     </p>
-                    </Card>
-                <Card bodyStyle={{paddingLeft:150,paddingRight:150}} bordered={false} style={{ textAlign:"center", width: '1860px', fontSize:26}} >
                     <p>
                     How we are using your contributions:
                     </p>
@@ -46,7 +44,9 @@ const Disclosure= () => {
                 </Card>
             </div>
             </Row>
-            <ArrowRightOutlined style={{ fontSize: "50px",paddingLeft:1850 }} onClick={() => history.push("/scenario")} />
+            <Col span={2} offset={23}>
+                <ArrowRightOutlined style={{ fontSize: "50px"}} onClick={() => history.push("/scenario")} />
+            </Col>
         </div>
     );
 
