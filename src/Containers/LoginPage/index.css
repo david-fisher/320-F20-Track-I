@@ -4,8 +4,8 @@
 	background-color: #881c1c;
 }
 
-h1 {
-	color: white !important;
+.header-text {
+	color: white;
 }
 
 .image-container {
