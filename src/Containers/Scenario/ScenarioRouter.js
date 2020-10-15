@@ -12,10 +12,6 @@ const ScenarioRouter = () => {
 
     const [sideBarData,setSideBarData] = useState([])
 
-    useEffect(() => {
-      console.log(sideBarData)
-    },[sideBarData])
-
     return (
       <>
         <Switch>
