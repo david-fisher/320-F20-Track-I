@@ -1,0 +1,12 @@
+.scenarioIntro-headermargin {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 250px 0px 8px;
+    list-style: none;
+    height: 60px;     
+}
+
+.scenarioIntro-maintext {
+    background-color: #ececec;
+}
