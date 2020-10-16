@@ -11,8 +11,7 @@ import {SidebarProvider} from "../../component/SidebarContext"
 const ScenarioRouter = () => {
 
     return (
-      <>
-        <SidebarProvider value={SidebarDataScenario}>
+        <SidebarProvider>
             <Switch>
               <Route exact path='/scenario' component={ScenarioIntro}/> 
               <Route path='/scenario/project-task' component={ProjectTask}/>   
@@ -21,7 +20,6 @@ const ScenarioRouter = () => {
               <Route path='/scenario/gather-information' component={GatherInformation}/>
             </Switch>
         </SidebarProvider>
-      </>
     );
   }
   

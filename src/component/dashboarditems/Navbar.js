@@ -16,14 +16,15 @@ const Navbar = (props) => {
         
         <nav className = 'nav-menu active'>
           <ul className='nav-menu-items'>
-            {props.data.map((item, index) => {
+            {Object.keys(props.data).map((item, index) => {
               return (
                 <li key={index} className="nav-text">
-                  <Link to={item.path}>
-                    {item.icon}&nbsp;&nbsp;&nbsp;
+                  {props.data[item].clickable ?
+                  <Link to={props.data[item].path}>
+                    {props.data[item].icon}&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
-                    <span>{item.title}</span>
-                  </Link>
+                    <span>{props.data[item].title}</span>
+                  </Link> : props.data[item].title}
                 </li>
               );
             })}

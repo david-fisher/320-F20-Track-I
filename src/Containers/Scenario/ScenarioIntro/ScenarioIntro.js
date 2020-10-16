@@ -3,20 +3,30 @@ import { Row, Col, Card, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
 import './ScenarioIntro.css';
-import SidebarContext from "../../../component/SidebarContext"
+import {SidebarContext} from "../../../component/SidebarContext"
+import * as AiIcons from 'react-icons/ai';
+
 
 const ScenarioIntro = () => {
   
-  const sidebarData = useContext(SidebarContext)
+  const {state,update} = useContext(SidebarContext)
   let history = useHistory();
 
-  useEffect(() => {
-    console.log(sidebarData)
-  })
+  const handleClick = () => {
+
+    history.push("/scenario/project-task")
+    update({0: {
+      title: 'Introduction',
+      path: '/scenario',
+      icon: <AiIcons.AiFillHome />,
+      clickable: true
+    }})
+
+  }
 
   return (
     <>
-      <Navbar data={sidebarData} />
+      <Navbar data={state} />
       <Row gutter={16}>
           <ul className="scenarioIntro-headermargin"> </ul>
           <Card bordered={false} style={{textAlign:"center", fontSize:26}}> 
@@ -73,7 +83,7 @@ const ScenarioIntro = () => {
       </Row>
       <Row>
           <Col offset={17}><div></div></Col>
-          <Col><Button type="primary" htmlType="submit" onClick={() => history.push("/scenario/project-task")}>next</Button></Col>
+          <Col><Button type="primary" htmlType="submit" onClick={handleClick}>next</Button></Col>
       </Row>
     </>
   );

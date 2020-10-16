@@ -2,7 +2,7 @@ import React, {useState,useEffect,useContext} from 'react';
 import { Row, Col, Typography, Button, Radio } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
-import SidebarContext from '../../../component/SidebarContext';
+import {SidebarContext} from '../../../component/SidebarContext';
 
 const InitialAction = () => {
   
@@ -10,16 +10,12 @@ const InitialAction = () => {
 
   const [choice,setChoice] = useState(0)
 
-  const sidebarData = useContext(SidebarContext)
+  const {state,update} = useContext(SidebarContext)
   let history = useHistory();
-
-  useEffect(() => {
-    console.log("Choice: ",choice)
-  },[choice])
 
   return (
     <>
-      <Navbar data={sidebarData} />
+      <Navbar data={state} />
       <Row>
         <Col offset={5} span={18}>
             <Title style={{color: "black"}}>Choose Initial Action</Title>
