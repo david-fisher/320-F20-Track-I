@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
+import SidebarContext from '../../../component/SidebarContext';
 
 
-const InitialRelection = (props) => {
+const InitialRelection = () => {
   
     const { Title, Paragraph, Text } = Typography;
     const { TextArea } = Input;
@@ -12,6 +13,7 @@ const InitialRelection = (props) => {
     const [answer1,setAnswer1] = useState("")
     const [answer2,setAnswer2] = useState("")
 
+    const sidebarData = useContext(SidebarContext)
     let history = useHistory()
 
     useEffect(() => {
@@ -22,7 +24,7 @@ const InitialRelection = (props) => {
 
     return (
         <>
-            <Navbar data={props.data} />
+            <Navbar data={sidebarData} />
             <Row>
                 <Col offset={5} span={18}>
                     <Title style={{color: "black"}}>Reflect on Initial Information</Title>

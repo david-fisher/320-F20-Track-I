@@ -1,18 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
-import * as AiIcons from 'react-icons/ai';
+import SidebarContext from '../../../component/SidebarContext';
 
 
-const GatherInformation = (props) => {
+
+const GatherInformation = () => {
 
   const { Title, Paragraph, Text } = Typography;
+
+  const sidebarData = useContext(SidebarContext)
   let history = useHistory();
 
   return (
     <>
-        <Navbar data={props.data} />
+        <Navbar data={sidebarData} />
 
         <Row>
           <Col offset={5} span={18}>
@@ -29,14 +32,7 @@ const GatherInformation = (props) => {
           </Col>
         </Row>
         <Row>
-          <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={() => {
-          history.push("/scenario/gather-information")
-          props.setData(props.data.concat(  {
-            title: 'Gather Info',
-            path: '/scenario/gather-information',
-            icon: <AiIcons.AiFillHome />
-          }))
-        }}>Next Page</Button></Col>
+          <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={() => history.push("/scenario/gather-information")}>Next Page</Button></Col>
         </Row>
     </>
   );

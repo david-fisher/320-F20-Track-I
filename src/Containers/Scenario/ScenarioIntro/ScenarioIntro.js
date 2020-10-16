@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Row, Col, Card, Button } from 'antd';
 import { useHistory } from "react-router-dom";
-import * as AiIcons from 'react-icons/ai';
 import Navbar from '../../../component/dashboarditems/Navbar'
 import './ScenarioIntro.css';
+import SidebarContext from "../../../component/SidebarContext"
 
-const ScenarioIntro = (props) => {
+const ScenarioIntro = () => {
   
+  const sidebarData = useContext(SidebarContext)
   let history = useHistory();
+
+  useEffect(() => {
+    console.log(sidebarData)
+  })
 
   return (
     <>
-      <Navbar data={props.data} />
+      <Navbar data={sidebarData} />
       <Row gutter={16}>
           <ul className="scenarioIntro-headermargin"> </ul>
           <Card bordered={false} style={{textAlign:"center", fontSize:26}}> 
@@ -68,16 +73,7 @@ const ScenarioIntro = (props) => {
       </Row>
       <Row>
           <Col offset={17}><div></div></Col>
-          <Col><Button type="primary" htmlType="submit" 
-          onClick={() => {
-            history.push("/scenario/project-task")
-            props.setData(props.data.concat(  {
-              title: 'Introduction',
-              path: '/scenario',
-              icon: <AiIcons.AiFillHome />
-            }))
-          }}
-            >next</Button></Col>
+          <Col><Button type="primary" htmlType="submit" onClick={() => history.push("/scenario/project-task")}>next</Button></Col>
       </Row>
     </>
   );

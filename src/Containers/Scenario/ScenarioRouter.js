@@ -1,32 +1,31 @@
-import  React, {useEffect, useState } from 'react';
-import Navbar from '../../component/dashboarditems/Navbar';
+import  React from 'react';
 import {SidebarDataScenario} from "../../component/dashboarditems/SidebarDataScenario"
-import { BrowserRouter as Switch, Route, withRouter } from 'react-router-dom';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
 import ProjectTask from "./ProjectTask/ProjectTask"
 import InitialReflection from "./InitialReflection/InitialReflection"
 import InitialAction from "./InitialAction/InitialAction"
 import GatherInformation from './GatherInformation/GatherInformation';
+import {SidebarProvider} from "../../component/SidebarContext"
 
 const ScenarioRouter = () => {
 
-    const [sideBarData,setSideBarData] = useState([])
-
     return (
       <>
-        <Switch>
-          <Route exact path='/scenario'> <ScenarioIntro data={sideBarData} setData={setSideBarData} /> </Route> 
-          <Route path='/scenario/project-task'> <ProjectTask data={sideBarData} setData={setSideBarData} /> </Route>   
-          <Route path='/scenario/initial-reflection'> <InitialReflection data={sideBarData}/></Route>
-          <Route path='/scenario/initial-action'> <InitialAction data={sideBarData}/></Route>
-          <Route path='/scenario/gather-information'> <GatherInformation data={sideBarData} setData={setSideBarData}/></Route>
-
-        </Switch>
+        <SidebarProvider value={SidebarDataScenario}>
+            <Switch>
+              <Route exact path='/scenario' component={ScenarioIntro}/> 
+              <Route path='/scenario/project-task' component={ProjectTask}/>   
+              <Route path='/scenario/initial-reflection' component={InitialReflection}/> 
+              <Route path='/scenario/initial-action' component={InitialAction}/> 
+              <Route path='/scenario/gather-information' component={GatherInformation}/>
+            </Switch>
+        </SidebarProvider>
       </>
     );
   }
   
-  export default withRouter(ScenarioRouter)
+  export default ScenarioRouter
 
   //****intro - no inputs, can go back
 //****project task - no inputs, can go back

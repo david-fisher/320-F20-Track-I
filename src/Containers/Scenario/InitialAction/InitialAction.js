@@ -1,14 +1,16 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useContext} from 'react';
 import { Row, Col, Typography, Button, Radio } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
+import SidebarContext from '../../../component/SidebarContext';
 
-const InitialAction = (props) => {
+const InitialAction = () => {
   
   const { Title, Paragraph, Text } = Typography;
 
   const [choice,setChoice] = useState(0)
 
+  const sidebarData = useContext(SidebarContext)
   let history = useHistory();
 
   useEffect(() => {
@@ -17,7 +19,7 @@ const InitialAction = (props) => {
 
   return (
     <>
-      <Navbar data={props.data} />
+      <Navbar data={sidebarData} />
       <Row>
         <Col offset={5} span={18}>
             <Title style={{color: "black"}}>Choose Initial Action</Title>

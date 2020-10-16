@@ -7,12 +7,36 @@ export const SidebarDataScenario = [
     title: 'Introduction',
     path: '/scenario',
     icon: <AiIcons.AiFillHome />,
-    cName: 'nav-text'
+    clickable: false
   },
   {
     title: 'Project Task',
     path: '/scenario/project-task',
-    icon: <IoIcons.IoIosPaper />,
-    cName: 'nav-text'
-  }
+    icon: <AiIcons.AiFillHome />,
+    clickable: false
+  },
+  {
+    title: 'Gather Info',
+    path: '/scenario/gather-information',
+    icon: <AiIcons.AiFillHome />,
+    clickable: false
+  },
+  {
+    title: 'Conversations',
+    path: '/scenario',
+    icon: <AiIcons.AiFillHome />,
+    clickable: false
+  },
+  {
+    title: 'Scenario Summary',
+    path: '/scenario',
+    icon: <AiIcons.AiFillHome />,
+    clickable: false
+  },
+  {
+    title: 'Feedback',
+    path: '/scenario',
+    icon: <AiIcons.AiFillHome />,
+    clickable: false
+  },
 ];

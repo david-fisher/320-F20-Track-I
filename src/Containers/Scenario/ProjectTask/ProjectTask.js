@@ -1,20 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 import { useHistory } from "react-router-dom";
-import * as AiIcons from 'react-icons/ai';
 import Navbar from '../../../component/dashboarditems/Navbar'
+import SidebarContext from "../../../component/SidebarContext"
 
 
-
-const ProjectTask = (props) => {
+const ProjectTask = () => {
   
+  const sidebarData = useContext(SidebarContext)
   const { Title, Paragraph, Text } = Typography;
 
   let history = useHistory();
 
   return (
     <>
-      <Navbar data={props.data} />
+      <Navbar data={sidebarData} />
       <Row>
         <Col offset={5} span={18}>
             <Title style={{color: "black"}}>Project Task</Title>
@@ -52,15 +52,7 @@ const ProjectTask = (props) => {
       </Row>
       <Row>
           <Col offset={5}><Button type="primary" htmlType="submit" 
-          onClick={() => {
-            history.push("/scenario/initial-reflection")
-            props.setData(props.data.concat(  {
-              title: 'Project Task',
-              path: '/scenario/project-task',
-              icon: <AiIcons.AiFillHome />
-            }))
-          }}
-            >next</Button></Col>
+          onClick={() => history.push("/scenario/initial-reflection")}>next</Button></Col>
       </Row>
     </>
   );
