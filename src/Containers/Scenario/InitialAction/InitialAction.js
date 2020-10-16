@@ -7,11 +7,21 @@ import {SidebarContext} from '../../../component/SidebarContext';
 const InitialAction = () => {
   
   const { Title, Paragraph, Text } = Typography;
-
   const [choice,setChoice] = useState(0)
-
   const {state,update} = useContext(SidebarContext)
   let history = useHistory();
+
+  const handleClick = () => {
+
+    history.push("/scenario/gather-information")
+
+    let newSidebarState = state
+    newSidebarState["projectTask"].routeTo = "gather-information"
+    update({newSidebarState})
+
+  }
+
+
 
   return (
     <>
@@ -37,7 +47,7 @@ const InitialAction = () => {
       </Row>
 
       <Row>
-          <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={() => {history.push("/scenario/gather-information")}}>Next Page</Button></Col>
+          <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col>
       </Row>
 
     </>

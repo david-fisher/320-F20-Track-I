@@ -16,11 +16,17 @@ const InitialRelection = () => {
     const {state,update} = useContext(SidebarContext)
     let history = useHistory()
 
-    useEffect(() => {
-        console.log("Answer 1: ",answer1)
-        console.log("Answer 2: ",answer2)
+    const handleClick = () => {
 
-    },[answer1,answer2])
+        history.push("/scenario/initial-action")
+    
+        let newSidebarState = state
+        newSidebarState["projectTask"].routeTo = "initial-action"
+        update({newSidebarState})
+    
+      }
+
+
 
     return (
         <>
@@ -44,7 +50,7 @@ const InitialRelection = () => {
                 </Col>
             </Row>
             <Row>
-                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={() => {history.push("/scenario/initial-action")}}>Next Page</Button></Col>
+                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col>
             </Row>
         </>
     );

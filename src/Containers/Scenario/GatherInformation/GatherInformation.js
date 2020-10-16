@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext,useEffect} from 'react';
 import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
@@ -14,14 +14,13 @@ const GatherInformation = () => {
 
   const handleClick = () => {
     history.push("/scenario/gather-information")
-    update({ 2: {
-      title: 'Gather Info',
-      path: '/scenario/gather-information',
-      icon: <AiIcons.AiFillHome />,
-      clickable: true
-    }})
+
+    let newSidebarState = state
+    newSidebarState["gatherInformation"].clickable = true
+    update({newSidebarState})
 
   }
+
 
   return (
     <>

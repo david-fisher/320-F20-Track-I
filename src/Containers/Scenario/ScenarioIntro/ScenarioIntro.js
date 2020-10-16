@@ -13,15 +13,11 @@ const ScenarioIntro = () => {
   let history = useHistory();
 
   const handleClick = () => {
-
     history.push("/scenario/project-task")
-    update({0: {
-      title: 'Introduction',
-      path: '/scenario',
-      icon: <AiIcons.AiFillHome />,
-      clickable: true
-    }})
 
+    let newSidebarState = state
+    newSidebarState["introduction"].clickable = true
+    update({newSidebarState})
   }
 
   return (

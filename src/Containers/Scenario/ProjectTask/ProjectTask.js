@@ -15,15 +15,17 @@ const ProjectTask = () => {
 
   const handleClick = () => {
 
-    state[1].clickable ? history.push("/scenario/gather-information") :
+    let newSidebarState = state
 
-    history.push("/scenario/initial-reflection")
-    update({ 1: {
-      title: 'Project Task',
-      path: '/scenario/project-task',
-      icon: <AiIcons.AiFillHome />,
-      clickable: true
-    }})
+    if (newSidebarState["projectTask"].routeTo === "initial-reflection")
+      history.push("/scenario/initial-reflection")
+    else if (newSidebarState["projectTask"].routeTo === "initial-action")
+      history.push("/scenario/initial-action")
+    else if (newSidebarState["projectTask"].routeTo === "gather-information")
+      history.push("/scenario/gather-information")
+
+    newSidebarState["projectTask"].clickable = true
+    update({newSidebarState})
 
   }
 
