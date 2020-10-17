@@ -3,7 +3,6 @@ import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
 import {SidebarContext} from '../../../component/SidebarContext';
-import * as AiIcons from 'react-icons/ai';
 
 const GatherInformation = () => {
 
@@ -13,7 +12,7 @@ const GatherInformation = () => {
   let history = useHistory();
 
   const handleClick = () => {
-    history.push("/scenario/gather-information")
+    history.push("/scenario/conversations")
 
     let newSidebarState = state
     newSidebarState["gatherInformation"].clickable = true

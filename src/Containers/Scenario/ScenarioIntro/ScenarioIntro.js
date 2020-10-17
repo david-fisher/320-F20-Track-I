@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
 import './ScenarioIntro.css';
 import {SidebarContext} from "../../../component/SidebarContext"
-import * as AiIcons from 'react-icons/ai';
 
 
 const ScenarioIntro = () => {

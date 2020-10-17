@@ -2,23 +2,23 @@ import React from 'react';
 import * as AiIcons from 'react-icons/ai';
 import * as IoIcons from 'react-icons/io';
 
-export const SidebarDataDashboard = [
-  {
+export const SidebarDataDashboard = {
+  classes:{
     title: 'Classes',
     path: '/dashboard',
     icon: <AiIcons.AiFillHome />,
-    cName: 'nav-text'
+    clickable: true
   },
-  {
+  results:{
     title: 'Results',
     path: '/dashboard/results',
     icon: <IoIcons.IoIosPaper />,
-    cName: 'nav-text'
+    clickable: true
   },
-  {
+  support:{
     title: 'Support',
     path: '/dashboard/support',
     icon: <IoIcons.IoMdHelpCircle />,
-    cName: 'nav-text'
+    clickable: true
   }
-];
+}

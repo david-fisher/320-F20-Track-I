@@ -1,11 +1,11 @@
 import  React from 'react';
-import {SidebarDataScenario} from "../../component/dashboarditems/SidebarDataScenario"
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
 import ProjectTask from "./ProjectTask/ProjectTask"
 import InitialReflection from "./InitialReflection/InitialReflection"
 import InitialAction from "./InitialAction/InitialAction"
 import GatherInformation from './GatherInformation/GatherInformation';
+import Conversations from './Conversations/Conversations'
 import {SidebarProvider} from "../../component/SidebarContext"
 
 const ScenarioRouter = () => {
@@ -18,6 +18,7 @@ const ScenarioRouter = () => {
               <Route path='/scenario/initial-reflection' component={InitialReflection}/> 
               <Route path='/scenario/initial-action' component={InitialAction}/> 
               <Route path='/scenario/gather-information' component={GatherInformation}/>
+              <Route path='/scenario/conversations' component={Conversations}/>
             </Switch>
         </SidebarProvider>
     );
