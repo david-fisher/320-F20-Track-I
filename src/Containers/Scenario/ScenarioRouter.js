@@ -1,4 +1,4 @@
-import  React from 'react';
+import  React, {useState} from 'react';
 import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
 import ProjectTask from "./ProjectTask/ProjectTask"
@@ -10,6 +10,8 @@ import {SidebarProvider} from "../../component/SidebarContext"
 
 const ScenarioRouter = () => {
 
+  const [conversationList,setConversationList] = useState([])
+
     return (
         <SidebarProvider>
             <Switch>
@@ -18,7 +20,9 @@ const ScenarioRouter = () => {
               <Route path='/scenario/initial-reflection' component={InitialReflection}/> 
               <Route path='/scenario/initial-action' component={InitialAction}/> 
               <Route path='/scenario/gather-information' component={GatherInformation}/>
-              <Route path='/scenario/conversations' component={Conversations}/>
+              <Route path='/scenario/conversations'>
+                <Conversations conversationList={conversationList} setConversationList={setConversationList}/>
+              </Route>
             </Switch>
         </SidebarProvider>
     );

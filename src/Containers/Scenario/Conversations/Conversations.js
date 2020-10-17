@@ -6,16 +6,13 @@ import {SidebarContext} from "../../../component/SidebarContext"
 import Stakeholder from "./Stakeholder"
 
 
-const Conversations = () => {
+const Conversations = (props) => {
   
   const {state,update} = useContext(SidebarContext)
   const { Title, Paragraph, Text } = Typography;
   const { Header, Footer, Sider, Content } = Layout;
 
-
   let history = useHistory();
-
-  const [conversationList,setConversationList] = useState([])
 
   useEffect(() => {
     let newSidebarState = state
@@ -62,7 +59,7 @@ const Conversations = () => {
                 </Row>
                 {stakeholders.map((stakeholder,index) => {
                     return(
-                        <Stakeholder key={index} name={stakeholder.name} bio={stakeholder.bio} conversationList={conversationList} setConversationList={setConversationList}/>
+                        <Stakeholder key={index} name={stakeholder.name} bio={stakeholder.bio} conversationList={props.conversationList} setConversationList={props.setConversationList}/>
                     )
                 })}
                 <Row>
@@ -72,7 +69,7 @@ const Conversations = () => {
             <Sider theme="light" width="250">
                 <Col>
                     <Title level={4}>Conversations had so far</Title>
-                    {conversationList.map(name => {
+                    {props.conversationList.map(name => {
                         return(
                             <>
                                 {name}
