@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+
 /**
  * @Author: ZJendex
  * @Time: 9/30/2020, Wed
@@ -41,12 +43,12 @@ public class RestfulDemoController {
     }
 
     //POST
-    @GetMapping(value = "/addone")
+    @PostMapping(value = "/students")
     public List<Student> addOneStudent(){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student newStudent = new Student();
-            newStudent.setId(5);
+            newStudent.setId(4);
             newStudent.setName("Andy");
             newStudent.setMajor("cs");
             mapper.create(newStudent);
@@ -55,28 +57,27 @@ public class RestfulDemoController {
     }
 
     //UPDATE
-    @GetMapping(value = "/update")
-    public List<Student> updateOneStudent(){
+    @PutMapping(value = "/students/{id}")
+    public @ResponseBody List<Student> updateOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student updatedStudent = new Student();
             updatedStudent.setName("Tim");
             updatedStudent.setMajor("math");
-            updatedStudent.setId(2);
+            updatedStudent.setId(id);
             mapper.update(updatedStudent);
             return mapper.selectAll();
         }
     }
 
     //DELETE
-    @GetMapping(value = "/delete/{id}")
-    public List<Student> deleteOneStudent(@PathVariable Long id){
+    @DeleteMapping(value = "/delete/{id}")
+    //@RequestMapping(value="/delete/{id}", method={RequestMethod.DELETE, RequestMethod.GET})
+    public @ResponseBody List<Student> deleteOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             mapper.delete(id);
             return mapper.selectAll();
         }
     }
-
-
 }

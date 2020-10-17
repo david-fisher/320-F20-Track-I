@@ -3,7 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team8.partyinthebackend.mapper.StudentMapper">
-
   <!-- select all students from database -->
   <select id="selectAll" resultType="team8.partyinthebackend.model.Student">
     select * from students;
@@ -19,16 +18,15 @@
     INSERT INTO students(id, name, major) VALUES (#{id}, #{name}, #{major});
   </select>
 
-<update id="update" parameterType="team8.partyinthebackend.model.Student">
-  UPDATE students SET 
+  <update id="update" parameterType="team8.partyinthebackend.model.Student">
+  UPDATE students SET
     name = #{name},
     major = #{major}
   WHERE id = #{id};
-</update>
+  </update>
 
-<!-- delete a student -->
-<delete id="delete" parameterType = "long">
+  <!-- delete a student -->
+  <delete id="delete" parameterType = "long">
   DELETE FROM students WHERE id = #{id};
-</delete>
-
+  </delete>
 </mapper>

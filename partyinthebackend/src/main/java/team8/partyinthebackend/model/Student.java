@@ -12,15 +12,15 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String name;
     private String major;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -41,6 +41,6 @@ public class Student {
     }
 
     public String toString() {
-        return Integer.toString(this.id) + " " + this.name + " " + this.major;
+        return Long.toString(this.id) + " " + this.name + " " + this.major;
     }
 }
