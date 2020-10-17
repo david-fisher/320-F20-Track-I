@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import { Row, Col, Typography, Button } from 'antd';
+import React, {useContext, useEffect, useState} from 'react';
+import { Row, Col, Typography, Button, Layout } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
 import {SidebarContext} from "../../../component/SidebarContext"
@@ -10,9 +10,20 @@ const Conversations = () => {
   
   const {state,update} = useContext(SidebarContext)
   const { Title, Paragraph, Text } = Typography;
+  const { Header, Footer, Sider, Content } = Layout;
+
 
   let history = useHistory();
 
+  const [conversationList,setConversationList] = useState([])
+
+  useEffect(() => {
+    let newSidebarState = state
+    newSidebarState["conversations"].clickable = true
+    update({newSidebarState})
+  }, [])
+
+  //from backend
   let stakeholders = [
     {
       name: "Stephen",
@@ -41,20 +52,37 @@ const Conversations = () => {
   }
 
   return (
-    <>
-        <Navbar data={state} />
-        <Row justify="center">
-            <Title>Conversations</Title>
-        </Row>
-            {stakeholders.map(stakeholder => {
-                return(
-                    <Stakeholder name={stakeholder.name} bio={stakeholder.bio} />
-                )
-            })}
-        <Row>
-            <Col offset={5}><Button type="primary" htmlType="submit" onClick={handleClick}>next</Button></Col>
-        </Row>
-    </>
+        <Layout>
+            <Layout style={{backgroundColor: "white"}}>
+                <Navbar data={state} />
+                <Row>
+                    <Col span={12} offset={6}>
+                        <Title>Conversations</Title>
+                    </Col>
+                </Row>
+                {stakeholders.map((stakeholder,index) => {
+                    return(
+                        <Stakeholder key={index} name={stakeholder.name} bio={stakeholder.bio} conversationList={conversationList} setConversationList={setConversationList}/>
+                    )
+                })}
+                <Row>
+                    <Col offset={6}><Button type="primary" htmlType="submit" onClick={handleClick}>next</Button></Col>
+                </Row>
+            </Layout>
+            <Sider theme="light" width="250">
+                <Col>
+                    <Title level={4}>Conversations had so far</Title>
+                    {conversationList.map(name => {
+                        return(
+                            <>
+                                {name}
+                                <br/>
+                            </>
+                        )
+                    })}
+                </Col>
+            </Sider>
+        </Layout>
   );
 }
 export default Conversations;

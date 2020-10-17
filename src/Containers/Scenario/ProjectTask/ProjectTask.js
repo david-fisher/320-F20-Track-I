@@ -23,10 +23,13 @@ const ProjectTask = () => {
     else if (newSidebarState["projectTask"].routeTo === "gather-information")
       history.push("/scenario/gather-information")
 
+  }
+
+  useEffect(() => {
+    let newSidebarState = state
     newSidebarState["projectTask"].clickable = true
     update({newSidebarState})
-
-  }
+  }, [])
 
   return (
     <>

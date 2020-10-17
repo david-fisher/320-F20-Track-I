@@ -13,12 +13,13 @@ const GatherInformation = () => {
 
   const handleClick = () => {
     history.push("/scenario/conversations")
+  }
 
+  useEffect(() => {
     let newSidebarState = state
     newSidebarState["gatherInformation"].clickable = true
     update({newSidebarState})
-
-  }
+  }, [])
 
 
   return (

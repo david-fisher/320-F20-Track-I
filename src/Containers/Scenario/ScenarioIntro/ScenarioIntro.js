@@ -13,11 +13,13 @@ const ScenarioIntro = () => {
 
   const handleClick = () => {
     history.push("/scenario/project-task")
+  }
 
+  useEffect(() => {
     let newSidebarState = state
     newSidebarState["introduction"].clickable = true
     update({newSidebarState})
-  }
+  }, [])
 
   return (
     <>

@@ -21,10 +21,10 @@ const Navbar = (props) => {
                 <li key={index} className="nav-text">
                   {props.data[item].clickable ?
                   <Link to={props.data[item].path}>
-                    {props.data[item].icon}&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      
+                    {props.data[item].icon !== null ? props.data[item].icon: null}
                     <span>{props.data[item].title}</span>
-                  </Link> : props.data[item].title}
+                  </Link> 
+                  : <div>{props.data[item].title}</div>}
                 </li>
               );
             })}
