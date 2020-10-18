@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Row, Col, Card, Button } from 'antd';
+import { Row, Col, Card, Button, Typography } from 'antd';
 import { useHistory } from "react-router-dom";
 import Navbar from '../../../component/dashboarditems/Navbar'
 import './ScenarioIntro.css';
@@ -9,6 +9,7 @@ import {SidebarContext} from "../../../component/SidebarContext"
 const ScenarioIntro = () => {
   
   const {state,update} = useContext(SidebarContext)
+  const { Title } = Typography;
   let history = useHistory();
 
   const handleClick = () => {
@@ -24,17 +25,15 @@ const ScenarioIntro = () => {
   return (
     <>
       <Navbar data={state} />
-      <Row gutter={16}>
-          <ul className="scenarioIntro-headermargin"> </ul>
-          <Card bordered={false} style={{textAlign:"center", fontSize:26}}> 
-            <p>
-              Scenario Introduction:
-            </p>
-          </Card>
+      <Row>
+        <Col offset={5}>
+          <Title>Scenario Introduction</Title>
+        </Col>
       </Row>
 
-      <Row justify="center" style={{ marginBottom: "30px" }}>
-          <Card style={{textAlign:"left", fontSize:16,width:"50rem",height:"45rem",background:"#ECECEC"}}> 
+      <Row>
+        <Col offset={5}>
+          <Card style={{textAlign:"left", fontSize:15,width:"61vw",background:"#ECECEC"}}> 
             <p>
             My Medical Advisor is a well-established website that fields millions of queries about diseases, 
             symptoms, and so forth from their registered users.
@@ -75,12 +74,10 @@ const ScenarioIntro = () => {
             <p>            
             You have been hired by the company as a junior data scientist and have been assigned to the project.
             </p>
-          
+
+            <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button>
           </Card>
-      </Row>
-      <Row>
-          <Col offset={17}><div></div></Col>
-          <Col><Button type="primary" htmlType="submit" onClick={handleClick}>next</Button></Col>
+        </Col>
       </Row>
     </>
   );

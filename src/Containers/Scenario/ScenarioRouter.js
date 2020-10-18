@@ -15,7 +15,7 @@ const ScenarioRouter = () => {
     return (
         <SidebarProvider>
             <Switch>
-              <Route exact path='/scenario' component={ScenarioIntro}/> 
+              <Route exact path='/scenario' component={ScenarioIntro}/>
               <Route path='/scenario/project-task' component={ProjectTask}/>   
               <Route path='/scenario/initial-reflection' component={InitialReflection}/> 
               <Route path='/scenario/initial-action' component={InitialAction}/> 

@@ -1,10 +1,15 @@
 import React from 'react';
+import Navbar from '../../../component/dashboarditems/Navbar';
 
-function Results() {
+
+function Results(props) {
   return (
-    <div className='results'>
-        (soon to be implemented)
-    </div>
+    <>
+      <Navbar data={props.data} />
+      <div className='results'>
+          (soon to be implemented)
+      </div>
+    </>
   );
 }
 

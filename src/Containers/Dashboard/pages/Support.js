@@ -1,11 +1,15 @@
-
 import React from 'react';
+import Navbar from '../../../component/dashboarditems/Navbar';
 
-function Support() {
+
+function Support(props) {
   return (
-    <div className='support'>
-      (soon to be implemented...)
-    </div>
+    <>
+      <Navbar data={props.data} />
+      <div className='support'>
+        (soon to be implemented...)
+      </div>
+    </>
   );
 }
 
