@@ -1,7 +1,7 @@
 import React from 'react';
 import './dashboard.css';
 import Navbar from '../../component/dashboarditems/Navbar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Switch, Route } from 'react-router-dom';
 import Classes from './pages/Classes';
 import Results from './pages/Results';
 import Support from './pages/Support';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Typography, Avatar, Card} from 'antd';
+import { Row, Col, Typography, Card} from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 
@@ -7,7 +7,7 @@ import {useHistory} from "react-router-dom";
 const Disclosure= () => {
 
     const history = useHistory()
-    const { Title, Paragraph } = Typography;
+    const { Title } = Typography;
     return (   
             <div className="Disclosure">
             <Row justify="center">
