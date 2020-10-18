@@ -65,7 +65,10 @@ public class RestfulDemoController {
             updatedStudent.setName("Tim");
             updatedStudent.setMajor("math");
             updatedStudent.setId(id);
+            mapper.create(updatedStudent);
+            updatedStudent.setMajor("CS");
             mapper.update(updatedStudent);
+
             return mapper.selectAll();
         }
     }
@@ -77,6 +80,7 @@ public class RestfulDemoController {
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             mapper.delete(id);
+            
             return mapper.selectAll();
         }
     }

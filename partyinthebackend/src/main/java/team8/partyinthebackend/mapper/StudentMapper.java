@@ -8,12 +8,16 @@ public interface StudentMapper {
     //select all students
     public List<Student> selectAll();
 
+    // Select students by ID.
     public List<Student> selectById(long id);
 
+    // Student account creation(?)
     public void create(Student student);
 
+    // Update student details.
     public void update(Student t);
 
+    // Remove a student by ID.
     public void delete(long id);
 
 
