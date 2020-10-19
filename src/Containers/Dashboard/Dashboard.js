@@ -5,21 +5,17 @@ import Classes from './pages/Classes';
 import Results from './pages/Results';
 import Support from './pages/Support';
 import { SidebarDataDashboard } from '../../component/dashboarditems/SidebarDataDashboard';
+import Navbar from "../../component/dashboarditems/Navbar"
 
 
 const Dashboard = () => {
     return (
       <>
+        <Navbar data={SidebarDataDashboard} />
         <Switch>
-          <Route exact path='/dashboard'>
-            <Classes data={SidebarDataDashboard} />
-          </Route>    
-          <Route path='/dashboard/results'>
-            <Results data={SidebarDataDashboard} />  
-          </Route>               
-          <Route path='/dashboard/support'>
-            <Support data={SidebarDataDashboard} />
-          </Route>
+          <Route exact path='/dashboard' component={Classes}/>
+          <Route path='/dashboard/results' component={Results}/>
+          <Route path='/dashboard/support' component={Support}/>
         </Switch>
       </>
     );

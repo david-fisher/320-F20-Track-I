@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Row, Col, Card, Button, Typography } from 'antd';
 import { useHistory } from "react-router-dom";
-import Navbar from '../../../component/dashboarditems/Navbar'
 import './ScenarioIntro.css';
 import {SidebarContext} from "../../../component/SidebarContext"
 
@@ -24,7 +23,6 @@ const ScenarioIntro = () => {
 
   return (
     <>
-      <Navbar data={state} />
       <Row>
         <Col offset={5}>
           <Title>Scenario Introduction</Title>

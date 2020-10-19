@@ -1,19 +1,23 @@
-import  React, {useState} from 'react';
-import { BrowserRouter as Switch, Route } from 'react-router-dom';
+import  React, {useState, useContext} from 'react';
+import { Switch, Route } from 'react-router-dom';
 import ScenarioIntro from "./ScenarioIntro/ScenarioIntro"
 import ProjectTask from "./ProjectTask/ProjectTask"
 import InitialReflection from "./InitialReflection/InitialReflection"
 import InitialAction from "./InitialAction/InitialAction"
 import GatherInformation from './GatherInformation/GatherInformation';
 import Conversations from './Conversations/Conversations'
-import {SidebarProvider} from "../../component/SidebarContext"
+import {SidebarContext} from "../../component/SidebarContext"
+import Navbar from '../../component/dashboarditems/Navbar'
+
 
 const ScenarioRouter = () => {
 
   const [conversationList,setConversationList] = useState([])
+  const {state,update} = useContext(SidebarContext)
 
     return (
-        <SidebarProvider>
+          <>
+            <Navbar data={state} />
             <Switch>
               <Route exact path='/scenario' component={ScenarioIntro}/>
               <Route path='/scenario/project-task' component={ProjectTask}/>   
@@ -24,7 +28,7 @@ const ScenarioRouter = () => {
                 <Conversations conversationList={conversationList} setConversationList={setConversationList}/>
               </Route>
             </Switch>
-        </SidebarProvider>
+          </>
     );
   }
   
@@ -43,6 +47,7 @@ const ScenarioRouter = () => {
 //**** each conversation had is added to navbar and return to conversations page (conversation grays out if chosen)
 
 //reflection questions on conversations - does not appear in navbar, cant go back
+
 //choose final action
 
 //**** summary of the scenario - what the student was suppose to gain, just text - added to navbar

@@ -1,7 +1,6 @@
 import React, {useState, useContext} from 'react';
 import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
-import Navbar from '../../../component/dashboarditems/Navbar'
 import {SidebarContext} from '../../../component/SidebarContext';
 
 
@@ -30,7 +29,6 @@ const InitialRelection = () => {
 
     return (
         <>
-            <Navbar data={state} />
             <Row>
                 <Col offset={5} span={18}>
                     <Title style={{color: "black"}}>Reflect on Initial Information</Title>

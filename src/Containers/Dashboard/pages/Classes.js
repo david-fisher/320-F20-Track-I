@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col, Button } from 'antd';
 import './Classes.css';
 import { useHistory } from "react-router-dom";
-import Navbar from '../../../component/dashboarditems/Navbar';
 
 
 function Classes(props) {
@@ -31,7 +30,6 @@ function Classes(props) {
 
   return (
     <>
-      <Navbar data={props.data} />
       <Row gutter={16}>
           {classesObject.map((c, index) => {
             return(

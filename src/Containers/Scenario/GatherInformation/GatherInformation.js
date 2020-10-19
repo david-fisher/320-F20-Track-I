@@ -1,7 +1,6 @@
 import React, {useContext,useEffect} from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 import { useHistory } from "react-router-dom";
-import Navbar from '../../../component/dashboarditems/Navbar'
 import {SidebarContext} from '../../../component/SidebarContext';
 
 const GatherInformation = () => {
@@ -24,8 +23,6 @@ const GatherInformation = () => {
 
   return (
     <>
-        <Navbar data={state} />
-
         <Row>
           <Col offset={5} span={18}>
               <Title style={{color: "black"}}>Start to Gather Information</Title>

@@ -1,11 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Row, Col, Typography, Button, Layout } from 'antd';
 import { useHistory } from "react-router-dom";
-import Navbar from '../../../component/dashboarditems/Navbar'
 import {SidebarContext} from "../../../component/SidebarContext"
 import Stakeholder from "./Stakeholder"
-import ConversationModal from "./ConversationModal"
-
+import AlreadyHad from"./AlreadyHad"
 
 
 const Conversations = (props) => {
@@ -81,7 +79,6 @@ const Conversations = (props) => {
   return (
         <Layout>
             <Layout style={{backgroundColor: "white"}}>
-                <Navbar data={state} />
                 <Row>
                     <Col span={12} offset={6}>
                         <Title>Conversations</Title>
@@ -106,13 +103,15 @@ const Conversations = (props) => {
             <Sider theme="light" width="250">
                 <Col>
                     <Title level={4}>Conversations had so far</Title>
-                    {props.conversationList.map(person => {
+                    {props.conversationList.map((person,index) => {
                         return(
-                            <>
-                                <Button type="text" danger style={{marginRight:"20px"}} onClick={() => setShowModal(true)}>{person.name}</Button>
-                                <br/>
-                                <ConversationModal showModal={showModal} setShowModal={setShowModal} name={person.name} conversation={person.conversation}/>
-                            </>
+                            <AlreadyHad
+                                key={index}
+                                showModal={showModal}
+                                setShowModal={setShowModal}
+                                name={person.name}
+                                conversation={person.conversation}
+                            />
                         )
                     })}
                 </Col>
