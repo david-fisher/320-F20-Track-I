@@ -5,7 +5,7 @@ import ProjectTask from "./ProjectTask/ProjectTask"
 import InitialReflection from "./InitialReflection/InitialReflection"
 import InitialAction from "./InitialAction/InitialAction"
 import GatherInformation from './GatherInformation/GatherInformation';
-import Conversations from './Conversations/Conversations'
+import ConversationsPage from './Conversations/ConversationsPage'
 import {SidebarContext} from "../../component/SidebarContext"
 import Navbar from '../../component/dashboarditems/Navbar'
 
@@ -25,7 +25,7 @@ const ScenarioRouter = () => {
               <Route path='/scenario/initial-action' component={InitialAction}/> 
               <Route path='/scenario/gather-information' component={GatherInformation}/>
               <Route path='/scenario/conversations'>
-                <Conversations conversationList={conversationList} setConversationList={setConversationList}/>
+                <ConversationsPage conversationList={conversationList} setConversationList={setConversationList}/>
               </Route>
             </Switch>
           </>

@@ -3,16 +3,14 @@ import { Row, Col, Typography, Button, Layout } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from "../../../component/SidebarContext"
 import Stakeholder from "./Stakeholder"
-import AlreadyHad from"./AlreadyHad"
+import ConversationsAlreadyHad from"./ConversationsAlreadyHad"
 
 
-const Conversations = (props) => {
+const ConversationsPage = (props) => {
   
   const {state,update} = useContext(SidebarContext)
   const { Title } = Typography;
   const { Sider } = Layout;
-
-  const [showModal,setShowModal] = useState(false)
 
   let history = useHistory();
 
@@ -105,10 +103,8 @@ const Conversations = (props) => {
                     <Title level={4}>Conversations had so far</Title>
                     {props.conversationList.map((person,index) => {
                         return(
-                            <AlreadyHad
+                            <ConversationsAlreadyHad
                                 key={index}
-                                showModal={showModal}
-                                setShowModal={setShowModal}
                                 name={person.name}
                                 conversation={person.conversation}
                             />
@@ -119,4 +115,4 @@ const Conversations = (props) => {
         </Layout>
   );
 }
-export default Conversations;
+export default ConversationsPage;
