@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import {SidebarContext} from "../../../component/SidebarContext"
 import Stakeholder from "./Stakeholder"
 import ConversationsAlreadyHad from"./ConversationsAlreadyHad"
+import HelpMenu from './helpMenu';
 
 
 const ConversationsPage = (props) => {
@@ -96,6 +97,7 @@ const ConversationsPage = (props) => {
                 })}
                 <Row>
                     <Col offset={6}><Button type="primary" onClick={handleClick}>Next Page</Button></Col>
+                    <Col offset={22}><HelpMenu/></Col>
                 </Row>
             </Layout>
             <Sider theme="light" width="250">
