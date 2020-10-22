@@ -27,7 +27,7 @@
   </select>
 
   <!-- delete a student -->
-  <delete id="delete" parameterType = "long">
+  <select id="delete" parameterType = "long" resultType="team8.partyinthebackend.model.Student">
     DELETE FROM students WHERE id = #{id};
-  </delete>
+  </select>
 </mapper>

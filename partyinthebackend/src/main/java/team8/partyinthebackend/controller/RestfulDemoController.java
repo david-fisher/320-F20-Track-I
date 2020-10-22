@@ -48,8 +48,8 @@ public class RestfulDemoController {
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student newStudent = new Student();
-            newStudent.setId(6);
-            newStudent.setName("Tim");
+            newStudent.setId(1);
+            newStudent.setName("Jack");
             newStudent.setMajor("cs");
             mapper.create(newStudent);
             return mapper.selectAll();
@@ -70,7 +70,7 @@ public class RestfulDemoController {
     }
 
     //DELETE
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/students/{id}")
     //@RequestMapping(value="/delete/{id}", method={RequestMethod.DELETE, RequestMethod.GET})
     public @ResponseBody List<Student> deleteOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
