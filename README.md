@@ -3,7 +3,9 @@ track 1's repo - Business in the frontend, Party in the backend
 ## Spring Boot Start up
 * Clone the repository
 * Import Maven dependencies
+* Change database settings inside *mybatis-config.xml* and *application.properties* to your own local database settings
 * Go to src\main\java\team8\partyinthebackend\EthicsApplication.java and run :rocket:
+  **OR** navigate to 320-F20TRACK-1\partyinthebackend (the folder which contains pom.xml) and run *mvn spring-boot:run* in the terminal
 * Finally, check out http://localhost:8080/
 
 ## React Webpage Start up
