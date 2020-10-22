@@ -19,15 +19,15 @@
     INSERT INTO students(id, name, major) VALUES (#{id}, #{name}, #{major});
   </select>
 
-  <update id="update" parameterType="team8.partyinthebackend.model.Student">
-  UPDATE students SET
-    name = #{name},
-    major = #{major}
-  WHERE id = #{id};
-  </update>
+  <select id="update" parameterType="team8.partyinthebackend.model.Student">
+    UPDATE students SET
+      name = #{name},
+      major = #{major}
+    WHERE id = #{id};
+  </select>
 
   <!-- delete a student -->
   <delete id="delete" parameterType = "long">
-  DELETE FROM students WHERE id = #{id};
+    DELETE FROM students WHERE id = #{id};
   </delete>
 </mapper>

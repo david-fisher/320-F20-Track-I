@@ -35,7 +35,7 @@ public class RestfulDemoController {
 
     //GET
     @GetMapping(value = "/students/{id}")
-    public List<Student> getOneStudent(@PathVariable Long id){
+    public Student getOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             return mapper.selectById(id);
@@ -48,8 +48,8 @@ public class RestfulDemoController {
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student newStudent = new Student();
-            newStudent.setId(4);
-            newStudent.setName("Andy");
+            newStudent.setId(6);
+            newStudent.setName("Tim");
             newStudent.setMajor("cs");
             mapper.create(newStudent);
             return mapper.selectAll();
@@ -61,13 +61,9 @@ public class RestfulDemoController {
     public @ResponseBody List<Student> updateOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
-            Student updatedStudent = new Student();
-            updatedStudent.setName("Tim");
-            updatedStudent.setMajor("math");
-            updatedStudent.setId(id);
-            mapper.create(updatedStudent);
-            updatedStudent.setMajor("CS");
-            mapper.update(updatedStudent);
+            Student student = mapper.selectById(id);
+            student.setMajor("Math");
+            mapper.update(student);
 
             return mapper.selectAll();
         }

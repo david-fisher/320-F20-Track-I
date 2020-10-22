@@ -10,7 +10,7 @@
         <property name="driver" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
         <property name="username" value="postgres"/>
-        <property name="password" value="testpassword"/>
+        <property name="password" value="password_please_change_locally"/>
       </dataSource>
     </environment>
   </environments>
