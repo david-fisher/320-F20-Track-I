@@ -35,7 +35,7 @@ public class RestfulDemoController {
 
     //GET
     @GetMapping(value = "/students/{id}")
-    public Student getOneStudent(@PathVariable Long id){
+    public List<Student> getOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             return mapper.selectById(id);
@@ -48,8 +48,8 @@ public class RestfulDemoController {
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student newStudent = new Student();
-            newStudent.setId(1);
-            newStudent.setName("Jack");
+            newStudent.setId(4);
+            newStudent.setName("Andy");
             newStudent.setMajor("cs");
             mapper.create(newStudent);
             return mapper.selectAll();
@@ -61,22 +61,25 @@ public class RestfulDemoController {
     public @ResponseBody List<Student> updateOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
-            Student student = mapper.selectById(id);
-            student.setMajor("Math");
-            mapper.update(student);
-
+            Student updatedStudent = new Student();
+            updatedStudent.setName("Tim");
+            updatedStudent.setMajor("math");
+            updatedStudent.setId(id);
+            mapper.create(updatedStudent);
+            updatedStudent.setMajor("Computer Science");
+            mapper.update(updatedStudent);
             return mapper.selectAll();
+
         }
     }
 
     //DELETE
-    @DeleteMapping(value = "/students/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     //@RequestMapping(value="/delete/{id}", method={RequestMethod.DELETE, RequestMethod.GET})
     public @ResponseBody List<Student> deleteOneStudent(@PathVariable Long id){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             mapper.delete(id);
-            
             return mapper.selectAll();
         }
     }
