@@ -40,7 +40,7 @@ public class StudentController {
     }
 
     @PostMapping("/students") // POST Method for Create operation
-    public Student createPhone(@Validated @RequestBody Student student) {
+    public Student newStudent(@Validated @RequestBody Student student) {
       return studentRepository.save(student);
     }
 
