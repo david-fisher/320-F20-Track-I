@@ -31,9 +31,11 @@ CREATE TABLE pages(
 	PAGE_ID		 INTEGER		NOT NULL,
 	PAGE_TYPE	 VARCHAR(70),
 	PAGE_TITLE	 VARCHAR(70),
-	Scenario	 REFERENCES scenarios(E_ID, VERSION_ID),
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,
 	NEXT_PAGE_ID INTEGER		REFERENCES pages(PAGE_ID),
-	PRIMARY KEY(PAGE_ID)
+	PRIMARY KEY(PAGE_ID),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
 
 CREATE TABLE stakeholders(
@@ -42,24 +44,30 @@ CREATE TABLE stakeholders(
 	DESCRIPTION		TEXT,
 	JOB			VARCHAR(70),
 	MATRIX		INTEGER[][],
-	Scenario	 (INTEGER,INTEGER)	REFERENCES scenarios(E_ID, VERSION_ID),
-	PRIMARY KEY(STK_ID)
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,	
+	PRIMARY KEY(STK_ID),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
 
 CREATE TABLE responses(
 	S_ID		INTEGER REFERENCES students(S_ID),
 	P_ID		INTEGER REFERENCES professors(P_ID),
-	Scenario	REFERENCES scenarios(E_ID, VERSION_ID),
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,
 	C_ID		INTEGER REFERENCES courses(C_ID),
 	DATE_TAKEN	DATE NOT NULL,
 	CHOICE TEXT,
-	PRIMARY KEY(S_ID, C_ID, Scenario, DATE_TAKEN)
+	PRIMARY KEY(S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
 
 CREATE TABLE assigned_to(
 	Student		INTEGER REFERENCES students(S_ID),
-	Scenario	REFERENCES scenarios(E_ID, VERSION_ID),
-	PRIMARY KEY(Student,Scenario)
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,
+	PRIMARY KEY(Student,Scenario),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
 
 CREATE TABLE students_in(
@@ -88,7 +96,7 @@ CREATE TABLE reflections_taken(
 	REFLECTIONS TEXT,
 	S_ID		INTEGER REFERENCES responses(S_ID),
 	C_ID		INTEGER REFERENCES responses(C_ID),
-	Scenario	REFERENCES scenarios(E_ID, VERSION_ID),
+	
 	DATE_TAKEN	DATE REFERENCES responses(DATE_TAKEN),
 	PRIMARY KEY(REFLECTIONS, S_ID, C_ID, Scenario, DATE_TAKEN)
 );
@@ -96,12 +104,15 @@ CREATE TABLE reflections_taken(
 CREATE TABLE conversations_had(
 	S_ID		INTEGER REFERENCES responses(S_ID),
 	C_ID		INTEGER REFERENCES responses(C_ID),
-	Scenario	REFERENCES scenarios(E_ID, VERSION_ID),
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,
 	DATE_TAKEN	DATE REFERENCES responses(DATE_TAKEN),
 	STAKEHOLDER INTEGER REFERENCES stakeholders(STK_ID),
 	SCORE INTEGER,
 	CONVERSATION_ID INTEGER REFERENCES conversations(CONVERSATION_ID),
-	PRIMARY KEY(S_ID,C_ID,Scenario,DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID)
+	PRIMARY KEY(S_ID,C_ID,Scenario, ScenarioVer, DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+
 );
 
 CREATE TABLE action_page(
@@ -129,15 +140,20 @@ CREATE TABLE stakeholder_page(
 );
 
 CREATE TABLE scenarios_for(
-	Scenario	 REFERENCES scenarios(E_ID, VERSION_ID),
+	Scenario	 INTEGER,
+	ScenarioVer	 INTEGER,
 	C_ID		 INTEGER REFERENCES courses(C_ID),
-	PRIMARY KEY(Scenario, C_ID)
+	PRIMARY KEY(Scenario, ScenarioVer, C_ID),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+
 );
 
 CREATE TABLE stakeholders_in(
 	STAKEHOLDER 	INTEGER REFERENCES stakeholders(STK_ID),
-	Scenario	 (INTEGER,INTEGER)	REFERENCES scenarios(E_ID, VERSION_ID),
-	PRIMARY KEY(STAKEHOLDER,Scenario)
+	Scenario		INTEGER,
+	ScenarioVer		INTEGER,
+	PRIMARY KEY(STAKEHOLDER,Scenario, ScenarioVer),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
 
 CREATE TABLE conversations(
@@ -149,7 +165,9 @@ CREATE TABLE conversations(
 );
 
 CREATE TABLE scenarios_in(
-	Scenario	 (INTEGER,INTEGER)	REFERENCES scenarios(E_ID, VERSION_ID),
+	Scenario INTEGER,
+	ScenarioVer INTEGER,
 	C_ID	INTEGER REFERENCES courses(C_ID),
-	PRIMARY KEY(Scenario,C_ID)
+	PRIMARY KEY(Scenario, ScenarioVer, C_ID),
+	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
