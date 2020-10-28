@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Typography, Card} from 'antd';
+import { Row, Col, Typography, Card, Image} from 'antd';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import {useHistory} from "react-router-dom";
 
@@ -12,9 +12,10 @@ const Disclosure= () => {
             <div className="Disclosure">
             <Row justify="center">
                 <Col>
-                    <div style={{ backgroundColor: "#881C1C", height: "170px", width: "100vw" }}>
-                        <Title level={2} style={{ textAlign: "center", lineHeight: "170px", color: "white",fontSize:40 }}>Disclosure</Title>
+                    <div style={{ backgroundColor: "#881C1C", height: "200px", width: "100vw" }}>
+                        <Title level={2} style={{ textAlign: "center", lineHeight: "200px", color: "white",fontSize:40 }}>Disclosure</Title>
                     </div>
+                    <Image width="100%" src="/img/Vector.svg" />
                 </Col>
             </Row>
             <Row justify="start">
