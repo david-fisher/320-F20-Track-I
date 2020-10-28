@@ -3,7 +3,7 @@ import { Row, Col, Card, Button, Typography } from 'antd';
 import { useHistory } from "react-router-dom";
 import './ScenarioIntro.css';
 import {SidebarContext} from "../../../component/SidebarContext"
-
+import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
 
 const ScenarioIntro = () => {
   
@@ -28,7 +28,6 @@ const ScenarioIntro = () => {
           <Title>Scenario Introduction</Title>
         </Col>
       </Row>
-
       <Row>
         <Col offset={5}>
           <Card style={{textAlign:"left", fontSize:15,width:"61vw",background:"#ECECEC"}}> 
@@ -73,7 +72,7 @@ const ScenarioIntro = () => {
             You have been hired by the company as a junior data scientist and have been assigned to the project.
             </p>
 
-            <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button>
+            <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button><Col offset={23}><HelpMenu/></Col>
           </Card>
         </Col>
       </Row>

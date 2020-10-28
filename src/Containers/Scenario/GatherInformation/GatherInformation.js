@@ -2,6 +2,7 @@ import React, {useContext,useEffect} from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
+import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
 
 const GatherInformation = () => {
 
@@ -38,7 +39,7 @@ const GatherInformation = () => {
           </Col>
         </Row>
         <Row>
-          <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col>
+          <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col><Col offset={23}><HelpMenu/></Col>
         </Row>
     </>
   );
