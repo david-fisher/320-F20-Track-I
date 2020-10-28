@@ -62,6 +62,16 @@ CREATE TABLE responses(
 	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
 
+CREATE TABLE issues(
+	ISSUE_ID INTEGER,
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,
+	Name		VARCHAR(70),
+	ImportanceFactor INTEGER,
+	PRIMARY KEY (ISSUE_ID, Scenario, ScenarioVer),
+	FOREIGN KEY (Scenario, ScenarioVer) REFERENCES scenarios(E_ID, VERSION_ID)
+);
+
 CREATE TABLE assigned_to(
 	Student		INTEGER REFERENCES students(S_ID),
 	Scenario	INTEGER,
