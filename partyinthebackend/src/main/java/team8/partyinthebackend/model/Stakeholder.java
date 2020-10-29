@@ -2,11 +2,8 @@ package team8.partyinthebackend.model;
 
 import javax.persistence.*;
 
-@Entity
 public class Stakeholder {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private long id;
     private String name;
     private String title;
