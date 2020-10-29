@@ -30,19 +30,39 @@ function Classes(props) {
 
   return (
     <>
-      <Row gutter={16}>
-          {classesObject.map((c, index) => {
-            return(
-              <Col offset={index === 0 ? 5 : 0} key={index}>
-                <div className="box" style={{backgroundColor: index % 2 === 0 ? "#2A9D8F" : "#5b7f95"}}>
-                  {c.classNumber} <br/>
-                  {c.classTitle}
-                  <Button type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>start</Button>
-                </div>
-              </Col>
-            )
-          })}
-      </Row>
+    <div class = "container">
+    <Row gutter={36}>
+            {classesObject.map((c, index) => {
+              return(
+                <Col offset={index === 0 ? 3 : 0} key={index}>
+                  <br/>
+                  <div className="box" style={{backgroundColor: index % 2 === 0 ? "blanchedalmond" : "blanchedalmond"}}>
+                    <div className="head">In Progress...</div>
+                    {c.classNumber + ", "}
+                    {c.classTitle} <br/>
+
+                    <Button className = "start" type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>start</Button>
+                   
+                  </div>
+                </Col>
+              )
+        })}
+    </Row>
+    </div>
+  
+      
+      {/* <div class="leftpane">
+        <h1>What</h1>
+        </div>
+      <div class="middlepane">
+        
+        <h1>The</h1>
+      </div>
+      <div class="rightpane">
+        <h1>Fuck</h1>
+      </div> */}
+    
+      
     </>
   );
 }

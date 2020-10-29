@@ -22,15 +22,19 @@
   padding: 10px;
   background-color: #2a9d8f;
 } */
-
-.row {
-    display: flex;
-    /* border: 1px solid rgb(0, 0, 0); */
-    float: left;
-    width: 500px; /* it changes by screen size actually */
-    padding: 10px;
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-color: #eeeeee;
 }
-.row:before, .row:after {
+/* .row {
+    display: flex;
+   
+    float: left;
+    width: 500px; 
+    padding: 10px;
+} */
+/* .row:before, .row:after {
     content: "";
 }
 .row:after {
@@ -39,8 +43,8 @@
 .col {
     float: left;
     width: 100%;
-}
-.box {
+} */
+/* .box {
     border: 2px solid rgb(0, 0, 0);
     width: 100px;
     height: 100px;
@@ -48,11 +52,62 @@
     border-radius: 25px;
     text-align: center;
     line-height: 100%;
+} */
+.start{
+    justify-content: center;
 }
 
-.col:first-child .box {
+.box {
+    border: 4px solid rgb(0,0,0);
+    width: 12vw;
+    height: 100%;
+    text-align: center;
+}
+
+/* .col:first-child .box {
     margin-left: 0;
 }
 .col:last-child .box {
     margin-right: 0;
+} */
+
+
+.head{
+    background-color: #003b5c;
+    text-align: center;
+    color: white;
 }
+  
+/*.container {
+    display: inline;
+    width: 100vw;
+    height: 100%;
+} */
+  
+/* .leftpane { I tried to make middle white and sides grey, css didnt agree
+  
+    width: 20vw;
+    height: 100%;
+    float: left;
+    background-color: rosybrown;
+    border-collapse: collapse;
+}
+
+.middlepane {
+  
+    width: 60vw;
+    height: 100%;
+    
+    float: left;
+    background-color: royalblue;
+    border-collapse: collapse;
+}
+
+.rightpane {
+ 
+    width: 20vw;
+    height: 100%;
+    float: left;
+    background-color: yellow;
+    border-collapse: collapse;
+} */
