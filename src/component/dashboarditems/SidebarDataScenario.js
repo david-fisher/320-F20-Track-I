@@ -30,4 +30,9 @@ export const SidebarDataScenario = {
     path: '/scenario',
     clickable: false
   },
+  conclusion: {
+    title: 'Conclusion',
+    path: '/scenario/conclusion',
+    clickable: true
+  }
 }
