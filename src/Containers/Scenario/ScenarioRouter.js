@@ -8,7 +8,7 @@ import GatherInformation from './GatherInformation/GatherInformation';
 import ConversationsPage from './Conversations/ConversationsPage'
 import {SidebarContext} from "../../component/SidebarContext"
 import Navbar from '../../component/dashboarditems/Navbar'
-
+import Conclusion from './Conclusion/Conclusion'
 
 const ScenarioRouter = () => {
 
@@ -27,6 +27,7 @@ const ScenarioRouter = () => {
               <Route path='/scenario/conversations'>
                 <ConversationsPage conversationList={conversationList} setConversationList={setConversationList}/>
               </Route>
+              <Route path='/scenario/conclusion' component = {Conclusion}/>
             </Switch>
           </>
     );
