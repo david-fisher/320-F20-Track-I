@@ -10,14 +10,12 @@ public class Student {
 
     private int id;
     private String name;
-    private int[] scenariosAssignedToStudent;
-    private int[] coursesInStudent;
+    private Courses courses;
 
     public Student(int id, String name) {
         this.id = id;
         this.name = name;
-        this.scenariosAssignedToStudent = new int[]{1, 2, 3};
-        this.coursesInStudent = new int[]{1, 2, 3};
+        this.courses = new Courses();
     }
 
     public int getId() {
@@ -36,20 +34,12 @@ public class Student {
         this.name = name;
     }
 
-    public int[] getCoursesInStudent() {
-        return coursesInStudent;
+    public Courses getCourses() {
+        return courses;
     }
 
-    public void setCoursesInStudent(int[] coursesInStudent) {
-        this.coursesInStudent = coursesInStudent;
-    }
-
-    public int[] getScenariosAssignedToStudent() {
-        return scenariosAssignedToStudent;
-    }
-
-    public void setScenariosAssignedToStudent(int[] scenariosAssignedToStudent) {
-        this.scenariosAssignedToStudent = scenariosAssignedToStudent;
+    public void addCourse(int id, String name) {
+        this.courses.addScenario(id, name);
     }
 }
 
