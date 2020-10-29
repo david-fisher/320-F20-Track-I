@@ -52,7 +52,6 @@ CREATE TABLE stakeholders(
 
 CREATE TABLE responses(
 	S_ID		INTEGER REFERENCES students(S_ID),
-	P_ID		INTEGER REFERENCES professors(P_ID),
 	Scenario	INTEGER,
 	ScenarioVer INTEGER,
 	C_ID		INTEGER REFERENCES courses(C_ID),
@@ -104,24 +103,26 @@ CREATE TABLE demographics(
 
 CREATE TABLE reflections_taken(
 	REFLECTIONS TEXT,
-	S_ID		INTEGER REFERENCES responses(S_ID),
-	C_ID		INTEGER REFERENCES responses(C_ID),
-	
-	DATE_TAKEN	DATE REFERENCES responses(DATE_TAKEN),
-	PRIMARY KEY(REFLECTIONS, S_ID, C_ID, Scenario, DATE_TAKEN)
+	S_ID		INTEGER,
+	C_ID		INTEGER,
+	Scenario	INTEGER,
+	ScenarioVer INTEGER,
+	DATE_TAKEN	DATE REFERENCES,
+	PRIMARY KEY(REFLECTIONS, S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN),
+	FOREIGN KEY (S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN) references responses(S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN)
 );
 
 CREATE TABLE conversations_had(
-	S_ID		INTEGER REFERENCES responses(S_ID),
-	C_ID		INTEGER REFERENCES responses(C_ID),
+	S_ID		INTEGER,
+	C_ID		INTEGER,
 	Scenario	INTEGER,
 	ScenarioVer INTEGER,
-	DATE_TAKEN	DATE REFERENCES responses(DATE_TAKEN),
+	DATE_TAKEN	DATE,
 	STAKEHOLDER INTEGER REFERENCES stakeholders(STK_ID),
 	SCORE INTEGER,
 	CONVERSATION_ID INTEGER REFERENCES conversations(CONVERSATION_ID),
 	PRIMARY KEY(S_ID,C_ID,Scenario, ScenarioVer, DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+	FOREIGN KEY (S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN) references responses(S_ID,C_ID, Scenario, ScenarioVer, DATE_TAKEN)
 
 );
 
