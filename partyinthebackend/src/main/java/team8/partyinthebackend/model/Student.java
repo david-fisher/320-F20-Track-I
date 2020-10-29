@@ -1,26 +1,30 @@
 package team8.partyinthebackend.model;
 
-import javax.persistence.*;
-
 /**
  * @Author: ZJendex
  * @Time: 9/30/2020, Wed
  **/
 
-@Entity
+
 public class Student {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     private String name;
-    private String major;
+    private int[] scenariosAssignedToStudent;
+    private int[] coursesInStudent;
 
-    public long getId() {
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.scenariosAssignedToStudent = new int[]{1, 2, 3};
+        this.coursesInStudent = new int[]{1, 2, 3};
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -32,15 +36,20 @@ public class Student {
         this.name = name;
     }
 
-    public String getMajor() {
-        return major;
+    public int[] getCoursesInStudent() {
+        return coursesInStudent;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
+    public void setCoursesInStudent(int[] coursesInStudent) {
+        this.coursesInStudent = coursesInStudent;
     }
 
-    public String toString() {
-        return Long.toString(this.id) + " " + this.name + " " + this.major;
+    public int[] getScenariosAssignedToStudent() {
+        return scenariosAssignedToStudent;
+    }
+
+    public void setScenariosAssignedToStudent(int[] scenariosAssignedToStudent) {
+        this.scenariosAssignedToStudent = scenariosAssignedToStudent;
     }
 }
+
