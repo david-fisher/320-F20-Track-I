@@ -58,13 +58,13 @@ public class RestfulDemoController {
 
     //UPDATE
     @PutMapping(value = "/students/{id}")
-    public @ResponseBody List<Student> updateOneStudent(@PathVariable Long id){
+    public @ResponseBody List<Student> updateOneStudent(@PathVariable Long id, @RequestParam String major, @RequestParam String name){
         try(SqlSession sqlSession = MybatisUtils.getSqlSession()) {
             StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
             Student student = mapper.selectById(id);
             student.setMajor("Math");
-            mapper.update(student);
-
+            //mapper.update(student);
+            System.out.println(major + " " + name);
             return mapper.selectAll();
         }
     }
