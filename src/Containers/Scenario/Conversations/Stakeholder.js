@@ -18,7 +18,7 @@ const Stakeholder = (props) => {
         /* 5 is arbitrary here and will come from backend! */
         if(props.conversationList.length >=5)
             setDisabled(true)
-    },)
+    })
 
     const handleExpand = () => {
         setShowBio(!showBio)
@@ -26,9 +26,13 @@ const Stakeholder = (props) => {
     }
 
     const handleConversation = () => {
-        props.setConversationList(props.conversationList.concat({name: props.name, conversation: props.conversation}))
+        props.setStakeholders(stakeholders => {
+            let newStakeholders = stakeholders
+            newStakeholders[props.index].disabled = true
+            return newStakeholders
+        })
+        props.setConversationList(props.conversationList.concat({name: props.name, conversation: props.conversation, disabled: true}))
         setShowModal(true)
-        setDisabled(true)
     }
 
     return (
@@ -39,7 +43,7 @@ const Stakeholder = (props) => {
                     <Text strong>{props.name}</Text>
                 </Col>
                 <Col>
-                    {disabled ? <Button disabled style={{marginRight:"20px"}}>Choose</Button> : <Button danger style={{marginRight:"20px"}} onClick={handleConversation}>Choose</Button>}
+                    {props.stakeholders[props.index].disabled || disabled? <Button disabled style={{marginRight:"20px"}} >Choose</Button> : <Button danger style={{marginRight:"20px"}} onClick={handleConversation}>Choose</Button>}
                 </Col>
             </Row>
             <Row>

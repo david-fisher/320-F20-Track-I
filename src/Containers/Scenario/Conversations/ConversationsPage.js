@@ -34,55 +34,6 @@ const ConversationsPage = (props) => {
 
   }
 
-  //from backend
-  let stakeholders = [
-    {
-      name: "Stephen",
-      conversation: "this is a conversation with stephen",
-      bio: "1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    },
-    {
-      name: "Nisarg",
-      conversation: "this is a conversation with nisarg",
-      bio: "2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    },
-    {
-      name: "Jackie",
-      conversation: "this is a conversation with jackie",
-      bio: "3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    },
-    {
-      name: "Jeffrey",
-      conversation: "this is a conversation with jefferey",
-      bio: "4 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    },
-    {
-      name:"Dan",
-      conversation: "this is a conversation with dan",
-      bio:"I am a loserrrr!!!"
-    },
-    {
-        name:"Vy",
-        conversation: "this is a conversation with Vy",
-        bio:"this is my bio"
-    },
-    {
-        name:"Vani",
-        conversation: "this is a conversation with vani",
-        bio:"testing testing"
-    },
-    {
-        name:"Sam",
-        conversation: "this is a conversation with sam",
-        bio:"Hello World!"
-    },
-    {
-        name:"Rachel",
-        conversation: "this is a conversation with rachel",
-        bio:"I am cool"
-    },
-      
-  ]
 
   return (
         <Layout>
@@ -93,10 +44,13 @@ const ConversationsPage = (props) => {
                         <Title level={3}>Please Choose 5 Conversations</Title>
                     </Col>
                 </Row>
-                {stakeholders.map((stakeholder,index) => {
+                {props.stakeholders.map((stakeholder,index) => {
                     return(
                         <Stakeholder
-                            key={index} 
+                            key={index}
+                            index={index}
+                            stakeholders={props.stakeholders}
+                            setStakeholders={props.setStakeholders} 
                             name={stakeholder.name} 
                             bio={stakeholder.bio} 
                             conversation={stakeholder.conversation} 

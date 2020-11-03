@@ -22,6 +22,69 @@ const ScenarioRouter = () => {
   const [conversationList,setConversationList] = useState([])
   const {state,update} = useContext(SidebarContext)
 
+  //from backend
+  const [stakeholders,setStakeholders] = useState([
+    {
+      name: "Stephen",
+      conversation: "this is a conversation with stephen",
+      bio: "1 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      disabled: false
+    },
+    {
+      name: "Nisarg",
+      conversation: "this is a conversation with nisarg",
+      bio: "2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      disabled: false
+    },
+    {
+      name: "Jackie",
+      conversation: "this is a conversation with jackie",
+      bio: "3 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      disabled: false
+    },
+    {
+      name: "Jeffrey",
+      conversation: "this is a conversation with jefferey",
+      bio: "4 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      disabled: false
+    },
+    {
+      name:"Dan",
+      conversation: "this is a conversation with dan",
+      bio:"I am a loserrrr!!!",
+      disabled: false
+
+    },
+    {
+        name:"Vy",
+        conversation: "this is a conversation with Vy",
+        bio:"this is my bio",
+        disabled: false
+
+    },
+    {
+        name:"Vani",
+        conversation: "this is a conversation with vani",
+        bio:"testing testing",
+        disabled: false
+
+    },
+    {
+        name:"Sam",
+        conversation: "this is a conversation with sam",
+        bio:"Hello World!",
+        disabled: false
+
+    },
+    {
+        name:"Rachel",
+        conversation: "this is a conversation with rachel",
+        bio:"I am cool",
+        disabled: false
+    },
+      
+  ])
+
     return (
           <>
             <Navbar data={state} />
@@ -32,7 +95,7 @@ const ScenarioRouter = () => {
               <Route path='/scenario/initial-action' component={InitialAction}/> 
               <Route path='/scenario/gather-information' component={GatherInformation}/>
               <Route path='/scenario/conversations'>
-                <ConversationsPage conversationList={conversationList} setConversationList={setConversationList}/>
+                <ConversationsPage conversationList={conversationList} setConversationList={setConversationList} stakeholders={stakeholders} setStakeholders={setStakeholders}/>
               </Route>
               <Route path='/scenario/conversation-reflection' component = {ConversationReflection}/>
               <Route path='/scenario/final-action' component = {FinalAction}/>
