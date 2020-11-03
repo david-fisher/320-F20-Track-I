@@ -21,6 +21,19 @@ const ConversationsPage = (props) => {
     update({newSidebarState})
   }, [])
 
+  const handleClick = () => {
+
+    let newSidebarState = state
+
+    if (newSidebarState["conversations"].routeTo === "conversation-reflection")
+      history.push("/scenario/conversation-reflection")
+    else if (newSidebarState["conversations"].routeTo === "final-action")
+      history.push("/scenario/final-action")
+    else if (newSidebarState["conversations"].routeTo === "summary")
+      history.push("/scenario/summary")
+
+  }
+
   //from backend
   let stakeholders = [
     {
@@ -71,16 +84,13 @@ const ConversationsPage = (props) => {
       
   ]
 
-  const handleClick = () => {
-
-  }
-
   return (
         <Layout>
             <Layout style={{backgroundColor: "white"}}>
                 <Row>
                     <Col span={12} offset={6}>
                         <Title>Conversations</Title>
+                        <Title level={3}>Please Choose 5 Conversations</Title>
                     </Col>
                 </Row>
                 {stakeholders.map((stakeholder,index) => {

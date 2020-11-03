@@ -10,6 +10,12 @@ import {SidebarContext} from "../../component/SidebarContext"
 import Navbar from '../../component/dashboarditems/Navbar'
 import Conclusion from './Conclusion/Conclusion'
 import HelpMenu from './Conversations/helpMenu';
+import ConversationReflection from './ConversationReflection/ConversationReflection';
+import FinalAction from './FinalAction/FinalAction';
+import ScenarioSummary from './ScenarioSummary/ScenarioSummary';
+import Feedback from './Feedback/Feedback';
+import ConsequencesReflection from './ConsequencesReflection/ConsequencesReflection';
+
 
 const ScenarioRouter = () => {
 
@@ -28,6 +34,11 @@ const ScenarioRouter = () => {
               <Route path='/scenario/conversations'>
                 <ConversationsPage conversationList={conversationList} setConversationList={setConversationList}/>
               </Route>
+              <Route path='/scenario/conversation-reflection' component = {ConversationReflection}/>
+              <Route path='/scenario/final-action' component = {FinalAction}/>
+              <Route path='/scenario/summary' component = {ScenarioSummary}/>
+              <Route path='/scenario/feedback' component = {Feedback}/>
+              <Route path='/scenario/consequences-reflection' component = {ConsequencesReflection}/>
               <Route path='/scenario/conclusion' component = {Conclusion}/>
             </Switch>
             <HelpMenu/>

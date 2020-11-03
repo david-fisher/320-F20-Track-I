@@ -3,7 +3,6 @@ import { Row, Col, Card, Button, Typography } from 'antd';
 import { useHistory } from "react-router-dom";
 import './ScenarioIntro.css';
 import {SidebarContext} from "../../../component/SidebarContext"
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
 
 const ScenarioIntro = () => {
   
