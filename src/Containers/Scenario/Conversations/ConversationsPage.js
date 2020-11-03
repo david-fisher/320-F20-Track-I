@@ -106,7 +106,13 @@ const ConversationsPage = (props) => {
                     )
                 })}
                 <Row>
-                    <Col offset={6}><Button type="primary" onClick={handleClick}>Next Page</Button></Col>
+                    <Col offset={6}>
+                        {/* 5 is arbitrary here and will come from backend! */}
+                        {props.conversationList.length< 5 ? 
+                            <Button disabled type="primary">Next Page</Button> : 
+                            <Button type="primary" onClick={handleClick}>Next Page</Button>
+                        }                
+                    </Col>
                 </Row>
             </Layout>
             <Sider theme="light" width="250">
