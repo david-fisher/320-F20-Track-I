@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { Row, Col, Typography, Button, Layout } from 'antd';
+import { Row, Col, Typography, Button, Layout, Progress } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from "../../../component/SidebarContext"
 import Stakeholder from "./Stakeholder"
@@ -106,7 +106,8 @@ const ConversationsPage = (props) => {
                     )
                 })}
                 <Row>
-                    <Col offset={6}>
+                    <Col offset={6} span={8}>
+                        <Progress percent={(props.conversationList.length/5) * 100} status={props.conversationList.length === 5 ? "" : "active"} />
                         {/* 5 is arbitrary here and will come from backend! */}
                         {props.conversationList.length< 5 ? 
                             <Button disabled type="primary">Next Page</Button> : 
