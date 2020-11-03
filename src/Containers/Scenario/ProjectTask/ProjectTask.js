@@ -68,7 +68,7 @@ const ProjectTask = () => {
         </Col>
       </Row>
       <Row>
-          <Col offset={5}><Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button></Col><Col offset={23}><HelpMenu/></Col>
+          <Col offset={5}><Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button></Col><Col offset={23}></Col>
       </Row>
     </>
   );

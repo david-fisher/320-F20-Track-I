@@ -9,6 +9,7 @@ import ConversationsPage from './Conversations/ConversationsPage'
 import {SidebarContext} from "../../component/SidebarContext"
 import Navbar from '../../component/dashboarditems/Navbar'
 import Conclusion from './Conclusion/Conclusion'
+import HelpMenu from './Conversations/helpMenu';
 
 const ScenarioRouter = () => {
 
@@ -29,6 +30,7 @@ const ScenarioRouter = () => {
               </Route>
               <Route path='/scenario/conclusion' component = {Conclusion}/>
             </Switch>
+            <HelpMenu/>
           </>
     );
   }

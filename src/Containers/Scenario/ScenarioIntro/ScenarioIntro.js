@@ -72,7 +72,7 @@ const ScenarioIntro = () => {
             You have been hired by the company as a junior data scientist and have been assigned to the project.
             </p>
 
-            <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button><Col offset={23}><HelpMenu/></Col>
+            <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button><Col offset={23}></Col>
           </Card>
         </Col>
       </Row>

@@ -48,7 +48,7 @@ const InitialRelection = () => {
                 </Col>
             </Row>
             <Row>
-                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col><Col offset={23}><HelpMenu/></Col>
+                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col><Col offset={23}></Col>
             </Row>
         </>
     );

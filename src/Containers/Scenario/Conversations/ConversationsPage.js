@@ -97,7 +97,6 @@ const ConversationsPage = (props) => {
                 })}
                 <Row>
                     <Col offset={6}><Button type="primary" onClick={handleClick}>Next Page</Button></Col>
-                    <Col offset={22}><HelpMenu/></Col>
                 </Row>
             </Layout>
             <Sider theme="light" width="250">

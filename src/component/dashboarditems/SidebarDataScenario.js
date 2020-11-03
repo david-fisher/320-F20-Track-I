@@ -33,6 +33,6 @@ export const SidebarDataScenario = {
   conclusion: {
     title: 'Conclusion',
     path: '/scenario/conclusion',
-    clickable: true
+    clickable: false
   }
 }
