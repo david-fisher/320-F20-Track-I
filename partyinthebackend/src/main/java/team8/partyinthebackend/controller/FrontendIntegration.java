@@ -18,7 +18,7 @@ import java.util.List;
  **/
 
 @RestController
-public class FrontendIntergration {
+public class FrontendIntegration {
 	
     /**
      * While we are not able to use the interfaces from database team right now and creating a database locally is too cumbersome, we have made this class as 
