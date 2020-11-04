@@ -107,7 +107,7 @@ CREATE TABLE reflections_taken(
 	C_ID		INTEGER,
 	Scenario	INTEGER,
 	ScenarioVer INTEGER,
-	DATE_TAKEN	DATE REFERENCES,
+	DATE_TAKEN	DATE,
 	PRIMARY KEY(REFLECTIONS, S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN),
 	FOREIGN KEY (S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN) references responses(S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN)
 );
