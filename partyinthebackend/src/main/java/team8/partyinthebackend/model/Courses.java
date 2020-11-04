@@ -23,5 +23,4 @@ public class Courses {
     public void addScenario(int id, String name) {
         this.scenarios.add(new Scenario(id, name));
     }
-
 }
