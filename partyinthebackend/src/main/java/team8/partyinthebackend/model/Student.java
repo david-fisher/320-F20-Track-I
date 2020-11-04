@@ -39,7 +39,7 @@ public class Student {
     }
 
     public void addCourse(int id, String name) {
-        //this.courses.addScenario(id, name);
+        this.courses.addScenario(id, name);
     }
 }
 
