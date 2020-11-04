@@ -112,6 +112,14 @@ CREATE TABLE reflections_taken(
 	FOREIGN KEY (S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN) references responses(S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN)
 );
 
+CREATE TABLE conversations(
+	STAKEHOLDER INTEGER REFERENCES stakeholders(STK_ID),
+	CONVERSATION_ID INTEGER,
+	QUESTION TEXT,
+	RESPONSE TEXT,
+	PRIMARY KEY(STAKEHOLDER, CONVERSATION_ID)
+);
+
 CREATE TABLE conversations_had(
 	S_ID		INTEGER,
 	C_ID		INTEGER,
@@ -165,14 +173,6 @@ CREATE TABLE stakeholders_in(
 	ScenarioVer		INTEGER,
 	PRIMARY KEY(STAKEHOLDER,Scenario, ScenarioVer),
 	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
-);
-
-CREATE TABLE conversations(
-	STAKEHOLDER INTEGER REFERENCES stakeholders(STK_ID),
-	CONVERSATION_ID INTEGER,
-	QUESTION TEXT,
-	RESPONSE TEXT,
-	PRIMARY KEY(STAKEHOLDER, CONVERSATION_ID)
 );
 
 CREATE TABLE scenarios_in(
