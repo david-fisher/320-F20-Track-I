@@ -44,7 +44,7 @@ public class Student {
     }
 
     public void addCourse(int id, String name) {
-        //this.courses.addScenario(id, name);
+        this.courses.addScenario(id, name);
     }
     public void putAnswer(String pageName, String pageInfo) {
     	this.answers.put(pageName,pageInfo);
