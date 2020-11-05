@@ -40,8 +40,9 @@ public class StudentController {
     }
 
     @PostMapping("/students") // POST Method for Create operation
-    public Student newStudent(@Validated @RequestBody Student student) {
-      return studentRepository.save(student);
+    public int newStudent(@RequestBody Student student) {
+      studentRepository.save(student);
+      return student.getId();
     }
 
     @PutMapping("/students/{id}")    // PUT Method for Update operation
@@ -60,13 +61,11 @@ public class StudentController {
     }
 
     @DeleteMapping("/students/{id}")    // DELETE Method for Delete operation
-    public Map<String, Boolean> deleteStudent(@PathVariable(value = "id") int studentId) throws Exception {
+    public int deleteStudent(@PathVariable(value = "id") int studentId) throws Exception {
       Student student = studentRepository.findById(studentId)
                   .orElseThrow(() -> new Exception("Student " + studentId + " not found"));
   
       studentRepository.delete(student);
-      Map<String, Boolean> response = new HashMap<>();
-      response.put("deleted", Boolean.TRUE);
-      return response;
+      return 1;
     }    
 }

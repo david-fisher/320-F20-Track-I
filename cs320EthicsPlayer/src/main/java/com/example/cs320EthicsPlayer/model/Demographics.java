@@ -6,6 +6,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -36,7 +38,7 @@ public class Demographics {
         super();
     }
 
-    public Demographics(int student_ID, int age, String grade, String gender, String race, String major){
+    public Demographics(@JsonProperty("S_ID") int student_ID, @JsonProperty("AGE") int age, @JsonProperty("GRADE") String grade, @JsonProperty("GENDER") String gender, @JsonProperty("RACE") String race, @JsonProperty("MAJOR") String major){
         this.student_ID=student_ID;
         this.age=age;
         this.grade=grade;
@@ -63,5 +65,13 @@ public class Demographics {
 
     public String getMajor(){
         return major;
+    }
+
+    public String getGrade(){
+        return grade;
+    }
+
+    public void setGrade(@JsonProperty("GRADE") String g){
+        grade=g;
     }
 }
