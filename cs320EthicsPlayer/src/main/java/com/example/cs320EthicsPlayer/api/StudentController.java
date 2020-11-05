@@ -1,8 +1,6 @@
 package com.example.cs320EthicsPlayer.api;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;

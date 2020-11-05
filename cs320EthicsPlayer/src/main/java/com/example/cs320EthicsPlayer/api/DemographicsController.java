@@ -63,6 +63,11 @@ public class DemographicsController {
         return d.getGrade();        
     }
 
+    @GetMapping("/studentDemographicsGrade/{Grade}")
+    public List<Demographics> findAllByGrade(@PathVariable(value="Grade") String grade){
+        return demographicsRepository.findByGrade(grade);
+    }
+
     public int updateStudentGender(int student_ID, String gender){
         return 0;
     }

@@ -38,6 +38,11 @@ public class Demographics {
         super();
     }
 
+    public Demographics(@JsonProperty("S_ID") int student_ID){
+        super();
+        this.student_ID=student_ID;
+    }
+
     public Demographics(@JsonProperty("S_ID") int student_ID, @JsonProperty("AGE") int age, @JsonProperty("GRADE") String grade, @JsonProperty("GENDER") String gender, @JsonProperty("RACE") String race, @JsonProperty("MAJOR") String major){
         this.student_ID=student_ID;
         this.age=age;
