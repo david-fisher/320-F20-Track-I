@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.example.cs320EthicsPlayer.model.Demographics;
 import com.example.cs320EthicsPlayer.repository.DemographicsRepository;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +22,19 @@ public class DemographicsController {
     @Autowired
     private DemographicsRepository demographicsRepository;
 
+    //safe new student to table
+    @PostMapping("/studentDemographics")
+    public void newDemographicStu(@RequestBody Demographics d){
+        demographicsRepository.save(d);
+    }
+
+    //get all students
     @GetMapping("/studentDemographics")
     public List<Demographics> getAllStudentDemographics(){
         return demographicsRepository.findAll();
     }
 
+    //get specific student by student id
     @GetMapping("/studentDemographics/{id}")
     public ResponseEntity<Demographics> getStudentDemographicsById(@PathVariable(value = "id") int student_ID) throws Exception{
         Demographics d = demographicsRepository.findById(student_ID)
@@ -35,11 +42,15 @@ public class DemographicsController {
         return ResponseEntity.ok().body(d);
     }
 
-    @PostMapping("/studentDemographics")
-    public void newDemographicStu(@RequestBody Demographics d){
-        demographicsRepository.save(d);
+    @GetMapping("/studentDemographics/Grade/{id}")
+    public String getStudentGrade(@PathVariable(value = "id") int student_ID) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        return d.getGrade();        
     }
 
+    /*update specific column of a specific student 
+    */
     public int updateStudentAge(int student_ID, int age){
         return 0;
     }
@@ -56,18 +67,6 @@ public class DemographicsController {
         return ResponseEntity.ok(demographicsRepository.save(de));
     }
 
-    @GetMapping("/studentDemographics/Grade/{id}")
-    public String getStudentGrade(@PathVariable(value = "id") int student_ID) throws Exception{
-        Demographics d = demographicsRepository.findById(student_ID)
-            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
-        return d.getGrade();        
-    }
-
-    @GetMapping("/studentDemographicsGrade/{Grade}")
-    public List<Demographics> findAllByGrade(@PathVariable(value="Grade") String grade){
-        return demographicsRepository.findByGrade(grade);
-    }
-
     public int updateStudentGender(int student_ID, String gender){
         return 0;
     }
@@ -79,4 +78,33 @@ public class DemographicsController {
     public int updateStudentMajor(int student_ID, String major){
         return 0;
     }
+    
+    /* these methods will get all rows with a certain input for the column ie all demographics of a certain major
+    */
+
+    @GetMapping("/studentDemographicsGrade/{Grade}")
+    public List<Demographics> findAllByGrade(@PathVariable(value="Grade") String grade){
+        return demographicsRepository.findByGrade(grade);
+    }
+
+    @GetMapping("/studentDemographicsGender/{Gender}")
+    public List<Demographics> findAllByGender(@PathVariable(value="Gender") String gender){
+        return demographicsRepository.findByGender(gender);
+    }
+
+    @GetMapping("/studentDemographicsRace/{Race}")
+    public List<Demographics> findAllByRace(@PathVariable(value="Race") String race){
+        return demographicsRepository.findByRace(race);
+    }   
+    
+    @GetMapping("/studentDemographicsAge/{Age}")
+    public List<Demographics> findAllByAge(@PathVariable(value="Age") int age){
+        return demographicsRepository.findByAge(age);
+    }
+
+    @GetMapping("/studentDemographicsMajor/{Major}")
+    public List<Demographics> findAllByMajor(@PathVariable(value="Major") String major){
+        return demographicsRepository.findByMajor(major);
+    }
+
 }
