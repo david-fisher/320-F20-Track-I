@@ -2,9 +2,8 @@ import React, {useState, useContext} from 'react';
 import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
 
-const InitialRelection = () => {
+const ConversationReflection = () => {
   
     const { Title, Paragraph, Text } = Typography;
     const { TextArea } = Input;
@@ -17,21 +16,19 @@ const InitialRelection = () => {
 
     const handleClick = () => {
 
-        history.push("/scenario/initial-action")
+        history.push("/scenario/final-action")
     
         let newSidebarState = state
-        newSidebarState["projectTask"].routeTo = "initial-action"
+        newSidebarState["conversations"].routeTo = "final-action"
         update({newSidebarState})
     
       }
-
-
 
     return (
         <>
             <Row>
                 <Col offset={5} span={18}>
-                    <Title style={{color: "black"}}>Reflect on Initial Information</Title>
+                    <Title style={{color: "black"}}>Reflect on Conversations Information</Title>
                     <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                         when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
@@ -40,9 +37,9 @@ const InitialRelection = () => {
                         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
                         Aldus PageMaker including versions of Lorem Ipsum.
                     </Paragraph>
-                    <Text strong> 1. This is Question 1 to Reflect On.</Text><br/>
+                    <Text strong> 1. Why did you choose conversations that you did?</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer1(e.target.value)}/>
-                    <Text strong> 2. This is Question 2 to Reflect On.</Text><br/>
+                    <Text strong> 2. What did you learn?</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer2(e.target.value)}/>
 
                 </Col>
@@ -53,4 +50,4 @@ const InitialRelection = () => {
         </>
     );
 }
-export default InitialRelection;
+export default ConversationReflection;

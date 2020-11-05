@@ -7,7 +7,7 @@ const HelpMenu = () => {
 
     return (
         <>
-            <Button type = "primary" onClick={() => setModalIsOpen(true)}>?</Button>
+            <Button type = "primary" style={{position: "fixed", bottom: "0px", right: "0px"}} onClick={() => setModalIsOpen(true)}>?</Button>
             <Modal 
             visible={modalIsOpen} 
             onOk={() => setModalIsOpen(false)}

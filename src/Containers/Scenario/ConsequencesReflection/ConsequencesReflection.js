@@ -1,26 +1,36 @@
-import React, {useContext,useEffect} from 'react';
+import React, {useContext,useEffect,useState} from 'react';
 import { Row, Col, Typography, Divider, Input, Button } from 'antd';
+import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
 
-const Conclusion = () => {
+const ConsequencesReflection = () => {
 
     const { Title, Paragraph, Text } = Typography;
   
     const {state,update} = useContext(SidebarContext)
     const {TextArea} = Input;
 
+    const [answer1,setAnswer1] = useState("")
+    const [answer2,setAnswer2] = useState("")
+
+    let history = useHistory();
+
+
+    const handleClick = () => {
+        history.push("/scenario/conclusion")
+    }
 
     useEffect(() => {
-      // let newSidebarState = state
-      // newSidebarState["conclusion"].clickable = true
-      // update({newSidebarState})
+    //   let newSidebarState = state
+    //   newSidebarState["conclusion"].clickable = true
+    //   update({newSidebarState})
     }, [])
   
     return (
       <>
           <Row>
             <Col offset={5} span={18}>
-                <Title style={{color: "black"}}>Conclusion</Title>
+                <Title style={{color: "black"}}>Consequences Reflection</Title>
                 <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
                     Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
                     when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
@@ -29,17 +39,16 @@ const Conclusion = () => {
                     sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
                     Aldus PageMaker including versions of Lorem Ipsum.<br/><br/>
                 </Paragraph>
-                <Divider />
-                <Paragraph>If you would like to sign up for a focus group send an email to ethics-project@cs.umass.edu<br/><br/>
-                <Text strong>We would appreciate receiving any comments that you have on this online ethics simulation:</Text>
-                </Paragraph>
-                <TextArea />
+                <Text strong> 1. Consequence Question 1.</Text><br/>
+                <TextArea rows={4} onChange={e => setAnswer1(e.target.value)}/>
+                <Text strong> 2. Consequence Question 2.</Text><br/>
+                <TextArea rows={4} onChange={e => setAnswer2(e.target.value)}/>
             </Col>
           </Row>
           <Row>
-                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} >Submit</Button></Col>
-            </Row>
+            <Col offset={5}><Button type="primary" style={{marginTop: "10px"}} onClick={handleClick}>Next Page</Button></Col>
+          </Row>
       </>
     );
   }
-  export default Conclusion;
+  export default ConsequencesReflection;

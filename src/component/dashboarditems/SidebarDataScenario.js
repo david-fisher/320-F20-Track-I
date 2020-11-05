@@ -18,21 +18,17 @@ export const SidebarDataScenario = {
   conversations: {
     title: 'Conversations',
     path: '/scenario/conversations',
-    clickable: false
+    clickable: false,
+    routeTo: "conversation-reflection"
   },
   summary: {
     title: 'Scenario Summary',
-    path: '/scenario',
+    path: '/scenario/summary',
     clickable: false
   },
   feedback: {
     title: 'Feedback',
-    path: '/scenario',
+    path: '/scenario/feedback',
     clickable: false
-  },
-  conclusion: {
-    title: 'Conclusion',
-    path: '/scenario/conclusion',
-    clickable: true
   }
 }

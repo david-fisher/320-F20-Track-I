@@ -2,9 +2,8 @@ import React, {useState,useContext} from 'react';
 import { Row, Col, Typography, Button, Radio } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
 
-const InitialAction = () => {
+const FinalAction = () => {
   
   const { Title, Paragraph, Text } = Typography;
   const [choice,setChoice] = useState(0)
@@ -13,10 +12,10 @@ const InitialAction = () => {
 
   const handleClick = () => {
 
-    history.push("/scenario/gather-information")
+    history.push("/scenario/summary")
 
     let newSidebarState = state
-    newSidebarState["projectTask"].routeTo = "gather-information"
+    newSidebarState["conversations"].routeTo = "summary"
     update({newSidebarState})
 
   }
@@ -27,10 +26,8 @@ const InitialAction = () => {
     <>
       <Row>
         <Col offset={5} span={18}>
-            <Title style={{color: "black"}}>Choose Initial Action</Title>
-            <Paragraph>You're a new employee working on a data science team that is working on a larger project. 
-              You've also had an oportunity to reflect on your understanding of the task that you have been assigned 
-              on this project and to list any questions that still remain for you.
+            <Title style={{color: "black"}}>Choose Final Action</Title>
+            <Paragraph>Here lays some text about this quandry...
             </Paragraph>
             <Text strong style={{marginTop: "15px"}}>Please select what you would like to do next.</Text>
         </Col>
@@ -52,4 +49,4 @@ const InitialAction = () => {
     </>
   );
 }
-export default InitialAction;
+export default FinalAction;
