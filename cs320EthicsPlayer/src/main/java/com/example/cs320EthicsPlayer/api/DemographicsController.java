@@ -80,10 +80,18 @@ public class DemographicsController {
     }
 
     public int updateStudentRace(int student_ID, String race){
+         Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        d.setRace(race);
+        demographicsRepository.save(d);
         return 0;
     }
 
     public int updateStudentMajor(int student_ID, String major){
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        d.setMajor(major);
+        demographicsRepository.save(d);
         return 0;
     }
     
