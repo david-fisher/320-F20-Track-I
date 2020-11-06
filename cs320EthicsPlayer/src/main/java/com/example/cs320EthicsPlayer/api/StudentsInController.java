@@ -60,7 +60,7 @@ public class StudentsInController {
     // this best place for it?
     @GetMapping
     public Map<Integer,String> getAllCourses(){
-        return null;
+        return courseRepository.findAll();
     }
 
 }
