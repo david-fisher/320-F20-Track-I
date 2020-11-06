@@ -22,7 +22,7 @@ public class DemographicsController {
     @Autowired
     private DemographicsRepository demographicsRepository;
 
-    //safe new student to table
+    //save new student to table
     @PostMapping("/studentDemographics")
     public void newDemographicStu(@RequestBody Demographics d){
         demographicsRepository.save(d);
@@ -55,6 +55,7 @@ public class DemographicsController {
         return 0;
     }
 
+    //only works if you send string without {} or any ""
     @PutMapping("/studentDemographicsGrade/{id}")
     public ResponseEntity<Demographics> updateStudentGrade(@PathVariable(value = "id") int student_ID, @RequestBody String grade) throws Exception{
         Demographics d = demographicsRepository.findById(student_ID)
@@ -67,7 +68,14 @@ public class DemographicsController {
         return ResponseEntity.ok(demographicsRepository.save(de));
     }
 
-    public int updateStudentGender(int student_ID, String gender){
+    //return obj for now
+    @PutMapping("studentDemographicsGender/{id}/{Gender}")
+    public int updateStudentGender(@PathVariable(value="id") int student_ID, @PathVariable(value="Gender") String gender)
+            throws Exception {
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        d.setGender(gender);
+        demographicsRepository.save(d);
         return 0;
     }
 
