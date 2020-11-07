@@ -37,6 +37,14 @@ public class StudentController {
         return ResponseEntity.ok().body(student);
     }
 
+    @GetMapping("/studentsName/{id}")
+    public String getStudentName(@PathVariable(value = "id") int studentId) throws Exception {
+
+      Student student = studentRepository.findById(studentId)
+              .orElseThrow(() -> new Exception("Student " + studentId + " not found"));
+      return student.getName();
+  }
+
     @PostMapping("/students") // POST Method for Create operation
     public int newStudent(@RequestBody Student student) {
       studentRepository.save(student);

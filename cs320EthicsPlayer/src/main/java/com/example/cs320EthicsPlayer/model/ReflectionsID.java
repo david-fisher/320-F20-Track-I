@@ -12,6 +12,10 @@ public class ReflectionsID implements java.io.Serializable {
     int c_ID;
     int e_ID;    
 
+    public ReflectionsID(){
+        super();
+    }
+    
     public ReflectionsID(int s_ID, int c_ID, int e_ID){
         this.s_ID=s_ID;
         this.c_ID=c_ID;

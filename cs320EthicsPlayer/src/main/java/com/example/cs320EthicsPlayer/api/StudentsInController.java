@@ -1,7 +1,6 @@
 package com.example.cs320EthicsPlayer.api;
 
 import java.util.List;
-import java.util.Map;
 
 import com.example.cs320EthicsPlayer.model.StudentsIn;
 import com.example.cs320EthicsPlayer.model.StudentsInID;
@@ -46,21 +45,15 @@ public class StudentsInController {
                   .orElseThrow(() -> new Exception("Student " + student_id +" not found in " + course_id));
         studentsInRepository.delete(s);
         return 1;
-
     }
 
-    /*@GetMapping("/getStudentsCourse/{cID}")
-    public List<Integer> getStudentsInCourse(@PathVariable int c_ID){
-        //c_ID
-        // figure out how to findallbycid
-        return studentsInRepository.findByCourseID(c_ID);
-    }*/
-
-
-    // this best place for it?
-    @GetMapping
-    public Map<Integer,String> getAllCourses(){
-        return courseRepository.findAll();
+    @GetMapping("/getStudentsInCourse/{c_id}")
+    public List<Integer> getStudentsInCourse(@PathVariable("c_id") int c_id){
+        return studentsInRepository.findBycourseID(c_id);
     }
 
+    @GetMapping ("getCoursesOfStudent/{s_id}")
+    public List<Integer> getCoursesInStudent(@PathVariable("s_id") int s_id){
+        return studentsInRepository.findBystudentID(s_id);
+    }
 }

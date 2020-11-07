@@ -78,4 +78,16 @@ public class Demographics {
     public void setGrade(String g){
         grade=g;
     }
+
+	public void setRace(String r) {
+        race=r;
+	}
+
+	public void setMajor(String m) {
+        major=m;
+	}
+
+	public void setAge(int a) {
+        age=a;
+	}
 }
