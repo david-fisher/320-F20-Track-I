@@ -1,11 +1,9 @@
 package com.example.cs320EthicsPlayer.model;
 
-import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;

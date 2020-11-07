@@ -2,6 +2,7 @@ package com.example.cs320EthicsPlayer.api;
 
 import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
+import com.example.cs320EthicsPlayer.repository.PagesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class EventPageController {
     @Autowired
     private EventPageRepository eventPageRepository;
 
+    @Autowired
+    private PagesRepository pagesRepository;
+
     @PostMapping("/eventpage") // POST Method for Create operation
     public EventPage createEventPage(@Validated @RequestBody EventPage event) {
       return eventPageRepository.save(event);
@@ -27,8 +31,44 @@ public class EventPageController {
 
     @GetMapping("/eventpage/{page_ID}")
     public ResponseEntity<EventPage> getPageInfoById(@PathVariable(value = "page_ID") int page_ID) throws Exception {
-        EventPage reflectQs = eventPageRepository.findById(page_ID)
+        EventPage ePage = eventPageRepository.findById(page_ID)
             .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
-        return ResponseEntity.ok().body(reflectQs);
+        return ResponseEntity.ok().body(ePage);
     }
+
+    @GetMapping("/eventpage/Intro/{page_ID}")
+    public String getIntroPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        EventPage ePage = eventPageRepository.findById(page_ID)
+            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+        //if(!(pagesRepository.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
+        return ePage.getPageInfo();
+    }
+
+    //getPtaPageText()
+    @GetMapping("/eventpage/PTA/{page_ID}")
+    public String getPtaPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        EventPage ePage = eventPageRepository.findById(page_ID)
+        .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+        //if(!(pagesRepository.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
+         return ePage.getPageInfo();
+    }
+
+    //getSummaryPageText()
+    @GetMapping("eventpage/Summary/{page_ID}")
+    public String getSummaryPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        EventPage ePage = eventPageRepository.findById(page_ID)
+        .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+        //if(!(pagesRepository.getPageType().equals("SUMMARY"))){ throw new Exception("Incorrect Page Type");}
+        return ePage.getPageInfo();
+    }
+
+    //getFeedBackPageText()
+    @GetMapping("eventpage/Feedback/{page_ID}")
+    public String getFeedBackPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        EventPage ePage = eventPageRepository.findById(page_ID)
+        .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+        //if(!(pagesRepository.getPageType().equals("FEEDBACK"))){ throw new Exception("Incorrect Page Type");}
+        return ePage.getPageInfo();
+    }
+
 }

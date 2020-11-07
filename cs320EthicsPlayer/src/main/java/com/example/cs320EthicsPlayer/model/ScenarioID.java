@@ -16,7 +16,7 @@ public class ScenarioID implements java.io.Serializable {
     }
     
     public ScenarioID(int EID, int VERSIONID){
-        this.e_ID=EID;
+        this.e_id=EID;
         this.version_id = VERSIONID;
     }
 }
