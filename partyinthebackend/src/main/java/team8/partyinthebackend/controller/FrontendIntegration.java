@@ -162,6 +162,33 @@ public class FrontendIntegration {
             return obj;
         }
     }
+
+    /**
+     * (GET) radar plot
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/finalscore")
+    public JSONObject getRadarPlot(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            JSONObject rPlot = new JSONObject();
+            rPlot.put("field1", 1);
+            rPlot.put("field2", 4);
+            rPlot.put("field3", 5);
+            rPlot.put("field4", 3);
+            rPlot.put("field5", 2);
+            rPlot.put("field6", 2);
+            obj.put("body", rPlot);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            JSONObject blank = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", blank);
+            return obj;
+        }
+    }
     
     /**
      * (POST) posts a students answer to the initial reflection in the student dummy object
