@@ -123,6 +123,9 @@ public class FrontendIntegration {
         }
     }
     
+    /**
+     * (GET) initial reflection
+     */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
@@ -139,10 +142,30 @@ public class FrontendIntegration {
             return obj;
         }
     }
-    /**
-     * (PUT) puts a students answer to the initial reflection in the student dummy object
-     */
 
+    /**
+     * (GET) consequences
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/consequences")
+    public JSONObject getConsequences(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            obj.put("summary_text", "Nice job. Probably. This is just filler text, so I don't have a way to know.");
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            JSONObject blank = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("summary_text", blank);
+            return obj;
+        }
+    }
+    
+    /**
+     * (POST) posts a students answer to the initial reflection in the student dummy object
+     */
     @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public @ResponseBody JSONObject updateOneStudent(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
         try {
