@@ -21,7 +21,7 @@ public class PagesController {
     }
 
     //getPageSubtitle()
-    @GetMapping("PageSubtitle/{page_ID}")
+    /*@GetMapping("PageSubtitle/{page_ID}")
     public String getPageSubtitle(@PathVariable(value="page_ID") int page_ID) throws Exception{
         Pages p = pagesRepository.findById(page_ID)
             .orElseThrow(() -> new Exception("Page " + page_ID +" not found"));
@@ -29,7 +29,7 @@ public class PagesController {
         //cannot find subtitle in schema !!
 
         return "";
-    }
+    }*/
 
     //getPageType()
     @GetMapping("/PageType/{page_ID}")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.cs320EthicsPlayer.model.StudentsIn;
 import com.example.cs320EthicsPlayer.model.StudentsInID;
+import com.example.cs320EthicsPlayer.repository.StudentRepository;
 import com.example.cs320EthicsPlayer.repository.StudentsInRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,13 @@ public class StudentsInController {
     @Autowired
     private StudentsInRepository studentsInRepository;
 
+    @Autowired
+    private StudentRepository studentRepository;
+
     @PostMapping("/addStudentToC")
-    public int addStudentToCourse(@RequestBody StudentsIn s){
+    public int addStudentToCourse(@RequestBody StudentsIn s) throws Exception{
+        studentRepository.findById(s.getStudentID())
+            .orElseThrow(()-> new Exception("Student "+ s.getStudentID() +" not found"));
         studentsInRepository.save(s);
         return 1;
     } 
@@ -53,7 +59,9 @@ public class StudentsInController {
     }
 
     @GetMapping ("getCoursesOfStudent/{s_id}")
-    public List<Integer> getCoursesInStudent(@PathVariable("s_id") int s_id){
+    public List<Integer> getCoursesInStudent(@PathVariable("s_id") int s_id) throws Exception {
+        studentRepository.findById(s_id)
+            .orElseThrow(()-> new Exception("Student "+ s_id +" not found"));
         return studentsInRepository.findBystudentID(s_id);
     }
 }
