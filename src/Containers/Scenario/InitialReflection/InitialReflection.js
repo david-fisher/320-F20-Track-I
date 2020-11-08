@@ -1,8 +1,8 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext,useEffect} from 'react';
 import { Row, Col, Typography, Button, Input } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
+import axios from "axios"
 
 const InitialRelection = () => {
   
@@ -11,6 +11,7 @@ const InitialRelection = () => {
 
     const [answer1,setAnswer1] = useState("")
     const [answer2,setAnswer2] = useState("")
+    const [irData,setIrData] = useState("")
 
     const {state,update} = useContext(SidebarContext)
     let history = useHistory()
@@ -23,7 +24,25 @@ const InitialRelection = () => {
         newSidebarState["projectTask"].routeTo = "initial-action"
         update({newSidebarState})
     
-      }
+    }
+
+    // useEffect(() => {    
+    //     axios.get('http://localhost:8080/scenario/2/4/initialreflection',{
+    //       headers: {
+    //         "Access-Control-Allow-Origin": true
+    //       }
+    //     }).then(resp => {
+    //         console.log("INCOMING!",resp)
+    //         setIrData(resp.data.body)
+    //     })
+    //     .catch(err => {
+    //       console.log("THIS IS THE ERROR",err)
+    //     });
+    //   }, [])
+    
+    //   useEffect(() => {
+    //     console.log(irData)
+    //   },[irData])
 
 
 

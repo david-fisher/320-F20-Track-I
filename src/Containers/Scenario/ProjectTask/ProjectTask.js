@@ -1,13 +1,14 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect,useState} from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from "../../../component/SidebarContext"
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
-
+import axios from "axios"
 const ProjectTask = () => {
   
   const {state,update} = useContext(SidebarContext)
   const { Title, Paragraph, Text } = Typography;
+
+  const [ptaData,setPtaData] = useState("")
 
   let history = useHistory();
 
@@ -28,13 +29,30 @@ const ProjectTask = () => {
     let newSidebarState = state
     newSidebarState["projectTask"].clickable = true
     update({newSidebarState})
+
+    axios.get('http://localhost:8080/scenario/2/4/pta',{
+      headers: {
+        "Access-Control-Allow-Origin": true
+      }
+    }).then(resp => {
+        console.log("INCOMING!",resp)
+        setPtaData(resp.data.body)
+    })
+    .catch(err => {
+      console.log("THIS IS THE ERROR",err)
+    });
+
   }, [])
+
+  useEffect(() => {
+    console.log(ptaData)
+  },[ptaData])
 
   return (
     <>
       <Row>
         <Col offset={5} span={18}>
-            <Title style={{color: "black"}}>Project Task</Title>
+            <Title style={{color: "black"}}>{ptaData.page_title}</Title>
             <Text strong> 1. This is Task 1</Text><br/>
             <ul style={{marginLeft:"40px"}}>
               <li><Text>this is text</Text></li>
@@ -57,14 +75,7 @@ const ProjectTask = () => {
               <li><Text>this is text</Text></li>
             </ol>
             <br/>
-            <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-              when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-              It has survived not only five centuries, but also the leap into electronic typesetting, 
-              remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-              sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-              Aldus PageMaker including versions of Lorem Ipsum.
-          </Paragraph>
+            <Paragraph>{ptaData.text}</Paragraph>
         </Col>
       </Row>
       <Row>

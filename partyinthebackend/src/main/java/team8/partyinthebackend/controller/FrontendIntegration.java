@@ -60,7 +60,7 @@ public class FrontendIntegration {
     /**
      * (GET) introduction
      */
-
+    @CrossOrigin
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/introduction")
     public JSONObject getIntroduction(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -82,7 +82,7 @@ public class FrontendIntegration {
     /**
      * (GET) project task assignment
      */
-
+    @CrossOrigin
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/pta")
     public JSONObject getPTA(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -104,7 +104,7 @@ public class FrontendIntegration {
     /**
      * (GET) gather information
      */
-
+    @CrossOrigin
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/gi")
     public JSONObject getGI(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -122,7 +122,7 @@ public class FrontendIntegration {
             return obj;
         }
     }
-    
+    @CrossOrigin
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {

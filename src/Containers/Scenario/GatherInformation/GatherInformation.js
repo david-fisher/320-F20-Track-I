@@ -1,8 +1,8 @@
-import React, {useContext,useEffect} from 'react';
+import React, {useContext,useEffect,useState} from 'react';
 import { Row, Col, Typography, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
+import axios from "axios"
 
 const GatherInformation = () => {
 
@@ -10,6 +10,8 @@ const GatherInformation = () => {
 
   const {state,update} = useContext(SidebarContext)
   let history = useHistory();
+
+  const [giData,setGiData] = useState("")
 
   const handleClick = () => {
     history.push("/scenario/conversations")
@@ -19,21 +21,31 @@ const GatherInformation = () => {
     let newSidebarState = state
     newSidebarState["gatherInformation"].clickable = true
     update({newSidebarState})
+
+    axios.get('http://localhost:8080/scenario/2/4/gi',{
+      headers: {
+        "Access-Control-Allow-Origin": true
+      }
+    }).then(resp => {
+        console.log("INCOMING!",resp)
+        setGiData(resp.data.body)
+    })
+    .catch(err => {
+      console.log("THIS IS THE ERROR",err)
+    });
   }, [])
+
+  useEffect(() => {
+    console.log(giData)
+  },[giData])
 
 
   return (
     <>
         <Row>
           <Col offset={5} span={18}>
-              <Title style={{color: "black"}}>Start to Gather Information</Title>
-              <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                  Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                  when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                  It has survived not only five centuries, but also the leap into electronic typesetting, 
-                  remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                  sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-                  Aldus PageMaker including versions of Lorem Ipsum.<br/><br/>
+              <Title style={{color: "black"}}>{giData.page_title}</Title>
+              <Paragraph>{giData.text}<br/><br/>
                   <Text strong>Make your selection on the next screen.</Text>
               </Paragraph>
           </Col>
