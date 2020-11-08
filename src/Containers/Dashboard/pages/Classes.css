@@ -40,11 +40,11 @@
     height: 90%;
     padding: .5em;
     text-align: center;
-    margin-top: 10px;
-    margin-bottom: -20px;
-    line-height: 1.1rem;
-    grid-row-gap: 50px;
-
+    
+    line-height: 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    overflow: hidden;
 }
 
 

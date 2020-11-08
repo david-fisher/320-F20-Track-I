@@ -41,7 +41,7 @@ function Classes(props) {
     },
     {
       classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty blah blah blahblahvlah"
+      classTitle: "Reasoning Under Uncertainty blah blah blahblahvlah lahblahvlah"
     },
     {
       classNumber: "CS240",
@@ -65,8 +65,8 @@ function Classes(props) {
                 <Col offset={1}>
                   <br/>
                   <div className="box" style={{backgroundColor: index % 2 === 0 ? "white" : "blanchedalmond"}} >
-                    <div className="head">In Progress...</div>
-                    {c.classNumber + ", "}
+                    <div className="head">In Progress...</div> 
+                    {c.classNumber + ", "} <br/>
                     {c.classTitle} <br/>
 
                     <Button className = "start" type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>start</Button>
