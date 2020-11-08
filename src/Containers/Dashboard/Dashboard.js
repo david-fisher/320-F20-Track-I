@@ -2,9 +2,11 @@ import React from 'react';
 import './dashboard.css';
 import { Switch, Route } from 'react-router-dom';
 import Classes from './pages/Classes';
-import Results from './pages/Results';
+import { IconContext } from 'react-icons';
+
 import Support from './pages/Support';
-import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
+import * as IoIcons from 'react-icons/io';
 
 
 // import { SidebarDataDashboard } from '../../component/dashboarditems/SidebarDataDashboard';
@@ -21,16 +23,26 @@ const Dashboard = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="tabs">
-                <Nav.Link href="/dashboard">Classes</Nav.Link>
-                <Nav.Link href="/dashboard/results">Results</Nav.Link>
-                <Nav.Link href="/dashboard/support">Support</Nav.Link>
+                <IconContext.Provider value={{ color: '#fff' }}>
+                  <Nav.Link href="/dashboard">
+                    <IoIcons.IoIosPaper />{' '} Classes 
+                    </Nav.Link>
+
+                  {/* <Nav.Link href="/dashboard/results">Results</Nav.Link> */}
+                  <Nav.Link href="/dashboard/support"><IoIcons.IoMdHelpCircle />{' '}Support</Nav.Link>
+                </IconContext.Provider>
+              </Nav>
+              <Nav className="justify-content-end" style={{ width: "100%", color: "white" }}>
+                <Nav.Link href="/getOuttaHere">
+                  Disconnect
+                </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
           </div>
         <Switch>
           <Route exact path='/dashboard' component={Classes}/>
-          <Route path='/dashboard/results' component={Results}/>
+          {/* <Route path='/dashboard/results' component={Results}/> */}
           <Route path='/dashboard/support' component={Support}/>
         </Switch>
         

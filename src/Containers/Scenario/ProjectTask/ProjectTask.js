@@ -51,29 +51,22 @@ const ProjectTask = () => {
   return (
     <>
       <Row>
+        
         <Col offset={5} span={18}>
             <Title style={{color: "black"}}>{ptaData.page_title}</Title>
             <Text strong> 1. This is Task 1</Text><br/>
             <ul style={{marginLeft:"40px"}}>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
+              <li><Text>Posts by and about the user</Text></li>
+              <li><Text>Pictures and videos</Text></li>
+              <li><Text>Relationships: Family, significant other, friends</Text></li>
+              <li><Text>Hobbies, exercise, and other activities</Text></li>
             </ul>
-            <Text strong> 2. This is Task 2</Text><br/>
+            <Text strong> 3. Premiums and memberships</Text><br/>
             <ul style={{marginLeft:"40px"}}>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
+              <li><Text>Loyaly card purchases</Text></li>
+              <li><Text>Browser histories</Text></li>
+              <li><Text>Email</Text></li>
             </ul>
-            <Text strong> 3. This is Task 3</Text><br/>
-            <ol style={{marginLeft:"40px"}}>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-              <li><Text>this is text</Text></li>
-            </ol>
             <br/>
             <Paragraph>{ptaData.text}</Paragraph>
         </Col>
