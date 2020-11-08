@@ -26,50 +26,26 @@
     height: 100vh;
     width: 100vw;
     background-color: #eeeeee;
+    /* grid-row-gap: 50px; */
 }
-/* .row {
-    display: flex;
-   
-    float: left;
-    width: 500px; 
-    padding: 10px;
-} */
-/* .row:before, .row:after {
-    content: "";
-}
-.row:after {
-    clear: both;
-}
-.col {
-    float: left;
-    width: 100%;
-} */
-/* .box {
-    border: 2px solid rgb(0, 0, 0);
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    border-radius: 25px;
-    text-align: center;
-    line-height: 100%;
-} */
+
 .start{
     justify-content: center;
 }
 
 .box {
-    border: 4px solid rgb(0,0,0);
+    display: inline-block;
+    border: 4px solid  #881c1c;
     width: 12vw;
-    height: 100%;
+    height: 90%;
+    padding: .5em;
     text-align: center;
-}
+    margin-top: 10px;
+    margin-bottom: -20px;
+    line-height: 1.1rem;
+    grid-row-gap: 50px;
 
-/* .col:first-child .box {
-    margin-left: 0;
 }
-.col:last-child .box {
-    margin-right: 0;
-} */
 
 
 .head{
@@ -78,36 +54,3 @@
     color: white;
 }
   
-/*.container {
-    display: inline;
-    width: 100vw;
-    height: 100%;
-} */
-  
-/* .leftpane { I tried to make middle white and sides grey, css didnt agree
-  
-    width: 20vw;
-    height: 100%;
-    float: left;
-    background-color: rosybrown;
-    border-collapse: collapse;
-}
-
-.middlepane {
-  
-    width: 60vw;
-    height: 100%;
-    
-    float: left;
-    background-color: royalblue;
-    border-collapse: collapse;
-}
-
-.rightpane {
- 
-    width: 20vw;
-    height: 100%;
-    float: left;
-    background-color: yellow;
-    border-collapse: collapse;
-} */

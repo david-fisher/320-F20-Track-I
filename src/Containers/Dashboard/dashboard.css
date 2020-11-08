@@ -11,8 +11,8 @@
   background-color: #881c1c;
 }
 
-.classes{
-    display: flex;
+/* .classes{
+    display: block;
     
     height: 100%;
     width: 100%;
@@ -28,7 +28,7 @@
   align-items: center;
   justify-content: center;
   font-size: 3rem; 
-}
+} */
 
 /* .intro{
   display: flex;
