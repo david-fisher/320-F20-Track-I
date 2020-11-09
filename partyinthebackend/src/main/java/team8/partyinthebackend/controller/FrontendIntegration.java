@@ -50,6 +50,7 @@ public class FrontendIntegration {
         public static Page page = new Page("This is a title", "Introduction goes here.");
         public static Page initialreflection = new Page("Initial reflection page", "reflect on this");
         public static Page initialactions = new Page("Initial action page", "Initial action text");
+        public static Page finalaction = new Page("Final action page", "Final action text");
 
         //simulation of stakeholders in the database
         public static StakeholderList stakeholders = new StakeholderList();
@@ -205,6 +206,28 @@ public class FrontendIntegration {
             JSONObject blank = new JSONObject();
             obj.put("status_code", 404);
             obj.put("body", blank);
+            return obj;
+        }
+    }
+
+    /**
+     * (GET) Choose Final Action
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/finalaction")
+    public JSONObject getFinalAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            String scenario_page = scenario_id+version_id+"finalaction";
+            Data.finalaction.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
+            obj.put("body", Data.finalaction);
+            obj.put("status_code", 200);
+
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            
             return obj;
         }
     }
