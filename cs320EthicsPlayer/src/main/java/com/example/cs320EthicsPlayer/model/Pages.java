@@ -26,10 +26,10 @@ public class Pages {
     private String pageTitle;
     
     @Column(name="Scenario")
-    private int scenario;
+    private int scenarioID;
 
     @Column(name="ScenarioVer")
-    private int scenarioVer;
+    private int scenarioVerID;
     
     @Column(name="NEXT_PAGE_ID")
     private int nextPageID;
@@ -42,8 +42,8 @@ public class Pages {
     	this.pageID = pageID;
     	this.pageType = pageType;
         this.pageTitle = pageTitle;
-        this.scenario = scenario;
-        this.scenarioVer = scenarioVer;
+        this.scenarioID = scenario;
+        this.scenarioVerID = scenarioVer;
         this.nextPageID=nextPageID;
     }
     
@@ -60,11 +60,11 @@ public class Pages {
     }
 
     public int getScenario(){
-        return scenario;
+        return scenarioID;
     }
 
     public int getScenarioVer(){
-        return scenarioVer;
+        return scenarioVerID;
     }
 
     public int getNextPageID(){
@@ -84,11 +84,11 @@ public class Pages {
     }
 
     public void setScenario(int scenario_id){
-        scenario=scenario_id;
+        scenarioID=scenario_id;
     }
 
     public void setScenarioVer(int scenario_version){
-        scenarioVer=scenario_version;
+        scenarioVerID=scenario_version;
     }
 
     public void setNextPageID(int next_page_id){

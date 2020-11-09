@@ -1,12 +1,18 @@
 package com.example.cs320EthicsPlayer.api;
 
+import java.util.List;
+
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.repository.PagesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/api/v1")
 public class PagesController {
     
     @Autowired
@@ -19,17 +25,6 @@ public class PagesController {
             .orElseThrow(() -> new Exception("Page " + page_ID +" not found"));
         return p.getPageTitle();
     }
-
-    //getPageSubtitle()
-    /*@GetMapping("PageSubtitle/{page_ID}")
-    public String getPageSubtitle(@PathVariable(value="page_ID") int page_ID) throws Exception{
-        Pages p = pagesRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Page " + page_ID +" not found"));
-        //!!!!    
-        //cannot find subtitle in schema !!
-
-        return "";
-    }*/
 
     //getPageType()
     @GetMapping("/PageType/{page_ID}")
@@ -47,4 +42,21 @@ public class PagesController {
         return p.getNextPageID();
     }
 
+    //returns a List of all pageIDs for a specific scenario
+    @GetMapping("/AllPageId/{scenario}/{scenarioVer}")
+    public List<Integer> getPageIDsByScenario(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
+        
+        return pagesRepository.findByScenarioIDAndScenarioVerID(scenario, scenarioVer);
+        
+    }
+
+    @GetMapping("Intro/PageID/{scenario}/{scenarioVer}")
+    public List<Integer> getIntroPageID(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
+        return pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, "INTRO");
+    }
+
+    @GetMapping("PageIDs/{scenario}/{scenarioVer}/{pageType}")
+    public List<Integer> getPageIDsByType(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer, @PathVariable(value="pageType") String pageType){
+        return pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, pageType);
+    }
 }
