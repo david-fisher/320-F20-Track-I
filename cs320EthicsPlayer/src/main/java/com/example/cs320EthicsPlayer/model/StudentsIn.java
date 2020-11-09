@@ -19,35 +19,35 @@ public class StudentsIn {
     
     @Id
     @Column(name = "Student")
-    private int student_ID;
+    private int studentID;
 
     @Id
     @Column(name= "C_ID")
-    private int course_ID;
+    private int courseID;
 
     public StudentsIn(){
         super();
     }
 
     public StudentsIn(@JsonProperty("S_ID") int student_ID, @JsonProperty("C_ID") int course_ID){
-        this.student_ID = student_ID;
-        this.course_ID = course_ID;
+        this.studentID = student_ID;
+        this.courseID = course_ID;
     }
 
     public int getStudentID(){
-        return student_ID;
+        return studentID;
     }
 
     public int getCourseID(){
-        return course_ID;
+        return courseID;
     }
 
     public void setStudentID(int sID){
-        student_ID = sID;
+        studentID = sID;
     }
 
     public void setCourseID(int cID){
-        course_ID=cID;
+        courseID=cID;
     }
-
 }
+

@@ -42,6 +42,9 @@ public class DemographicsController {
         return ResponseEntity.ok().body(d);
     }
 
+    /*
+    * get specific column of a Student from the students id
+    */
     @GetMapping("/studentDemographics/Grade/{id}")
     public String getStudentGrade(@PathVariable(value = "id") int student_ID) throws Exception{
         Demographics d = demographicsRepository.findById(student_ID)
@@ -49,10 +52,49 @@ public class DemographicsController {
         return d.getGrade();        
     }
 
-    /*update specific column of a specific student 
+    @GetMapping("/studentDemographics/Age/{id}")
+    public int getStudentAge(@PathVariable(value = "id") int student_ID) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        return d.getAge();        
+    }
+
+    @GetMapping("/studentDemographics/Gender/{id}")
+    public String getStudentGender(@PathVariable(value = "id") int student_ID) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        return d.getGender();        
+    }
+
+    @GetMapping("/studentDemographics/Race/{id}")
+    public String getStudentRace(@PathVariable(value = "id") int student_ID) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        return d.getRace();        
+    }
+
+    @GetMapping("/studentDemographics/Major/{id}")
+    public String getStudentMajor(@PathVariable(value = "id") int student_ID) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        return d.getMajor();        
+    }
+    
+    /*update specific column of a specific student
+    * 
     */
-    public int updateStudentAge(int student_ID, int age){
-        return 0;
+    @PutMapping("/studentDemographicsAge/{id}")
+    public ResponseEntity<Demographics> updateStudentAge(@PathVariable(value="id") int student_ID, @RequestBody int age) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+
+        if( age <= 0 ||age > 176 ){
+            throw new Exception("Invalid input");
+        }
+
+        Demographics de = new Demographics(d.getStudentID(),0,d.getGrade(),d.getGender(), d.getRace(),d.getMajor());
+        de.setAge(age);
+        return ResponseEntity.ok(demographicsRepository.save(de));
     }
 
     //only works if you send string without {} or any ""
@@ -60,15 +102,14 @@ public class DemographicsController {
     public ResponseEntity<Demographics> updateStudentGrade(@PathVariable(value = "id") int student_ID, @RequestBody String grade) throws Exception{
         Demographics d = demographicsRepository.findById(student_ID)
             .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
-        /*if(!(grade=="fre"||grade=="sop"||grade=="jun"||grade=="sen")){
+        if(!(grade.equals("fre")||grade.equals("sop")||grade.equals("jun")||grade.equals("sen"))){
             throw new Exception("Invalid input");
-        }*/
+        }
         Demographics de = new Demographics(d.getStudentID(),d.getAge(),"",d.getGender(), d.getRace(),d.getMajor());
         de.setGrade(grade);
         return ResponseEntity.ok(demographicsRepository.save(de));
     }
 
-    //return obj for now
     @PutMapping("studentDemographicsGender/{id}/{Gender}")
     public int updateStudentGender(@PathVariable(value="id") int student_ID, @PathVariable(value="Gender") String gender)
             throws Exception {
@@ -79,20 +120,28 @@ public class DemographicsController {
         return 0;
     }
 
-    public int updateStudentRace(int student_ID, String race){
-         Demographics d = demographicsRepository.findById(student_ID)
-            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
-        d.setRace(race);
-        demographicsRepository.save(d);
-        return 0;
-    }
-
-    public int updateStudentMajor(int student_ID, String major){
+    @PutMapping("/studentDemographicsRace/{id}")
+    public ResponseEntity<Demographics> updateStudentRace(@PathVariable(value = "id") int student_ID, @RequestBody String race) throws Exception{
         Demographics d = demographicsRepository.findById(student_ID)
             .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
-        d.setMajor(major);
-        demographicsRepository.save(d);
-        return 0;
+        /*if(!()){
+            throw new Exception("Invalid input");
+        }*/
+        Demographics de = new Demographics(d.getStudentID(),d.getAge(),d.getGrade(),d.getGender(), "",d.getMajor());
+        de.setRace(race);
+        return ResponseEntity.ok(demographicsRepository.save(de));
+    }
+
+    @PutMapping("/studentDemographicsMajor/{id}")
+    public ResponseEntity<Demographics> updateStudentMajor(@PathVariable(value="id") int student_ID, @RequestBody String major) throws Exception{
+        Demographics d = demographicsRepository.findById(student_ID)
+            .orElseThrow(() -> new Exception("Student " + student_ID + " not found"));
+        /*if(!()){
+            throw new Exception("Invalid input");
+        }*/
+        Demographics de = new Demographics(d.getStudentID(),d.getAge(),d.getGrade(),d.getGender(), d.getRace(), "");
+        de.setMajor(major);
+        return ResponseEntity.ok(demographicsRepository.save(de));
     }
     
     /* these methods will get all rows with a certain input for the column ie all demographics of a certain major
