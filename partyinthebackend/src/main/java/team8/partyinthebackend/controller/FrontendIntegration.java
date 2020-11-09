@@ -217,9 +217,7 @@ public class FrontendIntegration {
     public JSONObject getFinalAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
             JSONObject obj = new JSONObject();
-            String scenario_page = scenario_id+version_id+"finalaction";
-            Data.finalaction.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
-            obj.put("body", Data.finalaction);
+            obj.put("body", "Final action question");
             obj.put("status_code", 200);
 
             return obj;
@@ -227,7 +225,7 @@ public class FrontendIntegration {
         catch(Exception e) {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
-            
+
             return obj;
         }
     }
