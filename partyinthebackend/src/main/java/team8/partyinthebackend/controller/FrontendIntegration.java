@@ -18,6 +18,7 @@ import java.util.List;
  **/
 
 @RestController
+@CrossOrigin
 public class FrontendIntegration {
 	
     /**
@@ -47,7 +48,8 @@ public class FrontendIntegration {
 
         //simulation of pages table in the database
         public static Page page = new Page("This is a title", "Introduction goes here.");
-        public static Page initialreflection = new Page("This is a reflection", "reflect on this");
+        public static Page initialreflection = new Page("Initial reflection page", "reflect on this");
+        public static Page initialactions = new Page("Initial action page", "Initial action text");
 
         //simulation of stakeholders in the database
         public static StakeholderList stakeholders = new StakeholderList();
@@ -60,7 +62,6 @@ public class FrontendIntegration {
     /**
      * (GET) introduction
      */
-
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/introduction")
     public JSONObject getIntroduction(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -82,7 +83,6 @@ public class FrontendIntegration {
     /**
      * (GET) project task assignment
      */
-
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/pta")
     public JSONObject getPTA(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -104,7 +104,6 @@ public class FrontendIntegration {
     /**
      * (GET) gather information
      */
-
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/gi")
     public JSONObject getGI(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -133,6 +132,26 @@ public class FrontendIntegration {
             String scenario_page = scenario_id+version_id+"initialreflection";
             Data.initialreflection.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
             obj.put("body", Data.initialreflection);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
+    /**
+     * (GET) initial action
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
+    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            String scenario_page = scenario_id+version_id+"initialreflection";
+            Data.initialactions.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
+            obj.put("body", Data.initialactions);
             obj.put("status_code", 200);
             return obj;
         }
@@ -210,10 +229,4 @@ public class FrontendIntegration {
         }
     }
 
-
-//    @PutMapping(value = "/students/{id}")
-//    public @ResponseBody Student updateOneStudent(@PathVariable int id, @RequestParam String name) {
-//        Data.students.get(id-1).setName(name);
-//        return Data.students.get(id-1);
-//    }
 }
