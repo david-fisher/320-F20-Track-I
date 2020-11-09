@@ -30,8 +30,8 @@ CREATE TABLE pages(
 	PAGE_ID		 INTEGER		NOT NULL,
 	PAGE_TYPE	 VARCHAR(70),
 	PAGE_TITLE	 VARCHAR(70),
-	Scenario	INTEGER,
-	ScenarioVer INTEGER,
+	Scenario	 INTEGER,
+	ScenarioVer  INTEGER,
 	NEXT_PAGE_ID INTEGER		REFERENCES pages(PAGE_ID),
 	PRIMARY KEY(PAGE_ID),
 	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
@@ -67,6 +67,13 @@ CREATE TABLE issues(
 	ImportanceFactor INTEGER,
 	PRIMARY KEY (ISSUE_ID, Scenario, ScenarioVer),
 	FOREIGN KEY (Scenario, ScenarioVer) REFERENCES scenarios(E_ID, VERSION_ID)
+);
+
+CREATE TABLE coverage(
+	ISSUE_ID INTEGER REFERENCES issues(ISSUE_ID),
+	STAKEHOLDER INTEGER REFERENCES stakeholders(STK_ID),
+	coverage_score	DECIMAL,
+	PRIMARY KEY (ISSUE_ID, STAKEHOLDER)
 );
 
 CREATE TABLE assigned_to(
@@ -129,7 +136,6 @@ CREATE TABLE conversations_had(
 	CONVERSATION_ID INTEGER REFERENCES conversations(CONVERSATION_ID),
 	PRIMARY KEY(S_ID,C_ID,Scenario, ScenarioVer, DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID),
 	FOREIGN KEY (S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN) references responses(S_ID,C_ID, Scenario, ScenarioVer, DATE_TAKEN)
-
 );
 
 CREATE TABLE action_page(
@@ -148,7 +154,7 @@ CREATE TABLE reflection_questions(
 CREATE TABLE event_page(
 	PAGE_ID		INTEGER		REFERENCES pages(PAGE_ID),
 	BODY		TEXT,
-	PRIMARY KEY(PAGE_ID,BODY)
+	PRIMARY KEY(PAGE_ID)
 );
 
 CREATE TABLE stakeholder_page(
