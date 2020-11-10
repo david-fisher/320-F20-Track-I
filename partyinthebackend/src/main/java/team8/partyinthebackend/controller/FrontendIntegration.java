@@ -266,5 +266,32 @@ public class FrontendIntegration {
             return obj;
         }
     }
+    
+    /*
+     * (POST) Conversations - IN PROGRESS
+     */
 
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/stakeholder")
+    public @ResponseBody JSONObject updateConversations(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, 
+    		@RequestParam String stk_name, @RequestParam boolean is_picked, @RequestParam String[] questions) {
+    	try {
+    		JSONObject obj = new JSONObject();
+    		JSONObject body = new JSONObject();
+    		obj.put("status_code", 200);
+    		body.put("stk_name", stk_name);
+    		body.put("is_picked", is_picked);
+    		body.put("questions", questions);
+    		obj.put("body", body);
+    		return obj;
+    	}
+    	catch(Exception e) {
+    		JSONObject obj = new JSONObject();
+    		obj.put("status_code",  400);
+    		return obj;
+    	}
+    	
+    }
+    
+    
+    
 }
