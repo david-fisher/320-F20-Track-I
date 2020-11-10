@@ -250,4 +250,21 @@ public class FrontendIntegration {
         }
     }
 
+    /**
+     * (POST) posts a students answer to the feedback section
+     */
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/feedback")
+    public @ResponseBody JSONObject updateFeedbackResponse(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("feedback_response", "Pretty engaging scenario, 8/10, would take again.");
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 400);
+            return obj;
+        }
+    }
+
 }
