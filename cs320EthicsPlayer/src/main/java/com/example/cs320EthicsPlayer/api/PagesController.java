@@ -8,6 +8,8 @@ import com.example.cs320EthicsPlayer.repository.PagesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,19 +46,25 @@ public class PagesController {
 
     //returns a List of all pageIDs for a specific scenario
     @GetMapping("/AllPageId/{scenario}/{scenarioVer}")
-    public List<Integer> getPageIDsByScenario(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
+    public List<Pages> getPageIDsByScenario(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
         
         return pagesRepository.findByScenarioIDAndScenarioVerID(scenario, scenarioVer);
         
     }
 
-    @GetMapping("Intro/PageID/{scenario}/{scenarioVer}")
-    public List<Integer> getIntroPageID(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
-        return pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, "INTRO");
+    @GetMapping("/Intro/PageID/{scenario}/{scenarioVer}")
+    public int getIntroPageID(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
+        List<Pages>p= pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, "INTRO");
+        return p.get(0).getPageID();
+
     }
 
-    @GetMapping("PageIDs/{scenario}/{scenarioVer}/{pageType}")
-    public List<Integer> getPageIDsByType(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer, @PathVariable(value="pageType") String pageType){
+    @GetMapping("/PageIDs/{scenario}/{scenarioVer}/{pageType}")
+    public List<Pages> getPageIDsByType(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer, @PathVariable(value="pageType") String pageType){
         return pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, pageType);
+    }
+    @PostMapping("/Pages")
+    public Pages createPage(@RequestBody Pages page){
+        return pagesRepository.save(page);
     }
 }
