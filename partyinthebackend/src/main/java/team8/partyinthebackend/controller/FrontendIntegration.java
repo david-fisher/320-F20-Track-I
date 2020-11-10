@@ -231,14 +231,34 @@ public class FrontendIntegration {
     }
     
     /**
-     * (POST) posts a students answer to the initial reflection in the student dummy object
+     * (POST) posts a students answer to the initial reflection 
      */
     @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
-    public @ResponseBody JSONObject updateOneStudent(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
+    public @ResponseBody JSONObject postInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
         try {
             JSONObject obj = new JSONObject();
             //creates a unique scenario version and page string
             String scenario_page = scenario_id+version_id+"initialreflection";
+            Data.students.get(student_id-1).putAnswer(scenario_page, response);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+    
+    /**
+     * (POST) posts a students answer to the initial action
+     */
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
+    public @ResponseBody JSONObject postInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
+        try {
+            JSONObject obj = new JSONObject();
+            //creates a unique scenario version and page string
+            String scenario_page = scenario_id+version_id+"initialaction";
             Data.students.get(student_id-1).putAnswer(scenario_page, response);
             obj.put("status_code", 200);
             return obj;
