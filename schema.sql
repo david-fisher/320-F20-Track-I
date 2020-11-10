@@ -51,7 +51,7 @@ CREATE TABLE stakeholders(
 );
 
 CREATE TABLE responses(
-	S_ID		INTEGER REFERENCES students(S_ID),
+	S_ID	INTEGER REFERENCES students(S_ID),
 	Scenario	INTEGER,
 	ScenarioVer INTEGER,
 	C_ID		INTEGER REFERENCES courses(C_ID),
@@ -136,8 +136,8 @@ CREATE TABLE conversations_had(
 	STAKEHOLDER INTEGER REFERENCES stakeholders(STK_ID),
 	SCORE INTEGER,
 	CONVERSATION_ID INTEGER REFERENCES conversations(CONVERSATION_ID),
-	PRIMARY KEY(S_ID,C_ID,Scenario, ScenarioVer, DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID),
-	FOREIGN KEY (S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN) references responses(S_ID,C_ID, Scenario, ScenarioVer, DATE_TAKEN)
+	PRIMARY KEY(STUDENT_ID,COURSE_ID,Scenario, ScenarioVer, DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID),
+	FOREIGN KEY (STUDENT_ID, COURSE_ID, Scenario, ScenarioVer, DATE_TAKEN) references responses(S_ID,C_ID, Scenario, ScenarioVer, DATE_TAKEN)
 );
 
 CREATE TABLE action_page(
