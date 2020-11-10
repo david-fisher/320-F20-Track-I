@@ -18,6 +18,7 @@ import java.util.List;
  **/
 
 @RestController
+@CrossOrigin
 public class FrontendIntegration {
 	
     /**
@@ -47,7 +48,9 @@ public class FrontendIntegration {
 
         //simulation of pages table in the database
         public static Page page = new Page("This is a title", "Introduction goes here.");
-        public static Page initialreflection = new Page("This is a reflection", "reflect on this");
+        public static Page initialreflection = new Page("Initial reflection page", "reflect on this");
+        public static Page initialactions = new Page("Initial action page", "Initial action text");
+        public static Page finalaction = new Page("Final action page", "Final action text");
 
         //simulation of stakeholders in the database
         public static StakeholderList stakeholders = new StakeholderList();
@@ -60,7 +63,6 @@ public class FrontendIntegration {
     /**
      * (GET) introduction
      */
-    @CrossOrigin
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/introduction")
     public JSONObject getIntroduction(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -82,7 +84,6 @@ public class FrontendIntegration {
     /**
      * (GET) project task assignment
      */
-    @CrossOrigin
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/pta")
     public JSONObject getPTA(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -104,7 +105,6 @@ public class FrontendIntegration {
     /**
      * (GET) gather information
      */
-    @CrossOrigin
     @GetMapping(value = "/scenario/{scenario_id}/{version_id}/gi")
     public JSONObject getGI(@PathVariable int scenario_id, @PathVariable int version_id){
         try {
@@ -122,7 +122,10 @@ public class FrontendIntegration {
             return obj;
         }
     }
-    @CrossOrigin
+    
+    /**
+     * (GET) initial reflection
+     */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
@@ -139,10 +142,97 @@ public class FrontendIntegration {
             return obj;
         }
     }
+
     /**
-     * (PUT) puts a students answer to the initial reflection in the student dummy object
+     * (GET) initial action
      */
-    @CrossOrigin
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
+    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            String scenario_page = scenario_id+version_id+"initialreflection";
+            Data.initialactions.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
+            obj.put("body", Data.initialactions);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
+    /**
+     * (GET) consequences
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/consequences")
+    public JSONObject getConsequences(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            obj.put("summary_text", "Nice job. Probably. This is just filler text, so I don't have a way to know.");
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            JSONObject blank = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("summary_text", blank);
+            return obj;
+        }
+    }
+
+    /**
+     * (GET) radar plot
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/finalscore")
+    public JSONObject getRadarPlot(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            JSONObject rPlot = new JSONObject();
+            rPlot.put("field1", 1);
+            rPlot.put("field2", 4);
+            rPlot.put("field3", 5);
+            rPlot.put("field4", 3);
+            rPlot.put("field5", 2);
+            rPlot.put("field6", 2);
+            obj.put("body", rPlot);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            JSONObject blank = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", blank);
+            return obj;
+        }
+    }
+
+    /**
+     * (GET) Choose Final Action
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/finalaction")
+    public JSONObject getFinalAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("body", "Final action question");
+            obj.put("status_code", 200);
+
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+
+            return obj;
+        }
+    }
+    
+    /**
+     * (POST) posts a students answer to the initial reflection in the student dummy object
+     */
     @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public @ResponseBody JSONObject updateOneStudent(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
         try {
@@ -160,10 +250,48 @@ public class FrontendIntegration {
         }
     }
 
+    /**
+     * (POST) posts a students answer to the feedback section
+     */
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/feedback")
+    public @ResponseBody JSONObject updateFeedbackResponse(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("feedback_response", "Pretty engaging scenario, 8/10, would take again.");
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 400);
+            return obj;
+        }
+    }
+    
+    /*
+     * (POST) Conversations - IN PROGRESS
+     */
 
-//    @PutMapping(value = "/students/{id}")
-//    public @ResponseBody Student updateOneStudent(@PathVariable int id, @RequestParam String name) {
-//        Data.students.get(id-1).setName(name);
-//        return Data.students.get(id-1);
-//    }
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/stakeholder")
+    public @ResponseBody JSONObject updateConversations(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, 
+    		@RequestParam String stk_name, @RequestParam boolean is_picked, @RequestParam String[] questions) {
+    	try {
+    		JSONObject obj = new JSONObject();
+    		JSONObject body = new JSONObject();
+    		obj.put("status_code", 200);
+    		body.put("stk_name", stk_name);
+    		body.put("is_picked", is_picked);
+    		body.put("questions", questions);
+    		obj.put("body", body);
+    		return obj;
+    	}
+    	catch(Exception e) {
+    		JSONObject obj = new JSONObject();
+    		obj.put("status_code",  400);
+    		return obj;
+    	}
+    	
+    }
+    
+    
+    
 }

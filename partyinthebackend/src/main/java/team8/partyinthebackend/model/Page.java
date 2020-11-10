@@ -9,11 +9,11 @@ public class Page {
     
     private String title_page;
     private String intro_page;
-    private String answers;
+    private String questions_asked;
 
-    public Page(String title, String intro) {
-        this.title_page = title;
-        this.intro_page = intro;
+    public Page(String page_title, String text) {
+        this.title_page = page_title;
+        this.intro_page = text;
     }
 
     public String getTitle() {
@@ -32,11 +32,11 @@ public class Page {
         this.intro_page = intro;
     }
     public String getAnswers() {
-        return answers;
+        return questions_asked;
     }
 
-    public void setAnswers(String answers) {
-        this.answers = answers;
+    public void setAnswers(String questions_asked) {
+        this.questions_asked = questions_asked;
     }
 
 }
