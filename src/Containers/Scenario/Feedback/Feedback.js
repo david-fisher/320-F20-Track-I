@@ -1,8 +1,9 @@
-import React, {useContext,useEffect} from 'react';
+import React, {useContext,useEffect,useState} from 'react';
 import { Row, Col, Typography, Divider, Input, Button } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
 import { Radar } from 'react-chartjs-2'
+import axios from "axios"
 
 
 const Feedback = () => {
@@ -13,12 +14,14 @@ const Feedback = () => {
 
     let history = useHistory();
 
+    const [finalscore,setFinalscore] = useState("")
+
     const data = {
-      labels: ['Ethic Thing 1', 'Ethic Thing 2', 'Ethic Thing 3', 'Ethic Thing 4', 'Ethic Thing 5', 'Ethic Thing 6'],
+      labels: Object.keys(finalscore),
       datasets: [
         {
           label: '# of votes',
-          data: [1,1,3,2,3,2],
+          data: Object.values(finalscore),
           backgroundColor: 'rgba(255, 0, 0, 0.2)',
           borderColor: 'rgba(255, 0, 0, 1)',
           borderWidth: 1,
@@ -41,14 +44,30 @@ const Feedback = () => {
       let newSidebarState = state
       newSidebarState["feedback"].clickable = true
       update({newSidebarState})
+
+      axios.get('http://localhost:8080/student/2/scenario/1/2/finalscore',{
+        headers: {
+          "Access-Control-Allow-Origin": true
+        }
+      }).then(resp => {
+          console.log("INCOMING!",resp)
+          setFinalscore(resp.data.body)
+      })
+      .catch(err => {
+        console.log("THIS IS THE ERROR",err)
+      });
+
     }, [])
+  
+    useEffect(() => {
+      console.log(finalscore)
+    },[finalscore])
   
     return (
       <>
           <Row>
             <Col offset={5} span={18}>
                 <Title style={{color: "black"}}>Feedback</Title>
-                <Title style={{color: "black"}}>There will be a radar plot here soon...</Title>
                 <Radar data={data} options={options} />
                 <Paragraph>Words about the plot<br/><br/>
                 </Paragraph>

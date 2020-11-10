@@ -1,15 +1,16 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext,useEffect} from 'react';
 import { Row, Col, Typography, Button, Radio } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
-import HelpMenu from '../../../Containers/Scenario/Conversations/helpMenu';
-
+import axios from "axios"
 const InitialAction = () => {
   
   const { Title, Paragraph, Text } = Typography;
   const [choice,setChoice] = useState(0)
   const {state,update} = useContext(SidebarContext)
   let history = useHistory();
+
+  const [iaData,setIaData] = useState("")
 
   const handleClick = () => {
 
@@ -21,16 +22,32 @@ const InitialAction = () => {
 
   }
 
+  useEffect(() => {    
+    axios.get('http://localhost:8080/student/2/scenario/1/2/initialaction',{
+      headers: {
+        "Access-Control-Allow-Origin": true
+      }
+    }).then(resp => {
+        console.log("INCOMING!",resp)
+        setIaData(resp.data.body)
+    })
+    .catch(err => {
+      console.log("THIS IS THE ERROR",err)
+    });
+  }, [])
+
+  useEffect(() => {
+    console.log(iaData)
+  },[iaData])
+
 
 
   return (
     <>
       <Row>
         <Col offset={5} span={18}>
-            <Title style={{color: "black"}}>Choose Initial Action</Title>
-            <Paragraph>You're a new employee working on a data science team that is working on a larger project. 
-              You've also had an oportunity to reflect on your understanding of the task that you have been assigned 
-              on this project and to list any questions that still remain for you.
+            <Title style={{color: "black"}}>{iaData.title}</Title>
+            <Paragraph>{iaData.intro}
             </Paragraph>
             <Text strong style={{marginTop: "15px"}}>Please select what you would like to do next.</Text>
         </Col>
