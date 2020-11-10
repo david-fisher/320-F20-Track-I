@@ -26,23 +26,23 @@ const InitialRelection = () => {
     
     }
 
-    // useEffect(() => {    
-    //     axios.get('http://localhost:8080/scenario/2/4/initialreflection',{
-    //       headers: {
-    //         "Access-Control-Allow-Origin": true
-    //       }
-    //     }).then(resp => {
-    //         console.log("INCOMING!",resp)
-    //         setIrData(resp.data.body)
-    //     })
-    //     .catch(err => {
-    //       console.log("THIS IS THE ERROR",err)
-    //     });
-    //   }, [])
+    useEffect(() => {    
+        axios.get('http://localhost:8080/student/2/scenario/1/2/initialreflection',{
+          headers: {
+            "Access-Control-Allow-Origin": true
+          }
+        }).then(resp => {
+            console.log("INCOMING!",resp)
+            setIrData(resp.data.body)
+        })
+        .catch(err => {
+          console.log("THIS IS THE ERROR",err)
+        });
+      }, [])
     
-    //   useEffect(() => {
-    //     console.log(irData)
-    //   },[irData])
+      useEffect(() => {
+        console.log(irData)
+      },[irData])
 
 
 
@@ -50,14 +50,8 @@ const InitialRelection = () => {
         <>
             <Row>
                 <Col offset={5} span={18}>
-                    <Title style={{color: "black"}}>Reflect on Initial Information</Title>
-                    <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-                        Aldus PageMaker including versions of Lorem Ipsum.
+                    <Title style={{color: "black"}}>{irData.title}</Title>
+                    <Paragraph>{irData.intro}
                     </Paragraph>
                     <Text strong> 1. This is Question 1 to Reflect On.</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer1(e.target.value)}/>

@@ -142,7 +142,7 @@ public class FrontendIntegration {
     /**
      * (PUT) puts a students answer to the initial reflection in the student dummy object
      */
-
+    @CrossOrigin
     @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public @ResponseBody JSONObject updateOneStudent(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
         try {
