@@ -65,13 +65,13 @@ CREATE TABLE responses(
 );
 
 CREATE TABLE issues(
-	ISSUE_ID INTEGER UNIQUE,
+	ISSUE INTEGER UNIQUE,
 	Scenario	INTEGER,
-	ScenarioVer INTEGER,
+	Version		INTEGER,
 	Name		VARCHAR(70),
-	ImportanceFactor INTEGER,
-	PRIMARY KEY (ISSUE_ID, Scenario, ScenarioVer),
-	FOREIGN KEY (Scenario, ScenarioVer) REFERENCES scenarios(E_ID, VERSION_ID)
+	IMPORTANCE_SCORE INTEGER,
+	PRIMARY KEY (ISSUE, Scenario, Version),
+	FOREIGN KEY (Scenario, Version) REFERENCES scenarios(SCENARIO, VERSION)
 );
 
 CREATE TABLE coverage(
