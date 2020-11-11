@@ -291,7 +291,7 @@ public class FrontendIntegration {
      * (POST) Reflection on consequences student response
      */
     @PostMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/consequences")
-    public @ResponseBody JSONObject consequencesReflect(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String cons_reflection){
+    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String cons_reflection){
         try{
             JSONObject obj = new JSONObject();
             String scenario_page = scenario_id+version_id+"consequences";
@@ -303,6 +303,47 @@ public class FrontendIntegration {
         catch(Exception e){
             JSONObject obj = new JSONObject();
             obj.put("status_code", 400);
+
+            return obj;
+        }
+    }
+
+    /**
+     * (POST) Reflection on conversation student response
+     */
+    @PostMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/convoreflection")
+    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String[] answers){
+        try{
+            JSONObject obj = new JSONObject();
+            String scenario_page = scenario_id + version_id + "convoreflection";
+
+            // JSON array to store question_answer objects
+            JSONObject[] questions_answers = new JSONObject[answers.length];
+
+            // JSON object to store the array of question_answer objects
+            JSONObject body_object = new JSONObject();
+
+            // Storing question_answer objects in the JSON array
+            for(int i = 0; i < answers.length; i++){
+                JSONObject pair = new JSONObject();
+                pair.put("question", "Test question");
+                pair.put("answer", answers[i]);
+                questions_answers[i] = pair;
+                Data.students.get(student_id - 1).putAnswer(scenario_page, answers[i]); // Unsure about this
+            }
+            // Adding the questions_answers array to the body_object JSON object
+            body_object.put("questions_answers", questions_answers);
+            
+            obj.put("status_code", 200);
+            obj.put("body", body_object);
+            
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            JSONObject questions_answers = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", questions_answers);
 
             return obj;
         }
