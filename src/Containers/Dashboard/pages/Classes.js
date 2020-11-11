@@ -29,34 +29,18 @@ function Classes(props) {
     },
     {
       classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty"
+      classTitle: "Introduction to Civil and Environmental Engineering Measurements"
     },
     {
       classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty"
+      classTitle: "really loooooooooooooooooooooooo oooooooooooooooooooooooooooooooooog naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaame"
     },
-    {
-      classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty"
-    },
-    {
-      classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty blah blah blahblahvlah lahblahvlah"
-    },
-    {
-      classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty"
-    },
-    {
-      classNumber: "CS240",
-      classTitle: "Reasoning Under Uncertainty"
-    }
   ]
 
   return (
     <>
-    <div class = "container">
-    <Row gutter={40}>
+    <div className = "container">
+    <Row gutter={10}>
             {classesObject.map((c, index) => {
               
               return(
@@ -66,8 +50,15 @@ function Classes(props) {
                   <br/>
                   <div className="box" style={{backgroundColor: index % 2 === 0 ? "white" : "blanchedalmond"}} >
                     <div className="head">In Progress...</div> 
-                    {c.classNumber + ", "} <br/>
-                    {c.classTitle} <br/>
+                    <div className="class">
+                      {c.classNumber + ", "} <br/>
+                      
+                      <div className='classTitle'>{c.classTitle} 
+                        <span className="tooltiptext">{c.classTitle}</span>
+                      </div>
+                      <br/>
+                    </div>
+                    
 
                     <Button className = "start" type="primary" htmlType="submit" onClick={() => history.push("/introduction")}>start</Button>
                   </div>
