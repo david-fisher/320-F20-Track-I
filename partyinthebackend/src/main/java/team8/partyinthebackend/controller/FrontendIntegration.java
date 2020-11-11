@@ -61,8 +61,8 @@ public class FrontendIntegration {
     /**
      * (GET)1 introduction
      */
-    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/introduction")
-    public JSONObject getIntroduction(@PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/introduction")
+    public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try {
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
@@ -82,8 +82,8 @@ public class FrontendIntegration {
     /**
      * (GET)2 project task assignment
      */
-    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/pta")
-    public JSONObject getPTA(@PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
+    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try {
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
@@ -103,8 +103,8 @@ public class FrontendIntegration {
     /**
      * (GET)3 gather information
      */
-    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/gi")
-    public JSONObject getGI(@PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/gi")
+    public JSONObject getGI(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try {
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
