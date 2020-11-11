@@ -275,10 +275,8 @@ public class FrontendIntegration {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/reflectionquestions")
     public JSONObject getReflectionQuestions(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try{
-            List<JSONObject> rst = new ArrayList<>();
-            JSONObject question1 = new JSONObject();
-            question1.put("question_1", "Why did you do what you did?");
-            rst.add(question1);
+            List<String> rst = new ArrayList<>();
+            rst.add("Why did you do what you did?");
             JSONObject toRet = new JSONObject();
             toRet.put("status_code", 200);
             toRet.put("questions", rst);
