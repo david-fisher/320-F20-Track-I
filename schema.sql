@@ -170,10 +170,10 @@ CREATE TABLE stakeholder_page(
 
 CREATE TABLE scenarios_for(
 	Scenario	 INTEGER,
-	ScenarioVer	 INTEGER,
+	Version	 INTEGER,
 	COURSE		 INTEGER REFERENCES courses(COURSE),
-	PRIMARY KEY(Scenario, ScenarioVer, COURSE),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+	PRIMARY KEY(Scenario, Version, COURSE),
+	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
 
 );
 
