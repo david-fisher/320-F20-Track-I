@@ -130,7 +130,15 @@ public class FrontendIntegration {
             JSONObject obj = new JSONObject();
             String scenario_page = scenario_id+version_id+"initialreflection";
             Data.initialreflection.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
-            obj.put("body", Data.initialreflection);
+            JSONObject o = new JSONObject();
+            o.put("page_title", "initial reflection page");
+            o.put("text", "initial reflection page content");
+            String[] questions_asked = new String[3];
+            questions_asked[0] = "question1";
+            questions_asked[1] = "question2";
+            questions_asked[2] = "question3";
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
             obj.put("status_code", 200);
             return obj;
         }
@@ -148,9 +156,15 @@ public class FrontendIntegration {
     public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
             JSONObject obj = new JSONObject();
-            String scenario_page = scenario_id+version_id+"initialreflection";
-            Data.initialactions.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
-            obj.put("body", Data.initialactions);
+            JSONObject o = new JSONObject();
+            o.put("page_title", "initial action page");
+            o.put("text", "initial action page content");
+            String[] questions_asked = new String[3];
+            questions_asked[0] = "question1";
+            questions_asked[1] = "question2";
+            questions_asked[2] = "question3";
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
             obj.put("status_code", 200);
             return obj;
         }
