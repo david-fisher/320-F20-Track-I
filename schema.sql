@@ -45,9 +45,10 @@ CREATE TABLE stakeholders(
 	DESCRIPTION		TEXT,
 	JOB			VARCHAR(70),
 	Scenario	INTEGER,
-	ScenarioVer INTEGER,	
+	Version     INTEGER,
+	INTRODUCTION TEXT,
 	PRIMARY KEY(STAKEHOLDER),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
 );
 
 CREATE TABLE responses(
