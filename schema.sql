@@ -84,9 +84,9 @@ CREATE TABLE coverage(
 CREATE TABLE assigned_to(
 	Student		INTEGER REFERENCES students(STUDENT),
 	Scenario	INTEGER,
-	ScenarioVer INTEGER,
-	PRIMARY KEY(Student,Scenario),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+	Version INTEGER,
+	PRIMARY KEY(Student, Scenario, Version),
+	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
 );
 
 CREATE TABLE students_in(
