@@ -174,21 +174,15 @@ CREATE TABLE scenarios_for(
 	COURSE		 INTEGER REFERENCES courses(COURSE),
 	PRIMARY KEY(Scenario, Version, COURSE),
 	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
-
 );
 
+/*
 CREATE TABLE stakeholders_in(
 	STAKEHOLDER 	INTEGER REFERENCES stakeholders(STAKEHOLDER),
 	Scenario		INTEGER,
-	ScenarioVer		INTEGER,
-	PRIMARY KEY(STAKEHOLDER,Scenario, ScenarioVer),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+	Version		INTEGER,
+	PRIMARY KEY(STAKEHOLDER,Scenario, Version),
+	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
 );
+*/
 
-CREATE TABLE scenarios_in(
-	Scenario INTEGER,
-	ScenarioVer INTEGER,
-	COURSE	INTEGER REFERENCES courses(COURSE),
-	PRIMARY KEY(Scenario, ScenarioVer, COURSE),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
-);
