@@ -11,7 +11,7 @@ CREATE TABLE professors(
 );
 
 CREATE TABLE courses(
-	COURSE_ID INTEGER NOT NULL,
+	COURSE INTEGER NOT NULL,
 	NAME VARCHAR(70) NOT NULL,
 	PRIMARY KEY(COURSE)
 );
@@ -52,14 +52,14 @@ CREATE TABLE stakeholders(
 );
 
 CREATE TABLE responses(
-	S_ID	INTEGER REFERENCES students(S_ID),
+	STUDENT		INTEGER REFERENCES students(STUDENT),
 	Scenario	INTEGER,
-	ScenarioVer INTEGER,
-	C_ID		INTEGER REFERENCES courses(C_ID),
+	Version		INTEGER,
+	COURSE		INTEGER REFERENCES courses(COURSE),
 	DATE_TAKEN	DATE NOT NULL,
 	CHOICE TEXT,
-	PRIMARY KEY(S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN),
-	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
+	PRIMARY KEY(STUDENT, COURSE, Scenario, Version, DATE_TAKEN),
+	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
 );
 
 CREATE TABLE issues(
@@ -80,7 +80,7 @@ CREATE TABLE coverage(
 );
 
 CREATE TABLE assigned_to(
-	Student		INTEGER REFERENCES students(S_ID),
+	Student		INTEGER REFERENCES students(STUDENT),
 	Scenario	INTEGER,
 	ScenarioVer INTEGER,
 	PRIMARY KEY(Student,Scenario),
@@ -88,36 +88,36 @@ CREATE TABLE assigned_to(
 );
 
 CREATE TABLE students_in(
-	S_ID INTEGER REFERENCES students(S_ID),
-	C_ID INTEGER REFERENCES courses(C_ID),
-	PRIMARY KEY(S_ID,C_ID)
+	STUDENT INTEGER REFERENCES students(STUDENT),
+	COURSE INTEGER REFERENCES courses(COURSE),
+	PRIMARY KEY(STUDENT,COURSE)
 );
 
 CREATE TABLE Professors_teach(
 	P_ID INTEGER REFERENCES professors(P_ID),
-	C_ID INTEGER REFERENCES courses(C_ID),
-	PRIMARY KEY(P_ID,C_ID)
+	COURSE INTEGER REFERENCES courses(COURSE),
+	PRIMARY KEY(P_ID,COURSE)
 );
 
 CREATE TABLE demographics(
-	S_ID INTEGER REFERENCES students(S_ID),
+	STUDENT INTEGER REFERENCES students(STUDENT),
 	AGE INTEGER,
 	GRADE VARCHAR(3),
 	GENDER VARCHAR(10),
 	RACE VARCHAR(10),
 	MAJOR VARCHAR(70),
-	PRIMARY KEY(S_ID)
+	PRIMARY KEY(STUDENT)
 );
 
 CREATE TABLE reflections_taken(
 	REFLECTIONS TEXT,
-	S_ID		INTEGER,
-	C_ID		INTEGER,
+	STUDENT		INTEGER,
+	COURSE		INTEGER,
 	Scenario	INTEGER,
 	ScenarioVer INTEGER,
 	DATE_TAKEN	DATE,
-	PRIMARY KEY(REFLECTIONS, S_ID, C_ID, Scenario, ScenarioVer, DATE_TAKEN),
-	FOREIGN KEY (S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN) references responses(S_ID, Scenario, ScenarioVer, C_ID, DATE_TAKEN)
+	PRIMARY KEY(REFLECTIONS, STUDENT, COURSE, Scenario, ScenarioVer, DATE_TAKEN),
+	FOREIGN KEY (STUDENT, Scenario, ScenarioVer, COURSE, DATE_TAKEN) references responses(STUDENT, Scenario, ScenarioVer, COURSE, DATE_TAKEN)
 );
 
 CREATE TABLE conversations(
@@ -138,7 +138,7 @@ CREATE TABLE conversations_had(
 	SCORE INTEGER,
 	CONVERSATION_ID INTEGER REFERENCES conversations(CONVERSATION_ID),
 	PRIMARY KEY(STUDENT_ID,COURSE_ID,Scenario, ScenarioVer, DATE_TAKEN,STAKEHOLDER,CONVERSATION_ID),
-	FOREIGN KEY (STUDENT_ID, COURSE_ID, Scenario, ScenarioVer, DATE_TAKEN) references responses(S_ID,C_ID, Scenario, ScenarioVer, DATE_TAKEN)
+	FOREIGN KEY (STUDENT_ID, COURSE_ID, Scenario, ScenarioVer, DATE_TAKEN) references responses(STUDENT,COURSE, Scenario, ScenarioVer, DATE_TAKEN)
 );
 
 CREATE TABLE action_page(
@@ -168,8 +168,8 @@ CREATE TABLE stakeholder_page(
 CREATE TABLE scenarios_for(
 	Scenario	 INTEGER,
 	ScenarioVer	 INTEGER,
-	C_ID		 INTEGER REFERENCES courses(C_ID),
-	PRIMARY KEY(Scenario, ScenarioVer, C_ID),
+	COURSE		 INTEGER REFERENCES courses(COURSE),
+	PRIMARY KEY(Scenario, ScenarioVer, COURSE),
 	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 
 );
@@ -185,7 +185,7 @@ CREATE TABLE stakeholders_in(
 CREATE TABLE scenarios_in(
 	Scenario INTEGER,
 	ScenarioVer INTEGER,
-	C_ID	INTEGER REFERENCES courses(C_ID),
-	PRIMARY KEY(Scenario, ScenarioVer, C_ID),
+	COURSE	INTEGER REFERENCES courses(COURSE),
+	PRIMARY KEY(Scenario, ScenarioVer, COURSE),
 	FOREIGN KEY (Scenario, ScenarioVer) references scenarios(E_ID, VERSION_ID)
 );
