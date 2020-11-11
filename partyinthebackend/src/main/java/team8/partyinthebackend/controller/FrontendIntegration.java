@@ -286,6 +286,27 @@ public class FrontendIntegration {
             return obj;
         }
     }
+
+    /**
+     * (POST) Reflection on consequences student response
+     */
+    @PostMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/consequences")
+    public @ResponseBody JSONObject consequencesReflect(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String cons_reflection){
+        try{
+            JSONObject obj = new JSONObject();
+            String scenario_page = scenario_id+version_id+"consequences";
+            Data.students.get(student_id - 1).putAnswer(scenario_page, cons_reflection);
+            obj.put("status_code", 200);
+
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 400);
+
+            return obj;
+        }
+    }
     
     /*
      * (POST) Conversations - IN PROGRESS
