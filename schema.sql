@@ -116,10 +116,10 @@ CREATE TABLE reflections_taken(
 	STUDENT		INTEGER,
 	COURSE		INTEGER,
 	Scenario	INTEGER,
-	ScenarioVer INTEGER,
+	Version INTEGER,
 	DATE_TAKEN	DATE,
-	PRIMARY KEY(REFLECTIONS, STUDENT, COURSE, Scenario, ScenarioVer, DATE_TAKEN),
-	FOREIGN KEY (STUDENT, Scenario, ScenarioVer, COURSE, DATE_TAKEN) references responses(STUDENT, Scenario, ScenarioVer, COURSE, DATE_TAKEN)
+	PRIMARY KEY(REFLECTIONS, STUDENT, COURSE, Scenario, Version, DATE_TAKEN),
+	FOREIGN KEY (STUDENT, Scenario, Version, COURSE, DATE_TAKEN) references responses(STUDENT, Scenario, Version, COURSE, DATE_TAKEN)
 );
 
 CREATE TABLE conversations(
