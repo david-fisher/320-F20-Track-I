@@ -159,7 +159,7 @@ CREATE TABLE reflection_questions(
 CREATE TABLE generic_page(
 	PAGE		INTEGER		REFERENCES pages(PAGE),
 	BODY		TEXT,
-	PRIMARY KEY(PAGE)
+	PRIMARY KEY(PAGE, BODY)
 );
 
 CREATE TABLE stakeholder_page(
