@@ -1,11 +1,8 @@
-/*package com.example.cs320EthicsPlayer.model;
+package com.example.cs320EthicsPlayer.model;
 
 public class EventPageID implements java.io.Serializable {
     
-    /**
-     *
-     */
-    /*private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = 3L;
 
     private int page_ID;
     private String pageInfo;
@@ -19,4 +16,3 @@ public class EventPageID implements java.io.Serializable {
         this.pageInfo=pageInfo;
     }
 }
-*/
