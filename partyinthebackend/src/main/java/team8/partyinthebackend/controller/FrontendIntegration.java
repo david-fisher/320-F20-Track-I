@@ -187,6 +187,29 @@ public class FrontendIntegration {
     }
 
     /**
+     * GET: 7 Reflection on conversation
+     */
+    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/convoreflection")
+    public JSONObject getConvoReflection(@PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            String[] questions = new String[3];
+            questions[0] = "Reflection question1";
+            questions[1] = "Reflection question2";
+            questions[2] = "Reflection question3";
+            obj.put("body", questions);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch (Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
+
+    /**
      * (GET) 8 Choose Final Action
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/finalaction")
@@ -392,6 +415,7 @@ public class FrontendIntegration {
             return obj;
         }
     }
+    
 
     /**
      * (POST) 18 Conversations - IN PROGRESS
@@ -416,6 +440,29 @@ public class FrontendIntegration {
             return obj;
         }
     }
+
+    /**
+     * (POST) 19 Final action student decision
+    */
+    @PostMapping(value = "/student/{student_id}/course/{course_id}/scenario/{scenario_id}/finalaction")
+    public @ResponseBody JSONObject finalActionDecision(@PathVariable int student_id, @PathVariable int course_id, @PathVariable int scenario_id, @RequestParam String final_action) {
+        try {
+            JSONObject obj = new JSONObject();
+            Student student = new Student(student_id, "Peter");
+            student.addCourse(scenario_id, "test_scenario");
+            student.getCourses().getScenarioById(scenario_id).setFinal_action(final_action);
+            obj.put("body", student);
+            obj.put("status_code", 200);
+
+            return obj;
+        }
+        catch (Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 400);
+            return obj;
+        }
+    }
+
 
     /**
      * (POST) 20 Reflection on consequences student response
