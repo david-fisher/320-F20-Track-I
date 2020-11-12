@@ -61,8 +61,8 @@ public class FrontendIntegration {
     /**
      * (GET)1 introduction
      */
-    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/introduction")
-    public JSONObject getIntroduction(@PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/introduction")
+    public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try {
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
@@ -82,8 +82,8 @@ public class FrontendIntegration {
     /**
      * (GET)2 project task assignment
      */
-    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/pta")
-    public JSONObject getPTA(@PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
+    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try {
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
@@ -103,8 +103,8 @@ public class FrontendIntegration {
     /**
      * (GET)3 gather information
      */
-    @GetMapping(value = "/scenario/{scenario_id}/{version_id}/gi")
-    public JSONObject getGI(@PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/gi")
+    public JSONObject getGI(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try {
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
@@ -130,7 +130,15 @@ public class FrontendIntegration {
             JSONObject obj = new JSONObject();
             String scenario_page = scenario_id+version_id+"initialreflection";
             Data.initialreflection.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
-            obj.put("body", Data.initialreflection);
+            JSONObject o = new JSONObject();
+            o.put("page_title", "initial reflection page");
+            o.put("text", "initial reflection page content");
+            String[] questions_asked = new String[3];
+            questions_asked[0] = "question1";
+            questions_asked[1] = "question2";
+            questions_asked[2] = "question3";
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
             obj.put("status_code", 200);
             return obj;
         }
@@ -148,9 +156,15 @@ public class FrontendIntegration {
     public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
             JSONObject obj = new JSONObject();
-            String scenario_page = scenario_id+version_id+"initialreflection";
-            Data.initialactions.setAnswers(Data.students.get(student_id-1).getAnswer(scenario_page));
-            obj.put("body", Data.initialactions);
+            JSONObject o = new JSONObject();
+            o.put("page_title", "initial action page");
+            o.put("text", "initial action page content");
+            String[] questions_asked = new String[3];
+            questions_asked[0] = "question1";
+            questions_asked[1] = "question2";
+            questions_asked[2] = "question3";
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
             obj.put("status_code", 200);
             return obj;
         }
@@ -284,10 +298,8 @@ public class FrontendIntegration {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/reflectionquestions")
     public JSONObject getReflectionQuestions(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try{
-            List<JSONObject> rst = new ArrayList<>();
-            JSONObject question1 = new JSONObject();
-            question1.put("question_1", "Why did you do what you did?");
-            rst.add(question1);
+            List<String> rst = new ArrayList<>();
+            rst.add("Why did you do what you did?");
             JSONObject toRet = new JSONObject();
             toRet.put("status_code", 200);
             toRet.put("questions", rst);
@@ -423,14 +435,22 @@ public class FrontendIntegration {
 
     @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/stakeholder")
     public @ResponseBody JSONObject updateConversations(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id,
-                                                        @RequestParam String stk_name, @RequestParam boolean is_picked, @RequestParam String[] questions) {
+                                                        @PathVariable String stk_name, @RequestParam boolean[] q_flags, @RequestParam String[] questions) {
         try {
             JSONObject obj = new JSONObject();
             JSONObject body = new JSONObject();
+            
             obj.put("status_code", 200);
-            body.put("stk_name", stk_name);
-            body.put("is_picked", is_picked);
+            
+            // count how many questions are picked (marked as true)
+            int count = 0;
+            for(boolean b: q_flags) {
+            	if(b) count ++;
+            }
+            
+            body.put("num_questions", count);
             body.put("questions", questions);
+            body.put("is_picked", q_flags);
             obj.put("body", body);
             return obj;
         }
