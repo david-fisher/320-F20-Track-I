@@ -13,15 +13,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 //@IdClass(EventPageID.class)
-@Table(name="event_page")
+@Table(name="generic_page")
 @EntityListeners(AuditingEntityListener.class)
 public class EventPage{
 
     @Id
-    @Column(name="PAGE_ID")
+    @Column(name="PAGE")
     private int page_ID;
 
-    //@Id
+    @Id
     @Column(name="BODY")
     private String pageInfo;
 
@@ -29,7 +29,7 @@ public class EventPage{
         super();
     }
 
-    public EventPage(@JsonProperty("id") int page_ID, @JsonProperty("text") String pageInfo){
+    public EventPage(@JsonProperty("PAGE") int page_ID, @JsonProperty("BODY") String pageInfo){
         this.page_ID=page_ID;
         this.pageInfo=pageInfo;
     }
