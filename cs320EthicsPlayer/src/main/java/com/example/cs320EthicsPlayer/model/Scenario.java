@@ -50,7 +50,7 @@ public class Scenario {
         super();
     }
 
-    public Scenario(@JsonProperty("SCENARIO") int scenario,@JsonProperty("VERSION") int version,@JsonProperty("NAME") String name, @JsonProperty("NUM_CONVERSATIONS") int num_conversations,@JsonProperty("PUBLIC") boolean is_public, @JsonProperty("CREATOR") int professor, Date created, boolean isFinished){
+    public Scenario(@JsonProperty("SCENARIO") int scenario,@JsonProperty("VERSION") int version,@JsonProperty("NAME") String name, @JsonProperty("NUM_CONVERSATIONS") int num_conversations,@JsonProperty("PUBLIC") boolean is_public, @JsonProperty("CREATOR") int professor, @JsonProperty("DATE_CREATED") Date created, @JsonProperty("IS_FINISHED") boolean isFinished){
         this.scenario = scenario;
         this.version = version;
         this.name = name;

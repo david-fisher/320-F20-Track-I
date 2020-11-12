@@ -1,5 +1,7 @@
 package com.example.cs320EthicsPlayer.model;
 
+import java.sql.Date;
+
 public class ReflectionsID implements java.io.Serializable {
 
     /**
@@ -8,17 +10,23 @@ public class ReflectionsID implements java.io.Serializable {
      */
     private static final long serialVersionUID = 4L;
 
-    int s_ID;
-    int c_ID;
-    int e_ID;    
+    private String reflections;
+    private int sID;
+    private int cID;
+    private int scenario;
+    private int version;
+    private Date date;  
 
     public ReflectionsID(){
         super();
     }
     
-    public ReflectionsID(int s_ID, int c_ID, int e_ID){
-        this.s_ID=s_ID;
-        this.c_ID=c_ID;
-        this.e_ID=e_ID; 
+    public ReflectionsID(String reflections, int s_ID, int c_ID, int scenario, int e_ID, Date date){
+        this.reflections=reflections;
+        this.sID=s_ID;
+        this.cID=c_ID;
+        this.scenario=
+        this.version=e_ID; 
+        this.date=date;
     }
 }

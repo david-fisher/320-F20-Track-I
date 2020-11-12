@@ -6,6 +6,8 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -39,7 +41,7 @@ public class Stakeholders {
         super();
     }
 
-    public Stakeholders(int stakeholder_ID, String name, String description, String job, int scenario, int scenarioVer, String introduction){
+    public Stakeholders(@JsonProperty("STAKEHOLDER") int stakeholder_ID, @JsonProperty("NAME") String name, @JsonProperty("DESCRIPTION") String description, @JsonProperty("JOB") String job, @JsonProperty("Scenario") int scenario, @JsonProperty("Version") int scenarioVer, @JsonProperty("INTRODUCTION") String introduction){
         this.stakeholder_ID=stakeholder_ID;
         this.name=name;
         this.description=description;

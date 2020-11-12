@@ -19,21 +19,27 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Reflections {
     
+    @Id
     @Column(name="REFLECTIONS")
     private String reflections;
     
     @Id
-    @Column(name="S_ID")
-    private int s_ID;
+    @Column(name="STUDENT")
+    private int sID;
     
     @Id
-    @Column(name="C_ID")
-    private int c_ID;
+    @Column(name="COURSE")
+    private int cID;
     
     @Id
-    @Column(name="E_ID")
-    private int e_ID;
+    @Column(name="Scenario")
+    private int scenario;
 
+    @Id
+    @Column(name="Version")
+    private int version;
+
+    @Id
     @Column(name="DATE_TAKEN")
     private Date date;
 
@@ -41,11 +47,12 @@ public class Reflections {
         super();
     }
 
-    public Reflections(@JsonProperty("reflections") String reflections,@JsonProperty("S_ID") int student_id,@JsonProperty("C_ID") int course_id,@JsonProperty("E_ID") int e_id,@JsonProperty("Date") Date date){
+    public Reflections(@JsonProperty("reflections") String reflections,@JsonProperty("S_ID") int student_id,@JsonProperty("C_ID") int course_id,@JsonProperty("E_ID") int e_id,@JsonProperty("Date") Date date, @JsonProperty("Version") int version){
         this.reflections = reflections;
-        this.s_ID = student_id;
-        this.c_ID = course_id;
-        this.e_ID = e_id;
+        this.sID = student_id;
+        this.cID = course_id;
+        this.scenario = e_id;
+        this.version = version;
         this.date=date;
     }
     
@@ -54,15 +61,15 @@ public class Reflections {
     }
 
     public int getSID(){
-        return s_ID;
+        return sID;
     }
 
     public int getCID(){
-        return c_ID;
+        return cID;
     }
 
     public int getEID(){
-        return e_ID;
+        return scenario;
     }
 
     public Date getDate(){
@@ -74,15 +81,15 @@ public class Reflections {
     }
 
     public void setSID(int student_ID){
-        s_ID=student_ID;
+        sID=student_ID;
     }
 
     public void setCID(int course_ID){
-        c_ID=course_ID;
+        cID=course_ID;
     }
 
     public void setEID(int eID){
-        e_ID=eID;
+        scenario=eID;
     }
 
     public void setDate(Date newDate){
