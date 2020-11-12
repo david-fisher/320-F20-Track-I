@@ -59,9 +59,7 @@ const Feedback = () => {
 
     }, [])
   
-    useEffect(() => {
-      console.log(finalscore)
-    },[finalscore])
+
   
     return (
       <>

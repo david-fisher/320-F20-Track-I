@@ -16,7 +16,7 @@ const Stakeholder = (props) => {
 
     useEffect(() => {
         /* 5 is arbitrary here and will come from backend! */
-        if(props.conversationList.length >=5)
+        if(props.conversationList.length >= props.maxConvo)
             setDisabled(true)
     })
 

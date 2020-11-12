@@ -30,7 +30,7 @@ const ProjectTask = () => {
     newSidebarState["projectTask"].clickable = true
     update({newSidebarState})
 
-    axios.get('http://localhost:8080/scenario/2/4/pta',{
+    axios.get('http://localhost:8080/student/2/scenario/2/4/pta',{
       headers: {
         "Access-Control-Allow-Origin": true
       }
@@ -44,9 +44,6 @@ const ProjectTask = () => {
 
   }, [])
 
-  useEffect(() => {
-    console.log(ptaData)
-  },[ptaData])
 
   return (
     <>

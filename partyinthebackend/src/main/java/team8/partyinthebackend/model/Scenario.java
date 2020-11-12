@@ -9,6 +9,7 @@ public class Scenario {
     
     private int scenario_id;
     private String scenario_name;
+    private String final_action;
 
     public Scenario(int id, String name) {
         this.scenario_id = id;
@@ -29,6 +30,14 @@ public class Scenario {
 
     public void setName(String name) {
         this.scenario_name = name;
+    }
+
+    public String getFinal_action() {
+        return final_action;
+    }
+
+    public void setFinal_action(String final_action) {
+        this.final_action = final_action;
     }
 
 }

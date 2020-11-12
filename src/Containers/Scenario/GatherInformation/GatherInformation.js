@@ -22,7 +22,7 @@ const GatherInformation = () => {
     newSidebarState["gatherInformation"].clickable = true
     update({newSidebarState})
 
-    axios.get('http://localhost:8080/scenario/2/4/gi',{
+    axios.get('http://localhost:8080/student/2/scenario/2/4/gi',{
       headers: {
         "Access-Control-Allow-Origin": true
       }
@@ -35,9 +35,7 @@ const GatherInformation = () => {
     });
   }, [])
 
-  useEffect(() => {
-    console.log(giData)
-  },[giData])
+
 
 
   return (

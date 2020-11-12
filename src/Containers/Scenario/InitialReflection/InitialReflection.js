@@ -12,17 +12,28 @@ const InitialRelection = () => {
     const [answer1,setAnswer1] = useState("")
     const [answer2,setAnswer2] = useState("")
     const [irData,setIrData] = useState("")
+    const [questions,setQuestions] = useState([])
 
     const {state,update} = useContext(SidebarContext)
     let history = useHistory()
 
     const handleClick = () => {
 
-        history.push("/scenario/initial-action")
-    
-        let newSidebarState = state
-        newSidebarState["projectTask"].routeTo = "initial-action"
-        update({newSidebarState})
+      axios.post('http://localhost:8080/student/2/scenario/1/2/initialreflection',
+        answer1
+      )
+      .then(response => {
+        console.log("SENT",response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+      history.push("/scenario/initial-action")
+  
+      let newSidebarState = state
+      newSidebarState["projectTask"].routeTo = "initial-action"
+      update({newSidebarState})
     
     }
 
@@ -34,28 +45,25 @@ const InitialRelection = () => {
         }).then(resp => {
             console.log("INCOMING!",resp)
             setIrData(resp.data.body)
+            setQuestions(resp.data.body.questions_asked)
         })
         .catch(err => {
           console.log("THIS IS THE ERROR",err)
         });
-      }, [])
-    
-      useEffect(() => {
-        console.log(irData)
-      },[irData])
 
+      }, [])
 
 
     return (
         <>
             <Row>
                 <Col offset={5} span={18}>
-                    <Title style={{color: "black"}}>{irData.title}</Title>
-                    <Paragraph>{irData.intro}
+                    <Title style={{color: "black"}}>{irData.page_title}</Title>
+                    <Paragraph>{irData.text}
                     </Paragraph>
-                    <Text strong> 1. This is Question 1 to Reflect On.</Text><br/>
+                    <Text strong> {questions[0]}</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer1(e.target.value)}/>
-                    <Text strong> 2. This is Question 2 to Reflect On.</Text><br/>
+                    <Text strong> {questions[1]}</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer2(e.target.value)}/>
 
                 </Col>

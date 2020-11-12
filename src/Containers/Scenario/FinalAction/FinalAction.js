@@ -1,16 +1,28 @@
-import React, {useState,useContext} from 'react';
+import React, {useState,useContext,useEffect} from 'react';
 import { Row, Col, Typography, Button, Radio } from 'antd';
 import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
+import axios from "axios"
 
 const FinalAction = () => {
   
   const { Title, Paragraph, Text } = Typography;
   const [choice,setChoice] = useState(0)
+  const [choices,setChoices] = useState("")
   const {state,update} = useContext(SidebarContext)
   let history = useHistory();
 
   const handleClick = () => {
+
+    axios.post('http://localhost:8080/student/1/course/2/scenario/3/finalaction',
+        choice.toString()
+      )
+      .then(response => {
+        console.log("SENT",response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     history.push("/scenario/summary")
 
@@ -19,6 +31,21 @@ const FinalAction = () => {
     update({newSidebarState})
 
   }
+
+  useEffect(() => {    
+    axios.get('http://localhost:8080/student/2/scenario/1/2/finalaction',{
+      headers: {
+        "Access-Control-Allow-Origin": true
+      }
+    }).then(resp => {
+        console.log("INCOMING!",resp)
+        setChoices(resp.data.body)
+    })
+    .catch(err => {
+      console.log("THIS IS THE ERROR",err)
+    });
+
+  }, [])
 
 
 
@@ -36,8 +63,8 @@ const FinalAction = () => {
       <Row>
         <Col offset={5}>
           <Radio.Group onChange={e => setChoice(e.target.value)} value={choice}>
-            <Radio value={0}>Would you get to work so that you don't feel stressed about completing your task assignment before the project deadline</Radio><br/>
-            <Radio value={1}>Would you delay getting started and try to get answers for any lingering questions that you might have about the project</Radio>
+            <Radio value={0}>{choices[0]}</Radio><br/>
+            <Radio value={1}>{choices[1]}</Radio>
           </Radio.Group>
         </Col>
       </Row>

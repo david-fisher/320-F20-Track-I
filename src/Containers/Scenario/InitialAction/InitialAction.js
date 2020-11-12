@@ -14,6 +14,16 @@ const InitialAction = () => {
 
   const handleClick = () => {
 
+    axios.post('http://localhost:8080/student/2/scenario/1/2/initialaction',
+        choice.toString()
+      )
+      .then(response => {
+        console.log("SENT",response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
     history.push("/scenario/gather-information")
 
     let newSidebarState = state
@@ -36,9 +46,7 @@ const InitialAction = () => {
     });
   }, [])
 
-  useEffect(() => {
-    console.log(iaData)
-  },[iaData])
+
 
 
 
@@ -46,8 +54,8 @@ const InitialAction = () => {
     <>
       <Row>
         <Col offset={5} span={18}>
-            <Title style={{color: "black"}}>{iaData.title}</Title>
-            <Paragraph>{iaData.intro}
+            <Title style={{color: "black"}}>{iaData.page_title}</Title>
+            <Paragraph>{iaData.text}
             </Paragraph>
             <Text strong style={{marginTop: "15px"}}>Please select what you would like to do next.</Text>
         </Col>

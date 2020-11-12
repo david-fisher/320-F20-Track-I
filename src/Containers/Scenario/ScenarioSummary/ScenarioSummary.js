@@ -34,9 +34,7 @@ const ScenarioSummary = () => {
         });
   }, [])
 
-  useEffect(() => {
-    console.log(summaryData)
-  },[summaryData])
+
 
   return (
     <>

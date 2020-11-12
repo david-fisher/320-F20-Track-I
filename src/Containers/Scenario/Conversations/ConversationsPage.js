@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import {SidebarContext} from "../../../component/SidebarContext"
 import Stakeholder from "./Stakeholder"
 import ConversationsAlreadyHad from"./ConversationsAlreadyHad"
-import HelpMenu from './helpMenu';
 
 
 const ConversationsPage = (props) => {
@@ -41,7 +40,7 @@ const ConversationsPage = (props) => {
                 <Row>
                     <Col span={12} offset={6}>
                         <Title>Conversations</Title>
-                        <Title level={3}>Please Choose 5 Conversations</Title>
+                        <Title level={3}>Please Choose {props.maxConvo} Conversations</Title>
                     </Col>
                 </Row>
                 {props.stakeholders.map((stakeholder,index) => {
@@ -53,6 +52,7 @@ const ConversationsPage = (props) => {
                             setStakeholders={props.setStakeholders} 
                             name={stakeholder.name} 
                             bio={stakeholder.bio} 
+                            maxConvo={props.maxConvo}
                             conversation={stakeholder.conversation} 
                             conversationList={props.conversationList} 
                             setConversationList={props.setConversationList}
@@ -61,9 +61,9 @@ const ConversationsPage = (props) => {
                 })}
                 <Row>
                     <Col offset={6} span={8}>
-                        <Progress percent={(props.conversationList.length/5) * 100} status={props.conversationList.length === 5 ? "" : "active"} />
+                        <Progress percent={Math.round((props.conversationList.length/props.maxConvo) * 100)} status={props.conversationList.length === props.maxConvo ? "" : "active"} />
                         {/* 5 is arbitrary here and will come from backend! */}
-                        {props.conversationList.length< 5 ? 
+                        {props.conversationList.length< props.maxConvo ? 
                             <Button disabled type="primary">Next Page</Button> : 
                             <Button type="primary" onClick={handleClick}>Next Page</Button>
                         }                

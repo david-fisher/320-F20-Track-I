@@ -20,6 +20,15 @@ public class Courses {
         return scenarios;
     }
 
+    public Scenario getScenarioById(int id) {
+        for(Scenario scenario : scenarios) {
+            if (scenario.getId() == id) {
+                return scenario;
+            }
+        }
+        return null; 
+    }
+
     public void addScenario(int id, String name) {
         this.scenarios.add(new Scenario(id, name));
     }

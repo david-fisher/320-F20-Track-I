@@ -46,13 +46,16 @@ public class Student {
     public void addCourse(int id, String name) {
         this.courses.addScenario(id, name);
     }
+
     public void putAnswer(String pageName, String pageInfo) {
     	this.answers.put(pageName,pageInfo);
     }
+
     public String getAnswer(String pageName) {
     	String value = this.answers.get(pageName);
     	if(value == null) return "";
     	return value;
     }
+
 }
 
