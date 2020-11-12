@@ -411,14 +411,22 @@ public class FrontendIntegration {
 
     @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/stakeholder")
     public @ResponseBody JSONObject updateConversations(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id,
-                                                        @RequestParam String stk_name, @RequestParam boolean is_picked, @RequestParam String[] questions) {
+                                                        @PathVariable String stk_name, @RequestParam boolean[] q_flags, @RequestParam String[] questions) {
         try {
             JSONObject obj = new JSONObject();
             JSONObject body = new JSONObject();
+            
             obj.put("status_code", 200);
-            body.put("stk_name", stk_name);
-            body.put("is_picked", is_picked);
+            
+            // count how many questions are picked (marked as true)
+            int count = 0;
+            for(boolean b: q_flags) {
+            	if(b) count ++;
+            }
+            
+            body.put("num_questions", count);
             body.put("questions", questions);
+            body.put("is_picked", q_flags);
             obj.put("body", body);
             return obj;
         }
