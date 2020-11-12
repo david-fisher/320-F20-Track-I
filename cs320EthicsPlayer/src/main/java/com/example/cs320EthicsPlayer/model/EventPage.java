@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
-//import javax.persistence.IdClass;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-//@IdClass(EventPageID.class)
+@IdClass(EventPageID.class)
 @Table(name="generic_page")
 @EntityListeners(AuditingEntityListener.class)
 public class EventPage{
