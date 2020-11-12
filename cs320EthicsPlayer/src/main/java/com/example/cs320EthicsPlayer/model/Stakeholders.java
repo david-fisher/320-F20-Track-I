@@ -62,4 +62,8 @@ public class Stakeholders {
 	public String getJob() {
 		return job;
 	}
+	
+	public String getIntroduction() {
+		return introduction;
+	}
 }

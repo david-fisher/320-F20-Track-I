@@ -40,6 +40,14 @@ public class StakeholderController {
             .orElseThrow(()-> new Exception("Stakholder "+stk_ID+ " not found"));   
         return s.getDescription();
     }
+    
+    //getSpecificStakeholderIntroduction()
+    @GetMapping("/StakeholderIntroduction/{stk_ID}")
+    public String getSpecificStakeholderIntroduction(@PathVariable(value="stk_ID") int stk_ID) throws Exception{
+        Stakeholders s = stakeholderRepository.findById(stk_ID)
+            .orElseThrow(()-> new Exception("Stakholder "+stk_ID+ " not found"));   
+        return s.getIntroduction();
+    }
 
     //getStakeholderJob()
     @GetMapping("/StakeholderJob/{stk_ID}")
