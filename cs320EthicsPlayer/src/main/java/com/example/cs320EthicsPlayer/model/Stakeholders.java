@@ -14,7 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Stakeholders {
 
     @Id
-    @Column(name="STK_ID")
+    @Column(name="STAKEHOLDER")
     int stakeholder_ID;
 
     @Column(name="NAME")
@@ -29,20 +29,24 @@ public class Stakeholders {
     @Column(name="Scenario")
     int scenario;
 
-    @Column(name="ScenarioVer")
+    @Column(name="Version")
     int scenarioVer;
+
+    @Column(name="INTRODUCTION")
+    String introduction;
 
     public Stakeholders(){
         super();
     }
 
-    public Stakeholders(int stakeholder_ID, String name, String description, String job, int scenario, int scenarioVer){
+    public Stakeholders(int stakeholder_ID, String name, String description, String job, int scenario, int scenarioVer, String introduction){
         this.stakeholder_ID=stakeholder_ID;
         this.name=name;
         this.description=description;
         this.job=job;
         this.scenario=scenario;
         this.scenarioVer=scenarioVer;
+        this.introduction=introduction;
     }
 
 	public String getName() {
