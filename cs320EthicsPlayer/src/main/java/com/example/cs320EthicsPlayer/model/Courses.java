@@ -15,13 +15,13 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Courses{
     @Id
-    @Column(name = "C_ID")
+    @Column(name = "COURSE")
     private int course_ID;
 
     @Column(name = "Name")
     private String courseName;
 
-    public Courses(@JsonProperty("C_ID") int course_ID, @JsonProperty("courseName") String courseName){
+    public Courses(@JsonProperty("COURSE") int course_ID, @JsonProperty("courseName") String courseName){
         this.course_ID=course_ID;
         this.courseName=courseName;
     }
