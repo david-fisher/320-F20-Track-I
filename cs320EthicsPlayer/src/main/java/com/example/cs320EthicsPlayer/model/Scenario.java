@@ -31,7 +31,7 @@ public class Scenario {
     @Column(name="NAME")
     private String name;
     
-    @Column(name="NUM_CONVERSATIONS")
+    @Column(name="NUM_CONVERSATION")
     private int num_conversations;
 
     @Column(name="PUBLIC")
