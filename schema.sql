@@ -164,7 +164,7 @@ CREATE TABLE generic_page(
 
 CREATE TABLE stakeholder_page(
 	PAGE INTEGER REFERENCES pages(PAGE),
-	STAKEHOLDER INTEGER REFERENCES stakeholders(STAKEHOLDER)
+	STAKEHOLDER INTEGER REFERENCES stakeholders(STAKEHOLDER),
 	PRIMARY KEY (PAGE, STAKEHOLDER)
 );
 
@@ -174,6 +174,19 @@ CREATE TABLE scenarios_for(
 	COURSE		 INTEGER REFERENCES courses(COURSE),
 	PRIMARY KEY(Scenario, Version, COURSE),
 	FOREIGN KEY (Scenario, Version) references scenarios(SCENARIO, VERSION)
+);
+
+CREATE TABLE student_times(
+	STUDENT		INTEGER,
+	COURSE		INTEGER,
+	Scenario	INTEGER,
+	Version INTEGER,
+	DATE_TAKEN	DATE,
+	PAGE INTEGER REFERENCES pages(PAGE),
+	StartTime	DATE,
+	EndTime		DATE,
+	PRIMARY KEY (STUDENT, COURSE, Scenario, Version, DATE_TAKEN, PAGE),
+	FOREIGN KEY (STUDENT, Scenario, Version, COURSE, DATE_TAKEN) references responses(STUDENT, Scenario, Version, COURSE, DATE_TAKEN)
 );
 
 /*
