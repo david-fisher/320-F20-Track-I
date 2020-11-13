@@ -8,15 +8,15 @@ public class ScenarioID implements java.io.Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    int e_id;
-    int version_id;   
+    int scenario;
+    int version;   
 
     public ScenarioID(){
         super();
     }
     
     public ScenarioID(int EID, int VERSIONID){
-        this.e_id=EID;
-        this.version_id = VERSIONID;
+        this.scenario=EID;
+        this.version = VERSIONID;
     }
 }
