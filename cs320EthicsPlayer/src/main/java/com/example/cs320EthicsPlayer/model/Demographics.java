@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Demographics {
     
     @Id
-    @Column(name = "S_ID")
+    @Column(name = "STUDENT")
     private int student_ID;
 
     @Column(name = "AGE")
@@ -38,7 +38,7 @@ public class Demographics {
         super();
     }
 
-    public Demographics(@JsonProperty("S_ID") int student_ID, @JsonProperty("AGE") int age, @JsonProperty("GRADE") String grade, @JsonProperty("GENDER") String gender, @JsonProperty("RACE") String race, @JsonProperty("MAJOR") String major){
+    public Demographics(@JsonProperty("STUDENT") int student_ID, @JsonProperty("AGE") int age, @JsonProperty("GRADE") String grade, @JsonProperty("GENDER") String gender, @JsonProperty("RACE") String race, @JsonProperty("MAJOR") String major){
         this.student_ID=student_ID;
         this.age=age;
         this.grade=grade;

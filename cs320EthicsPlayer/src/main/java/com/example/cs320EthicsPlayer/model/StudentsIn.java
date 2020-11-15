@@ -18,18 +18,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class StudentsIn {
     
     @Id
-    @Column(name = "Student")
+    @Column(name = "STUDENT")
     private int studentID;
 
     @Id
-    @Column(name= "C_ID")
+    @Column(name= "COURSE")
     private int courseID;
 
     public StudentsIn(){
         super();
     }
 
-    public StudentsIn(@JsonProperty("S_ID") int student_ID, @JsonProperty("C_ID") int course_ID){
+    public StudentsIn(@JsonProperty("STUDENT") int student_ID, @JsonProperty("COURSE") int course_ID){
         this.studentID = student_ID;
         this.courseID = course_ID;
     }

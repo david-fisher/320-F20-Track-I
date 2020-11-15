@@ -1,5 +1,7 @@
 package com.example.cs320EthicsPlayer.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import com.example.cs320EthicsPlayer.api.ScenarioController;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,44 +21,52 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Scenario {
     
 	@Id
-    @Column(name="E_ID")
-    private int e_id;
+    @Column(name="SCENARIO")
+    private int scenario;
     
     @Id
-    @Column(name="VERSION_ID")
-    private int version_id;
+    @Column(name="VERSION")
+    private int version;
     
     @Column(name="NAME")
     private String name;
     
-    @Column(name="NUM_CONVERSATIONS")
+    @Column(name="NUM_CONVERSATION")
     private int num_conversations;
 
     @Column(name="PUBLIC")
     private boolean is_public;
     
-    @Column(name="CREATOR")
-    private int creator;
+    @Column(name="PROFESSOR")
+    private int professor;
+
+    @Column(name="DATE_CREATED")
+    private Date created;
+
+    @Column(name="IS_FINISHED")
+    boolean isFinished;
 
     public Scenario(){
         super();
     }
 
-    public Scenario(@JsonProperty("E_ID") int e_id,@JsonProperty("VERSION_ID") int version_id,@JsonProperty("NAME") String name, @JsonProperty("NUM_CONVERSATIONS") int num_conversations,@JsonProperty("PUBLIC") boolean is_public, @JsonProperty("CREATOR") int creator){
-        this.e_id = e_id;
-        this.version_id = version_id;
+    public Scenario(@JsonProperty("SCENARIO") int scenario,@JsonProperty("VERSION") int version,@JsonProperty("NAME") String name, @JsonProperty("NUM_CONVERSATIONS") int num_conversations,@JsonProperty("PUBLIC") boolean is_public, @JsonProperty("CREATOR") int professor, @JsonProperty("DATE_CREATED") Date created, @JsonProperty("IS_FINISHED") boolean isFinished){
+        this.scenario = scenario;
+        this.version = version;
         this.name = name;
         this.num_conversations = num_conversations;
         this.is_public=is_public;
-        this.creator = creator;
+        this.professor = professor;
+        this.created=created;
+        this.isFinished=isFinished;
     }
     
-    public int getEID(){
-        return e_id;
+    public int getScenarioID(){
+        return scenario;
     }
 
     public int getVERSIONID(){
-        return version_id;
+        return version;
     }
 
     public String getNAME(){
@@ -71,15 +82,15 @@ public class Scenario {
     }
     
     public int getCREATOR(){
-        return creator;
+        return professor;
     }
 
-    public void setEID(int EID){
-        e_id=EID;
+    public void setScenarioID(int EID){
+        scenario=EID;
     }
 
     public void setVERSIONID(int VERSIONID){
-        version_id=VERSIONID;
+        version=VERSIONID;
     }
 
     public void setName(String NAME){
@@ -95,7 +106,7 @@ public class Scenario {
     }    
     
     public void setCreator(int CREATOR){
-        creator = CREATOR;
+        professor = CREATOR;
     } 
 }
 

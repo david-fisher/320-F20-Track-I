@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
-//import javax.persistence.IdClass;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,16 +12,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-//@IdClass(EventPageID.class)
-@Table(name="event_page")
+@IdClass(EventPageID.class)
+@Table(name="generic_page")
 @EntityListeners(AuditingEntityListener.class)
 public class EventPage{
 
     @Id
-    @Column(name="PAGE_ID")
+    @Column(name="PAGE")
     private int page_ID;
 
-    //@Id
+    @Id
     @Column(name="BODY")
     private String pageInfo;
 
@@ -29,7 +29,7 @@ public class EventPage{
         super();
     }
 
-    public EventPage(@JsonProperty("id") int page_ID, @JsonProperty("text") String pageInfo){
+    public EventPage(@JsonProperty("PAGE") int page_ID, @JsonProperty("BODY") String pageInfo){
         this.page_ID=page_ID;
         this.pageInfo=pageInfo;
     }

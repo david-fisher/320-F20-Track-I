@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Pages {
     
 	@Id
-    @Column(name="PAGE_ID")
+    @Column(name="PAGE")
     private int pageID;
     
     @Column(name="PAGE_TYPE")
@@ -26,24 +26,32 @@ public class Pages {
     private String pageTitle;
     
     @Column(name="Scenario")
-    private int scenario;
+    private int scenarioID;
 
-    @Column(name="ScenarioVer")
-    private int scenarioVer;
+    @Column(name="Version")
+    private int scenarioVerID;
     
-    @Column(name="NEXT_PAGE_ID")
+    @Column(name="X_COORDINATE")
+    private int xCoordinate;
+    
+    @Column(name="Y_COORDINATE")
+    private int yCoordinate;
+    
+    @Column(name="NEXT_PAGE")
     private int nextPageID;
 
     public Pages(){
         super();
     }
 
-    public Pages(@JsonProperty("PAGE_ID") int pageID, @JsonProperty("PAGE_TYPE") String pageType,@JsonProperty("PAGE_TITLE") String pageTitle,@JsonProperty("Scenario") int scenario,@JsonProperty("ScenarioVer") int scenarioVer,@JsonProperty("NEXT_PAGE_ID") int nextPageID){
+    public Pages(@JsonProperty("PAGE") int pageID, @JsonProperty("PAGE_TYPE") String pageType,@JsonProperty("PAGE_TITLE") String pageTitle,@JsonProperty("Scenario") int scenario,@JsonProperty("ScenarioVer") int scenarioVer,@JsonProperty("X_COORDINATE") int xCoordinate, @JsonProperty("Y_COORDINATE") int yCoordinate, @JsonProperty("NEXT_PAGE") int nextPageID){
     	this.pageID = pageID;
     	this.pageType = pageType;
         this.pageTitle = pageTitle;
-        this.scenario = scenario;
-        this.scenarioVer = scenarioVer;
+        this.scenarioID = scenario;
+        this.scenarioVerID = scenarioVer;
+        this.xCoordinate = xCoordinate;
+        this.yCoordinate = yCoordinate;
         this.nextPageID=nextPageID;
     }
     
@@ -60,11 +68,11 @@ public class Pages {
     }
 
     public int getScenario(){
-        return scenario;
+        return scenarioID;
     }
 
     public int getScenarioVer(){
-        return scenarioVer;
+        return scenarioVerID;
     }
 
     public int getNextPageID(){
@@ -84,11 +92,11 @@ public class Pages {
     }
 
     public void setScenario(int scenario_id){
-        scenario=scenario_id;
+        scenarioID=scenario_id;
     }
 
     public void setScenarioVer(int scenario_version){
-        scenarioVer=scenario_version;
+        scenarioVerID=scenario_version;
     }
 
     public void setNextPageID(int next_page_id){
