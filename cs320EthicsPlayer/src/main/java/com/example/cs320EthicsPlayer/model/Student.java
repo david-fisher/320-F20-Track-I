@@ -16,7 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Student {
     
     @Id
-    @Column(name="S_ID", nullable = false)
+    @Column(name="STUDENT", nullable = false)
     private int id;
 
     @Column(name="Name", nullable = false)
@@ -26,7 +26,7 @@ public class Student {
         super();
     }
 
-    public Student(@JsonProperty("id")int id,@JsonProperty("name") String name){
+    public Student(@JsonProperty("STUDENT")int id,@JsonProperty("NAME") String name){
         this.id=id;
         this.name=name;
     }
