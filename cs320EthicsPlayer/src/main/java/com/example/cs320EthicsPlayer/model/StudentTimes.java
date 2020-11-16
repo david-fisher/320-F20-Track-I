@@ -6,14 +6,14 @@ import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import java.sql.date;
+import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@IdClass(StudentsTimeID.class)
+@IdClass(StudentTimesID.class)
 @Table(name = "students_times")
 @EntityListeners(AuditingEntityListener.class)
 public class StudentTimes {
@@ -52,7 +52,7 @@ public class StudentTimes {
         super();
     }
 
-    public StudentTimes(@JsonProperty("STUDENT") int student_ID, @JsonProperty("COURSE") int course_ID, @JsonProperty("Scenario") int scen, @JsonProperty("Version") int ver, @JsonProperty("DATE_TAKEN") Date date, @JsonProperty("PAGE") int page, @JsonProperty("StartTime") Date start, @JsonProperty("EndTime") Date end" {
+    public StudentTimes(@JsonProperty("STUDENT") int student_ID, @JsonProperty("COURSE") int course_ID, @JsonProperty("Scenario") int scen, @JsonProperty("Version") int ver, @JsonProperty("DATE_TAKEN") Date date, @JsonProperty("PAGE") int page, @JsonProperty("StartTime") Date start, @JsonProperty("EndTime") Date end) {
         this.studentID = student_ID;
         this.courseID = course_ID;
         this.scenarioID = scen;
@@ -88,11 +88,11 @@ public class StudentTimes {
         return pageID;
     }
 
-    public int getStartTime(){
+    public Date getStartTime(){
         return startTime;
     }
 
-    public int getEndTime(){
+    public Date getEndTime(){
         return endTime;
     }
 
