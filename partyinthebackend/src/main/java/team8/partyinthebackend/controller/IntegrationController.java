@@ -1,29 +1,25 @@
-package com.example.cs320EthicsPlayer.bTest;
-
-import java.util.List;
+package team8.partyinthebackend.controller;
 
 import com.example.cs320EthicsPlayer.model.Student;
-
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
 import com.example.cs320EthicsPlayer.repository.PagesRepository;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.example.cs320EthicsPlayer.api.StudentController;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author: ZJendex
  * @Time: 11/15/2020, Sun
  **/
 
+@CrossOrigin
 @RestController
-@RequestMapping("/api/v1")
-public class BtestController {
+@RequestMapping("/bt/v1")
+public class IntegrationController {
 
     @Autowired
     private StudentRepository studentRepository;
@@ -36,7 +32,6 @@ public class BtestController {
 
     @GetMapping(value = "/ss")
     public List<Student> test1() throws Exception {
-        StudentController s = new StudentController();
         return studentRepository.findAll();
     }
 
