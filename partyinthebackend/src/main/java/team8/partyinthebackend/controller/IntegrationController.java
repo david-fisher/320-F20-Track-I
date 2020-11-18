@@ -5,6 +5,8 @@ import com.example.cs320EthicsPlayer.repository.EventPageRepository;
 import com.example.cs320EthicsPlayer.repository.PagesRepository;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;
 import net.minidev.json.JSONObject;
+import team8.partyinthebackend.controller.FrontendIntegration.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,43 @@ public class IntegrationController {
 
     @Autowired
     private PagesRepository pagesRepository;
-
+    
     @GetMapping(value = "/ss")
     public List<Student> test1() throws Exception {
         return studentRepository.findAll();
+    }
+    
+    @PostMapping(value="/ss/{student_id}")
+    public @ResponseBody JSONObject addStudentTest(@PathVariable int student_id, @RequestParam String name) {
+        try {
+            JSONObject obj = new JSONObject();
+            Student student = new Student(student_id, name);
+            studentRepository.save(student);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+    
+    @DeleteMapping(value="/ss/{student_id}")
+    public @ResponseBody JSONObject removeStudentTest(@PathVariable int student_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            Student student = studentRepository.findById(student_id)
+                    .orElseThrow(() -> new Exception("Student " + student_id + " not found"));
+            studentRepository.delete(student);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
     }
 
     /**
