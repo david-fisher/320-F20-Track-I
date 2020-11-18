@@ -6,9 +6,7 @@ import com.example.cs320EthicsPlayer.repository.PagesRepository;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;
 import net.minidev.json.JSONObject;
 import team8.partyinthebackend.controller.FrontendIntegration.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
