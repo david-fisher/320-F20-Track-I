@@ -1,5 +1,7 @@
 package team8.partyinthebackend.controller;
 
+import com.example.cs320EthicsPlayer.model.EventPage;
+import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
 import com.example.cs320EthicsPlayer.repository.PagesRepository;
@@ -74,9 +76,19 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/introduction")
     public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) throws Exception {
         try {
+            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "INTRO");
+            int page_ID = pagesList.get(0).getPageID();
+            String page_title = pagesList.get(0).getPageTitle();
+            EventPage ePage = eventPageRepository.findById(page_ID)
+                    .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
+            Pages p = pagesRepository.findById(page_ID)
+                    .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
+            if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
+            String text = ePage.getPageInfo();
+
             JSONObject rst = new JSONObject();
-            rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
-            rst.put("page_title", "Introduction Page");
+            rst.put("text", text);
+            rst.put("page_title", page_title);
             JSONObject obj = new JSONObject();
             obj.put("body", rst);
             obj.put("status_code", 200);
