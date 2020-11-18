@@ -73,22 +73,23 @@ public class IntegrationController {
     /**
      * (GET)1 introduction
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/introduction")
-    public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) throws Exception {
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/introduction")
+    public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id) throws Exception {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "INTRO");
+            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Intro");
             int page_ID = pagesList.get(0).getPageID();
             String page_title = pagesList.get(0).getPageTitle();
-            EventPage ePage = eventPageRepository.findById(page_ID)
-                    .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
-            Pages p = pagesRepository.findById(page_ID)
-                    .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
-            if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
-            String text = ePage.getPageInfo();
+//            EventPage ePage = eventPageRepository.findById(pagesList.get(0).getPageID())
+//                    .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
+//            Pages p = pagesRepository.findById(page_ID)
+//                    .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
+            //if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
+            String text = "The body of introduction";
 
             JSONObject rst = new JSONObject();
             rst.put("text", text);
             rst.put("page_title", page_title);
+            rst.put("page_ID", page_ID);
             JSONObject obj = new JSONObject();
             obj.put("body", rst);
             obj.put("status_code", 200);
@@ -97,6 +98,7 @@ public class IntegrationController {
         catch(Exception e) {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
+            obj.put("error", e);
             return obj;
         }
     }
