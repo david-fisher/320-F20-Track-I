@@ -127,12 +127,17 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
     public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) throws Exception {
         try {
+            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
+            int page_ID = pagesList.get(0).getPageID();
+            String page_title = pagesList.get(0).getPageTitle();
+            
             JSONObject rst = new JSONObject();
             rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
-            rst.put("page_title", "Project Task Assignment Page");
+            rst.put("page_title", page_title);
             JSONObject obj = new JSONObject();
             obj.put("body", rst);
             obj.put("status_code", 200);
+            obj.put("page_ID", page_ID);
             return obj;
         }
         catch(Exception e) {
