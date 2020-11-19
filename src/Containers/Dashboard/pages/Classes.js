@@ -28,7 +28,7 @@ function Classes(props) {
       classTitle: "Reasoning Under Uncertainty"
     },
     {
-      classNumber: "CS240",
+      classNumber: "Civ249",
       classTitle: "Introduction to Civil and Environmental Engineering Measurements"
     },
     {
@@ -48,7 +48,7 @@ function Classes(props) {
                 
                 <Col offset={1}>
                   <br/>
-                  <div className="box" style={{backgroundColor: index % 2 === 0 ? "white" : "blanchedalmond"}} >
+                  <div className="box" style={{backgroundColor: index % 2 === 0 ? "white" : "white"}} >
                     <div className="head">In Progress...</div> 
                     <div className="class">
                       {c.classNumber + ", "} <br/>

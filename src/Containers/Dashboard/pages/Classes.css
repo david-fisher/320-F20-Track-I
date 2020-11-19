@@ -32,16 +32,16 @@
   justify-content: center;
   position:fixed;
   bottom:0;
-  color: #003b5c;
+  color: #881c1c;
   background-color: #881c1c;
 }
 
 .box {
   display: inline-block;
-  border: 4px solid  #881c1c;
+  border: 4px solid  #000000;
   width: 20vw;
   height: 20vh;
-  padding: .5em;
+  /* padding: .5em; */
   text-align: center;
   
   line-height: 1rem;
@@ -108,7 +108,8 @@ opacity: 1;
 
 
 .head{
-  background-color: #003b5c;
+  background-color: #881c1c;
+  line-height: 20px;
   text-align: center;
   color: white;
 }
