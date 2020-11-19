@@ -172,29 +172,31 @@ public class IntegrationController {
      * 
      * (GET)3 Initial Reflection -- IN PROGRESS!!!!
      */
-    // @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
-    // public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
-    //     try{
-    //         List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
-    //         // 203 is in the DB, will update later
-    //         // ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
-    //         JSONObject obj = new JSONObject();
-    //         JSONObject o = new JSONObject();
+    @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
+    public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
+        try{
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            // 203 is in the DB, will update later
+            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
+            JSONObject obj = new JSONObject();
+            JSONObject o = new JSONObject();
             
-    //         o.put("page_title", "initial reflection page");
-    //         o.put("text", "initial reflection page content");
-    //         o.put("questions_asked", allReflections);
-    //         obj.put("body", o);
-    //         obj.put("status_code", 200);
-    //         return obj;
-    //     }
-    //     catch(Exception e) {
-    //         JSONObject obj = new JSONObject();
-    //         obj.put("error", e.fillInStackTrace());
-    //         obj.put("status_code", 404);
-    //         return obj;
-    //     }
-    // }
+            o.put("page_title", "Initial Reflection");
+            o.put("text", "initial reflection page content");
+            String[] questions_asked = new String[2];
+            questions_asked[0] = allReflections.get(0).getReflectionQuestion();
+            questions_asked[1] = allReflections.get(1).getReflectionQuestion();
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
 
     /**
      * (GET)5 Stakeholders
