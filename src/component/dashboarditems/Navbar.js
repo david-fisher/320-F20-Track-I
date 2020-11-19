@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 import { withRouter } from "react-router";
-
+import {Steps} from 'antd';
 
 const Navbar = (props) => {
   
 
   //Data for navbar should be taken in as a prop
-
+  
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>

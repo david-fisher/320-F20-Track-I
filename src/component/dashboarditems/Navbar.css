@@ -1,14 +1,15 @@
 
   .nav-menu {
     background-color: #881c1c;
-    width: 18vw;
+    width: 20vw;
     height: 100vh;
     display: flex;
     justify-content: center;
-    position: fixed;
+   
     top: 0;
     left: -100%;
     transition: 850ms;
+    position: absolute;
   }
   
   .nav-menu.active {
@@ -18,15 +19,13 @@
   }
   
   .nav-text {
-    
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 8px 0px 8px 16px;
     list-style: none;
-    height: 60px;
-    
-    
+    height: 100px;
+    position: relative;
   }
   
   .nav-text a {
@@ -39,7 +38,7 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
-    
+    position: relative;
   }
 
   .nav-text div {
@@ -52,7 +51,6 @@
     align-items: center;
     padding: 0 16px;
     border-radius: 4px;
-    
   }
   
   .nav-text a:hover {
@@ -62,7 +60,4 @@
   .nav-menu-items {
     width: 100%;
   }
-  
-  /* span {
-    margin-left: 0px;
-  } */
+ 
