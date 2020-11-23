@@ -328,6 +328,22 @@ public class FrontendIntegration {
         }
     }
 
+    //Get: 13, Student ID on logging in
+    @GetMapping(value = "/student/{student_username}")
+    public JSONObject getFeebackText(@PathVariable String student_username){
+        try{
+            JSONObject feedback = new JSONObject();
+            feedback.put("status_code", 200);
+            feedback.put("student_id", 1234);
+            return feedback;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
     //GET: 14, returns course list with course id but not matching scenario ids
     @GetMapping(value = "/student/{student_id}/course_list")
     public JSONObject getCourseList(@PathVariable int student_id){

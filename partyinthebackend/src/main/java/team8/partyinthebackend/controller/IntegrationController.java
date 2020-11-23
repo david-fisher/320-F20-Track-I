@@ -89,7 +89,7 @@ public class IntegrationController {
     }
 
     /**
-     * (GET)1 introduction
+     * (GET)1 introduction -- IN PROGRESS!!!!
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/introduction")
     public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id) throws Exception {
@@ -122,10 +122,10 @@ public class IntegrationController {
     }
 
     /**
-     * (GET)2 project task assignment
+     * (GET)2 project task assignment -- IN PROGRESS!!!!
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
-    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) throws Exception {
+    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
             List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
             int page_ID = pagesList.get(0).getPageID();
@@ -148,7 +148,7 @@ public class IntegrationController {
     }
 
     /**
-     * (GET)3 gather information
+     * (GET)3 gather information -- IN PROGRESS!!!!
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/gi")
     public JSONObject getGI(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) throws Exception {
@@ -199,6 +199,32 @@ public class IntegrationController {
     }
 
     /**
+     * (GET)4 initial action -- IN PROGRESS!!!!
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
+    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            JSONObject o = new JSONObject();
+            o.put("page_title", "initial action page");
+            o.put("text", "initial action page content");
+            String[] questions_asked = new String[3];
+            questions_asked[0] = "question1";
+            questions_asked[1] = "question2";
+            questions_asked[2] = "question3";
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
+    /**
      * (GET)5 Stakeholders
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/stakeholderinfo")
@@ -234,4 +260,23 @@ public class IntegrationController {
             return obj;
         }
     }
+
+    /**
+     * Get: 13, Student ID on logging in -- IN PROGRESS!!!!
+     */
+    @GetMapping(value = "/student/{student_username}")
+    public JSONObject getFeebackText(@PathVariable String student_username){
+        try{
+            JSONObject feedback = new JSONObject();
+            feedback.put("status_code", 200);
+            feedback.put("student_id", 1234);
+            return feedback;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
 }
