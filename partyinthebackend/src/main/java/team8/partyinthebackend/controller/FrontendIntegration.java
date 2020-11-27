@@ -250,7 +250,7 @@ public class FrontendIntegration {
     /**
      * (GET) 9 consequences
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/dar ")
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/consequences")
     public JSONObject getConsequences(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
             JSONObject obj = new JSONObject();
