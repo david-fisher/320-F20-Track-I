@@ -1,11 +1,14 @@
 package team8.partyinthebackend.controller;
 
 import com.example.cs320EthicsPlayer.api.ReflectionQuestionsController;
+import com.example.cs320EthicsPlayer.api.ReflectionsController;
 import com.example.cs320EthicsPlayer.api.ScenarioController;
 import com.example.cs320EthicsPlayer.api.StakeholderController;
+import com.example.cs320EthicsPlayer.model.Courses;
 import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.model.ReflectionQuestions;
+import com.example.cs320EthicsPlayer.model.Reflections;
 import com.example.cs320EthicsPlayer.model.Stakeholders;
 import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
@@ -18,7 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +53,15 @@ public class IntegrationController {
 
     @Autowired
     private ReflectionQuestionsController reflectionQuestionsController;
+
+    @Autowired
+    private ReflectionsController reflectionsController;
+
+    @Autowired
+    private Courses course;
+
+    @Autowired
+    private EventPage eventPage;
     
     @GetMapping(value = "/ss")
     public List<Student> test1() throws Exception {
@@ -180,12 +193,16 @@ public class IntegrationController {
             //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
             JSONObject obj = new JSONObject();
             JSONObject o = new JSONObject();
-            
+            List<String> questions_asked = new ArrayList<>();
+
             o.put("page_title", "Initial Reflection");
             o.put("text", "initial reflection page content");
-            String[] questions_asked = new String[2];
-            questions_asked[0] = allReflections.get(0).getReflectionQuestion();
-            questions_asked[1] = allReflections.get(1).getReflectionQuestion();
+            for(int i = 0; i < allReflections.size(); i++){
+                questions_asked.add(allReflections.get(0).getReflectionQuestion());
+            }
+            // String[] questions_asked = new String[2];
+            // questions_asked[0] = allReflections.get(0).getReflectionQuestion();
+            // questions_asked[1] = allReflections.get(1).getReflectionQuestion();
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
             obj.put("status_code", 200);
@@ -279,4 +296,137 @@ public class IntegrationController {
         }
     }
 
+    /**
+     * (GET) 8 Choose Final Action -- IN PROGRESS
+     */
+    @GetMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/finalaction")
+    public JSONObject getFinalAction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id){
+        try{
+            JSONObject obj = new JSONObject();
+
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+
+            return obj;
+        }
+    }
+
+    /**
+     * (POST) 20 Reflection on consequences student response
+     */
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/consequences")
+    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @RequestParam String[] answers){
+        try{
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            // Unsure how to get page numbers
+            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
+            
+            // Instantiating the date object to store current date and time
+            Date current_date = new Date(System.currentTimeMillis());
+            // SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            
+            JSONObject obj = new JSONObject();
+
+            // JSON array to store question_answer objects
+            JSONObject[] questions_answers = new JSONObject[answers.length];
+
+            // JSON object to store the array of question_answer objects
+            JSONObject body_object = new JSONObject();
+
+            // Storing question_answer objects in the JSON array
+            for(int i = 0; i < allReflections.size(); i++){
+
+                // Storing this reflection in the database
+                Reflections reflection = new Reflections();
+                reflection.setSID(student_id);
+                reflection.setCID(course.getCID()); // Unsure how to get the course ID
+                reflection.setEID(eventPage.getPageID()); // Unsure how to get the event ID.
+                reflection.setDate(current_date);
+                reflection.setReflections(answers[i]);
+                reflectionsController.createReflection(reflection);
+
+                // For the JSON object
+                JSONObject pair = new JSONObject();
+                pair.put("question", allReflections.get(i).getReflectionQuestion());
+                pair.put("answer", answers[i]);
+                questions_answers[i] = pair;
+            }
+            // Adding the questions_answers array to the body_object JSON object
+            body_object.put("questions_answers", questions_answers);
+
+            obj.put("status_code", 200);
+            obj.put("body", body_object);
+
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            JSONObject questions_answers = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", questions_answers);
+
+            return obj;
+        }    
+    }
+
+    /**
+     * (POST) 17 Reflection on conversation student response
+     */
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/convoreflection")
+    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @RequestParam String[] answers){
+        try{
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            // Unsure how to get page numbers
+            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
+            
+            // Instantiating the date object to store current date and time
+            Date current_date = new Date(System.currentTimeMillis());
+            // SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            
+            JSONObject obj = new JSONObject();
+
+            // JSON array to store question_answer objects
+            JSONObject[] questions_answers = new JSONObject[answers.length];
+
+            // JSON object to store the array of question_answer objects
+            JSONObject body_object = new JSONObject();
+
+            // Storing question_answer objects in the JSON array
+            for(int i = 0; i < allReflections.size(); i++){
+
+                // Storing this reflection in the database
+                Reflections reflection = new Reflections();
+                reflection.setSID(student_id);
+                reflection.setCID(1);
+                reflection.setEID(0);
+                reflection.setDate(current_date);
+                reflection.setReflections(answers[i]);
+                reflectionsController.createReflection(reflection);
+
+                // For the JSON object
+                JSONObject pair = new JSONObject();
+                pair.put("question", allReflections.get(i).getReflectionQuestion());
+                pair.put("answer", answers[i]);
+                questions_answers[i] = pair;
+            }
+            // Adding the questions_answers array to the body_object JSON object
+            body_object.put("questions_answers", questions_answers);
+
+            obj.put("status_code", 200);
+            obj.put("body", body_object);
+
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            JSONObject questions_answers = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", questions_answers);
+
+            return obj;
+        } 
+    }
 }
