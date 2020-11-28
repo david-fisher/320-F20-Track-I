@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.cs320EthicsPlayer.model.StudentsIn;
 import com.example.cs320EthicsPlayer.model.StudentsInID;
+import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;
 import com.example.cs320EthicsPlayer.repository.StudentsInRepository;
 

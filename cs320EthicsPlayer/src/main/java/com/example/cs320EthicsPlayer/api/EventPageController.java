@@ -1,5 +1,7 @@
 package com.example.cs320EthicsPlayer.api;
 
+import java.util.List;
+
 import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
@@ -31,53 +33,52 @@ public class EventPageController {
     }
 
     @GetMapping("/eventpage/{page_ID}")
-    public ResponseEntity<EventPage> getPageInfoById(@PathVariable(value = "page_ID") int page_ID) throws Exception {
-        EventPage ePage = eventPageRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
-        return ResponseEntity.ok().body(ePage);
+    public List<EventPage> getPageInfoById(@PathVariable(value = "page_ID") int page_ID) throws Exception {
+        List<EventPage> ePages = eventPageRepository.findByPageID(page_ID);
+        return ePages;
     }
 
     @GetMapping("/eventpage/Intro/{page_ID}")
-    public String getIntroPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
-        EventPage ePage = eventPageRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
-        Pages p = pagesRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
-        if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
-        return ePage.getPageInfo();
+    public List<EventPage> getIntroPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        List<EventPage> ePage = eventPageRepository.findByPageID(page_ID);
+            //.orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
+            Pages p = pagesRepository.findById(page_ID)
+                .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
+        if(!(p.getPageType().equals("Intro"))){ throw new Exception("Incorrect Page Type");}
+        return ePage;
     }
 
     //getPtaPageText()
     @GetMapping("/eventpage/PTA/{page_ID}")
-    public String getPtaPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
-        EventPage ePage = eventPageRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
+    public List<EventPage> getPtaPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        List<EventPage> ePage = eventPageRepository.findByPageID(page_ID);
+            //.orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
         Pages p = pagesRepository.findById(page_ID)
             .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
-        if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
-         return ePage.getPageInfo();
+        if(!(p.getPageType().equals("PTA"))){ throw new Exception("Incorrect Page Type");}
+         return ePage;
     }
 
     //getSummaryPageText()
     @GetMapping("eventpage/Summary/{page_ID}")
-    public String getSummaryPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
-        EventPage ePage = eventPageRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
+    public List<EventPage> getSummaryPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        List<EventPage> ePage = eventPageRepository.findByPageID(page_ID);
+            //.orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
         Pages p = pagesRepository.findById(page_ID)
             .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
         if(!(p.getPageType().equals("SUMMARY"))){ throw new Exception("Incorrect Page Type");}
-        return ePage.getPageInfo();
+        return ePage;
     }
 
     //getFeedBackPageText()
     @GetMapping("eventpage/Feedback/{page_ID}")
-    public String getFeedBackPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
-        EventPage ePage = eventPageRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
+    public List<EventPage> getFeedBackPageText(@PathVariable(value="page_ID") int page_ID) throws Exception{
+        List<EventPage> ePage = eventPageRepository.findByPageID(page_ID);
+            //.orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
         Pages p = pagesRepository.findById(page_ID)
             .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
         if(!(p.getPageType().equals("FEEDBACK"))){ throw new Exception("Incorrect Page Type");}
-        return ePage.getPageInfo();
+        return ePage;
     }
 
 }

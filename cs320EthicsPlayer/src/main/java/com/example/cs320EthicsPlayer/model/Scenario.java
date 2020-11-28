@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import com.example.cs320EthicsPlayer.api.ScenarioController;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -35,7 +34,7 @@ public class Scenario {
     private int num_conversations;
 
     @Column(name="PUBLIC")
-    private boolean is_public;
+    private boolean isPublic;
     
     @Column(name="PROFESSOR")
     private int professor;
@@ -55,7 +54,7 @@ public class Scenario {
         this.version = version;
         this.name = name;
         this.num_conversations = num_conversations;
-        this.is_public=is_public;
+        this.isPublic=is_public;
         this.professor = professor;
         this.created=created;
         this.isFinished=isFinished;
@@ -78,7 +77,7 @@ public class Scenario {
     }
 
     public boolean getPUBLIC(){
-        return is_public;
+        return isPublic;
     }
     
     public int getCREATOR(){
@@ -102,7 +101,7 @@ public class Scenario {
     }
 
     public void setPublic(boolean PUBLIC){
-        is_public = PUBLIC;
+        isPublic = PUBLIC;
     }    
     
     public void setCreator(int CREATOR){

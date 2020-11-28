@@ -4,7 +4,7 @@ public class EventPageID implements java.io.Serializable {
     
     private static final long serialVersionUID = 3L;
 
-    private int page_ID;
+    private int pageID;
     private String pageInfo;
 
     public EventPageID(){
@@ -12,7 +12,7 @@ public class EventPageID implements java.io.Serializable {
     }
 
     public EventPageID(int page_ID, String pageInfo){
-        this.page_ID=page_ID;
+        this.pageID=page_ID;
         this.pageInfo=pageInfo;
     }
 }

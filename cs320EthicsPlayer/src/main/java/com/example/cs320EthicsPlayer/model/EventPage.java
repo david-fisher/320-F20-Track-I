@@ -19,7 +19,7 @@ public class EventPage{
 
     @Id
     @Column(name="PAGE")
-    private int page_ID;
+    private int pageID;
 
     @Id
     @Column(name="BODY")
@@ -30,12 +30,12 @@ public class EventPage{
     }
 
     public EventPage(@JsonProperty("PAGE") int page_ID, @JsonProperty("BODY") String pageInfo){
-        this.page_ID=page_ID;
+        this.pageID=page_ID;
         this.pageInfo=pageInfo;
     }
 
     public int getPageID(){
-        return page_ID;
+        return pageID;
     }
 
     public String getPageInfo(){

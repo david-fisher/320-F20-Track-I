@@ -28,10 +28,10 @@ public class ScenarioController {
         return s.getNAME();
     }
     //getPublicScenarios()
-    @GetMapping("/PublicScenarios")
-    public List<Integer> getPublicScenarios(){
-        return null;
-    }
+//    @GetMapping("/PublicScenarios")
+//    public List<Scenario> getPublicScenarios(){
+//        return scenarioRepository.findByis_public(true);
+//    }
 
     //getMaxNumOfConvos()
     @GetMapping("MaxNumConvos{eID}/{vID}")

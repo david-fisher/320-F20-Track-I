@@ -47,24 +47,31 @@ public class PagesController {
     //returns a List of all pageIDs for a specific scenario
     @GetMapping("/AllPageId/{scenario}/{scenarioVer}")
     public List<Pages> getPageIDsByScenario(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
-        
         return pagesRepository.findByScenarioIDAndScenarioVerID(scenario, scenarioVer);
-        
     }
 
+    //returns the pageID for the IntroPage 
     @GetMapping("/Intro/PageID/{scenario}/{scenarioVer}")
     public int getIntroPageID(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
         List<Pages>p= pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, "INTRO");
         return p.get(0).getPageID();
-
     }
+    
+    @GetMapping("/IntroPage/{scenario}/{scenarioVer}")
+    public Pages getIntroPage(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer){
+        List<Pages>p= pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, "INTRO");
+        return p.get(0);
+    }
+
 
     @GetMapping("/PageIDs/{scenario}/{scenarioVer}/{pageType}")
     public List<Pages> getPageIDsByType(@PathVariable(value="scenario") int scenario, @PathVariable(value="scenarioVer") int scenarioVer, @PathVariable(value="pageType") String pageType){
         return pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario,scenarioVer, pageType);
     }
+
     @PostMapping("/Pages")
     public Pages createPage(@RequestBody Pages page){
         return pagesRepository.save(page);
     }
+
 }
