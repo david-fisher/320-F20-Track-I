@@ -1,11 +1,17 @@
 package team8.partyinthebackend.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.cs320EthicsPlayer.api.ReflectionQuestionsController;
 import com.example.cs320EthicsPlayer.api.ReflectionsController;
 import com.example.cs320EthicsPlayer.api.ScenarioController;
 import com.example.cs320EthicsPlayer.api.StakeholderController;
+<<<<<<< Updated upstream
 import com.example.cs320EthicsPlayer.model.Courses;
 import com.example.cs320EthicsPlayer.model.EventPage;
+=======
+>>>>>>> Stashed changes
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.model.ReflectionQuestions;
 import com.example.cs320EthicsPlayer.model.Reflections;
@@ -13,18 +19,21 @@ import com.example.cs320EthicsPlayer.model.Stakeholders;
 import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
 import com.example.cs320EthicsPlayer.repository.PagesRepository;
-import com.example.cs320EthicsPlayer.repository.StakeholderRepository;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;
-import net.minidev.json.JSONObject;
-import team8.partyinthebackend.controller.FrontendIntegration.Data;
+import com.example.cs320EthicsPlayer.api.StudentsInController;
+import com.example.cs320EthicsPlayer.repository.StudentsInRepository;
+import com.example.cs320EthicsPlayer.api.PagesController;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< Updated upstream
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+=======
+import net.minidev.json.JSONObject;
+>>>>>>> Stashed changes
 
 /**
  * @Author: ZJendex
@@ -35,6 +44,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/bt/v1")
 public class IntegrationController {
+	
+	@Autowired
+	private PagesController pagesController;
+
+    @Autowired
+    private StudentsInController studentInController;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -296,6 +311,7 @@ public class IntegrationController {
         }
     }
 
+<<<<<<< Updated upstream
     /**
      * (GET) 8 Choose Final Action -- IN PROGRESS
      */
@@ -305,14 +321,40 @@ public class IntegrationController {
             JSONObject obj = new JSONObject();
 
             return obj;
+=======
+    //GET 14: Get courses Students are in
+    @GetMapping(value = "/student/{student_id}")
+    public JSONObject getCourses(@PathVariable int student_id){
+        try{
+            JSONObject rst = new JSONObject();
+            List<Integer> courses = studentInController.getCoursesInStudent(student_id);
+            rst.put("Status_code", 200);
+            rst.put("Courses", courses);
+            return rst;
         }
         catch(Exception e){
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
-
             return obj;
         }
     }
+
+	//GET: Get the page ID of the next page
+	@GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/version_id/{version_id}/page_id/{page_id}")
+	public JSONObject getNext(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
+		try {
+			JSONObject rst = new JSONObject();
+			rst.put("status_code", 200);
+			int nextPage = pagesController.getNextPage(page_id);
+			rst.put("next_page", nextPage);
+			return rst;
+		}
+		catch(Exception e) {
+			JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+		}
+	}
 
     /**
      * (POST) 20 Reflection on consequences student response
@@ -428,5 +470,8 @@ public class IntegrationController {
 
             return obj;
         } 
+    }
+            return obj;
+        }
     }
 }
