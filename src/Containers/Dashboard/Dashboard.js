@@ -33,7 +33,7 @@ const Dashboard = () => {
                 </IconContext.Provider>
               </Nav>
               <Nav className="justify-content-end" style={{ width: "100%", color: "white" }}>
-                {/* <Nav.Link href="/getOuttaHere">
+                {/* <Nav.Link href="/getOuttaHeren">
                   Disconnect
                 </Nav.Link> */}
               </Nav>
