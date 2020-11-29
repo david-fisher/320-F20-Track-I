@@ -1,9 +1,6 @@
 package team8.partyinthebackend.controller;
 
-import com.example.cs320EthicsPlayer.api.ReflectionQuestionsController;
-import com.example.cs320EthicsPlayer.api.ReflectionsController;
-import com.example.cs320EthicsPlayer.api.ScenarioController;
-import com.example.cs320EthicsPlayer.api.StakeholderController;
+import com.example.cs320EthicsPlayer.api.*;
 import com.example.cs320EthicsPlayer.model.Courses;
 import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.model.Pages;
@@ -45,6 +42,9 @@ public class IntegrationController {
 
     @Autowired
     private ScenarioController scenarioController;
+
+    @Autowired
+    private EventPageController eventPageController;
 
     @Autowired
     private ReflectionQuestionsController reflectionQuestionsController;
@@ -97,7 +97,7 @@ public class IntegrationController {
     }
 
     /**
-     * (GET)1 introduction -- IN PROGRESS!!!!
+     * (GET)1 introduction
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/introduction")
     public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id) throws Exception {
@@ -105,12 +105,8 @@ public class IntegrationController {
             List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Intro");
             int page_ID = pagesList.get(0).getPageID();
             String page_title = pagesList.get(0).getPageTitle();
-//            EventPage ePage = eventPageRepository.findById(pagesList.get(0).getPageID())
-//                    .orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
-//            Pages p = pagesRepository.findById(page_ID)
-//                    .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
-            //if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
-            String text = "The body of introduction";
+
+            String text = eventPageController.getIntroPageText(page_ID).get(0).getPageInfo();
 
             JSONObject rst = new JSONObject();
             rst.put("text", text);
