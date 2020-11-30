@@ -44,4 +44,16 @@ public class ConversationsHad {
     @Column(name="CONVERSATION")
     int convo;
 
+    public ConversationsHad(int student, int course, int scenario, int version, Date date, int stakeholder, double score,int convo){
+        this.student=student;
+        this.course=course;
+        this.scenario=scenario;
+        this.version=version;
+        this.date=date;
+        this.stakeholder=stakeholder;
+        this.score=score;
+        this.convo=convo;
+
+    }
+
 }

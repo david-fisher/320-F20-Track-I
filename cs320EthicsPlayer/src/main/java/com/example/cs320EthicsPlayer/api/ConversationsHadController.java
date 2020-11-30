@@ -1,8 +1,12 @@
 package com.example.cs320EthicsPlayer.api;
 
+import java.sql.Date;
+
+import com.example.cs320EthicsPlayer.model.ConversationsHad;
 import com.example.cs320EthicsPlayer.repository.ConversationsHadRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +23,11 @@ public class ConversationsHadController {
     *this call will add the stakeholder to the list of stakeholders that the 
     *student has talked too.
     */
-    public int  addStakeholderToStudentsList(int sID, int cID, int scen, int vers, int stk, int convo){
-        return 0;
+    @PostMapping("/addStakeholder")
+    public int  addStakeholderToStudentsList(int sID, int cID, int scen, int vers, Date date, int stk, double score, int convo){
+        ConversationsHad a = new ConversationsHad(sID, cID, scen, vers, date,stk, score, convo);
+        conversationsHadRepository.save(a);
+        return 1;
     }
 
 //getStudentsStakeholderList()
