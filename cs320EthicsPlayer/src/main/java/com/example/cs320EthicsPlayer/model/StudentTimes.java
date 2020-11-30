@@ -11,8 +11,10 @@ import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 @IdClass(StudentTimesID.class)
 @Table(name = "students_times")
 @EntityListeners(AuditingEntityListener.class)

@@ -188,7 +188,8 @@ public class IntegrationController {
     @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
     public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
         try{
-            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            // List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(203);
             // 203 is in the DB, will update later
             //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
             JSONObject obj = new JSONObject();
@@ -198,11 +199,8 @@ public class IntegrationController {
             o.put("page_title", "Initial Reflection");
             o.put("text", "initial reflection page content");
             for(int i = 0; i < allReflections.size(); i++){
-                questions_asked.add(allReflections.get(0).getReflectionQuestion());
+                questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
-            // String[] questions_asked = new String[2];
-            // questions_asked[0] = allReflections.get(0).getReflectionQuestion();
-            // questions_asked[1] = allReflections.get(1).getReflectionQuestion();
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
             obj.put("status_code", 200);
@@ -311,10 +309,18 @@ public class IntegrationController {
         try{
             JSONObject obj = new JSONObject();
             obj.put("status_code", 200);
-            JSONObject body = new JSONObject();
-            ResponseEntity<ReflectionQuestions> reflections = reflectionQuestionsController.getReflectionById(page_id);
-            body.put("reflections", reflections);
-            obj.put("body", body);
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
+            JSONObject o = new JSONObject();
+            List<String> questions_asked = new ArrayList<>();
+
+            o.put("page_title", "Final Action");
+            o.put("text", "Final action question");
+            for(int i = 0; i < allReflections.size(); i++){
+                questions_asked.add(allReflections.get(i).getReflectionQuestion());
+            }
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
+            obj.put("status_code", 200);
             return obj;
         }
         catch(Exception e){
@@ -327,10 +333,10 @@ public class IntegrationController {
     /**
      * (POST) 20 Reflection on consequences student response
      */
-    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/consequences")
-    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @RequestParam String[] answers){
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/consequences")
+    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
         try{
-            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
             // Unsure how to get page numbers
             //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
 
@@ -385,10 +391,10 @@ public class IntegrationController {
     /**
      * (POST) 17 Reflection on conversation student response
      */
-    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/convoreflection")
-    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @RequestParam String[] answers){
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/convoreflection")
+    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
         try{
-            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
             // Unsure how to get page numbers
             //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
 
@@ -441,23 +447,23 @@ public class IntegrationController {
     }
 
     //GET: Courses
-    @GetMapping(value = "/student/{student_id}")
-    public JSONObject getCourses(@PathVariable int student_id){
-        try{
-            JSONObject rst = new JSONObject();
-            rst.put("status_code", 200);
-            List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
-            JSONObject body = new JSONObject();
-            body.put("courses", courses);
-            rst.put("body", body);
-            return rst;
-        }
-        catch(Exception e){
-            JSONObject obj = new JSONObject();
-            obj.put("status_code", 404);
-            return obj;
-        }
-    }
+    // @GetMapping(value = "/student/{student_id}")
+    // public JSONObject getCourses(@PathVariable int student_id){
+    //     try{
+    //         JSONObject rst = new JSONObject();
+    //         rst.put("status_code", 200);
+    //         List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
+    //         JSONObject body = new JSONObject();
+    //         body.put("courses", courses);
+    //         rst.put("body", body);
+    //         return rst;
+    //     }
+    //     catch(Exception e){
+    //         JSONObject obj = new JSONObject();
+    //         obj.put("status_code", 404);
+    //         return obj;
+    //     }
+    // }
 
     //GET: Next Page ID
     @GetMapping(value="/scenario/{scenario_id}/version/{version_id}/page_id/{page_id}")
