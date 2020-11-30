@@ -25,7 +25,21 @@ public class ResponsesController {
 
     @GetMapping("/responses")
     public List<Responses> getAllResponses() {
-        return ReponsesRepository.findAll();
+        return responsesRepository.findAll();
+    }
+    
+    //gets all the responses for a specific scenario 
+    @GetMapping("/scenarioResponses/{scenario}")
+    public List<Responses> getAllResponsesForScenario(@PathVariable(value = "scenario") int scenario) {
+    	List<Responses> allResponses = responsesRepository.findByScenario(scenario);
+        return allResponses;
+    }
+    
+    //gets all responses taken by a student
+    @GetMapping("/studentResponses/{student}")
+    public List<Responses> getAllResponsesByStudent(@PathVariable(value = "student") int student) {
+    	List<Responses> allResponsesByStudent = responsesRepository.findByStudent(student);
+        return allResponsesByStudent;
     }
     
     //addStudentResponse()
