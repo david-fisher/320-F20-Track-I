@@ -126,17 +126,17 @@ public class IntegrationController {
     }
 
     /**
-     * (GET)2 project task assignment -- IN PROGRESS!!!!
+     * (GET)2 project task assignment
      */
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
     public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
+            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "PTA");
             int page_ID = pagesList.get(0).getPageID();
             String page_title = pagesList.get(0).getPageTitle();
-
+            String text = eventPageController.getPtaPageText(page_ID).get(0).getPageInfo();
             JSONObject rst = new JSONObject();
-            rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
+            rst.put("text", text);
             rst.put("page_title", page_title);
             JSONObject obj = new JSONObject();
             obj.put("body", rst);
@@ -147,6 +147,7 @@ public class IntegrationController {
         catch(Exception e) {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
+            obj.put("error", e);
             return obj;
         }
     }
@@ -212,6 +213,13 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
     public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
         try {
+            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
+            int page_ID = pagesList.get(0).getPageID();
+            String page_title = pagesList.get(0).getPageTitle();
+
+            String text = eventPageController.getIntroPageText(page_ID).get(0).getPageInfo();
+
+
             JSONObject obj = new JSONObject();
             JSONObject o = new JSONObject();
             o.put("page_title", "initial action page");
