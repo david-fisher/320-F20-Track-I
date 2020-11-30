@@ -63,6 +63,10 @@ public class Reflections {
     public int getSID(){
         return sID;
     }
+    
+    public int getVersion(){
+        return version;
+    }
 
     public int getCID(){
         return cID;
@@ -94,6 +98,10 @@ public class Reflections {
 
     public void setDate(Date newDate){
         date = newDate;
-    }    
+    }  
+    
+    public void setVersion(int version_){
+        version=version_;
+    }
 }
 
