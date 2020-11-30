@@ -22,6 +22,9 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @CrossOrigin
 @RestController
@@ -46,11 +49,16 @@ public class IntegrationController {
     @Autowired
     private EventPageController eventPageController;
 
+    @Autowired PagesController pagesController;
+
     @Autowired
     private ReflectionQuestionsController reflectionQuestionsController;
 
     @Autowired
     private ReflectionsController reflectionsController;
+
+    @Autowired 
+    private StudentsInController studentsInController;
 
     @Autowired
     private Courses course;
@@ -298,17 +306,20 @@ public class IntegrationController {
     /**
      * (GET) 8 Choose Final Action -- IN PROGRESS
      */
-    @GetMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/finalaction")
-    public JSONObject getFinalAction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id){
+    @GetMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/finalaction")
+    public JSONObject getFinalAction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id){
         try{
             JSONObject obj = new JSONObject();
-
+            obj.put("status_code", 200);
+            JSONObject body = new JSONObject();
+            ResponseEntity<ReflectionQuestions> reflections = reflectionQuestionsController.getReflectionById(page_id);
+            body.put("reflections", reflections);
+            obj.put("body", body);
             return obj;
         }
         catch(Exception e){
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
-
             return obj;
         }
     }
@@ -428,4 +439,43 @@ public class IntegrationController {
             return obj;
         }
     }
+
+    //GET: Courses
+    @GetMapping(value = "/student/{student_id}")
+    public JSONObject getCourses(@PathVariable int student_id){
+        try{
+            JSONObject rst = new JSONObject();
+            rst.put("status_code", 200);
+            List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
+            JSONObject body = new JSONObject();
+            body.put("courses", courses);
+            rst.put("body", body);
+            return rst;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
+    //GET: Next Page ID
+    @GetMapping(value="/scenario/{scenario_id}/version/{version_id}/page_id/{page_id}")
+    public JSONObject getNextPageID(@PathVariable int scenario_id,@PathVariable int version_id,@PathVariable int page_id) {
+        try{
+            JSONObject rst = new JSONObject();
+            rst.put("status_code", 200);
+            int next = pagesController.getNextPage(page_id);
+            JSONObject body = new JSONObject();
+            body.put("next_page_id", next);
+            rst.put("body", body);
+            return rst;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+    
 }
