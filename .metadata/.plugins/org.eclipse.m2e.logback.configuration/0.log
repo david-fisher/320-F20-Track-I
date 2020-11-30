@@ -39,3 +39,77 @@
 2020-11-29 17:26:14,089 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2020-11-29 17:26:14,091 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-11-29 17:26:14,092 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\cs320EthicsPlayer\src\test\resources
+2020-11-29 17:59:38,086 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 17:59:38,087 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 17:59:38,088 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 17:59:38,094 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 17:59:38,094 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\cs320EthicsPlayer\src\test\resources
+2020-11-29 17:59:38,114 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 17:59:38,115 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 17:59:38,115 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 17:59:38,117 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 17:59:38,118 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\partyinthebackend\src\test\resources
+2020-11-29 18:04:10,271 [Worker-2: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2020-11-29 18:04:58,515 [Worker-7: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2020-11-29 18:05:00,308 [Worker-7: Update Maven projects configuration] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT @ C:\Users\jeffr\320-F20-Track-I\cs320EthicsPlayer\pom.xml.
+2020-11-29 18:05:01,148 [Worker-7: Update Maven projects configuration] WARN  o.e.m.j.i.AbstractJavaProjectConfigurator - Could not determine source level, using default 1.5
+2020-11-29 18:05:01,165 [Worker-7: Update Maven projects configuration] WARN  o.e.m.j.i.AbstractJavaProjectConfigurator - Could not determine target level, using default 1.5
+2020-11-29 18:05:02,502 [Worker-7: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cs320EthicsPlayer/src/main/java
+2020-11-29 18:05:02,503 [Worker-7: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /cs320EthicsPlayer/src/main/resources
+2020-11-29 18:05:02,519 [Worker-7: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /cs320EthicsPlayer/src/main/resources
+2020-11-29 18:05:02,546 [Worker-7: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cs320EthicsPlayer/src/test/java
+2020-11-29 18:05:03,831 [Worker-7: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 5 sec
+2020-11-29 18:05:04,804 [Worker-2: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:05:04,813 [Worker-2: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 18:05:04,835 [Worker-2: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 18:05:04,850 [Worker-2: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:05:04,850 [Worker-2: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\cs320EthicsPlayer\src\test\resources
+2020-11-29 18:05:08,792 [Worker-17: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2020-11-29 18:05:09,474 [Worker-17: Update Maven projects configuration] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: team-8:partyinthebackend:0.0.1-SNAPSHOT @ C:\Users\jeffr\320-F20-Track-I\partyinthebackend\pom.xml.
+2020-11-29 18:05:10,150 [Worker-17: Update Maven projects configuration] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier  to /cs320EthicsPlayer/target/classes
+2020-11-29 18:05:10,585 [Worker-17: Update Maven projects configuration] WARN  o.e.m.j.i.AbstractJavaProjectConfigurator - Could not determine source level, using default 1.5
+2020-11-29 18:05:10,592 [Worker-17: Update Maven projects configuration] WARN  o.e.m.j.i.AbstractJavaProjectConfigurator - Could not determine target level, using default 1.5
+2020-11-29 18:05:10,717 [Worker-17: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /partyinthebackend/src/main/java
+2020-11-29 18:05:10,718 [Worker-17: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Resources folder /partyinthebackend/src/main/java overlaps with sources folder /partyinthebackend/src/main/java
+2020-11-29 18:05:10,723 [Worker-17: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /partyinthebackend/src/main/resources
+2020-11-29 18:05:10,748 [Worker-17: Update Maven projects configuration] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /partyinthebackend/src/test/java
+2020-11-29 18:05:11,598 [Worker-17: Update Maven projects configuration] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 2 sec
+2020-11-29 18:05:12,551 [Worker-13: Building workspace] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier  to /cs320EthicsPlayer/target/classes
+2020-11-29 18:05:12,559 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:05:12,560 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 18:05:12,567 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2020-11-29 18:05:12,590 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:05:12,590 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\partyinthebackend\src\test\resources
+2020-11-29 18:06:33,074 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:06:33,079 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 18:06:33,082 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 18:06:33,092 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:06:33,092 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\partyinthebackend\src\test\resources
+2020-11-29 18:07:33,222 [Worker-13: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 18:07:33,287 [Worker-13: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 18:21:18,955 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:21:18,955 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 18:21:18,955 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 18:21:18,956 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:21:18,957 [Worker-11: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\partyinthebackend\src\test\resources
+2020-11-29 18:22:24,517 [Worker-0: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 18:22:24,575 [Worker-0: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 18:25:25,298 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:25:25,305 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 18:25:25,308 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2020-11-29 18:25:25,310 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:25:25,311 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\partyinthebackend\src\test\resources
+2020-11-29 18:26:10,916 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:26:10,919 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 18:26:10,920 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2020-11-29 18:26:10,922 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 18:26:10,922 [Worker-21: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\partyinthebackend\src\test\resources
+2020-11-29 18:26:17,439 [Worker-18: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 18:26:17,501 [Worker-18: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 20:03:55,577 [Worker-29: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 20:03:55,578 [Worker-29: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-11-29 20:03:55,580 [Worker-29: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-11-29 20:03:55,583 [Worker-29: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-11-29 20:03:55,583 [Worker-29: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\jeffr\320-F20-Track-I\cs320EthicsPlayer\src\test\resources
+2020-11-29 20:04:32,225 [Worker-18: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
+2020-11-29 20:04:32,271 [Worker-18: Launching EthicsApplication] INFO  o.e.m.c.i.p.WorkspaceClassifierResolverManager - Resolving P/cs320EthicsPlayer: com.example:cs320EthicsPlayer:0.0.1-SNAPSHOT with classifier null to /cs320EthicsPlayer/target/classes
