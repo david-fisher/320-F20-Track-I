@@ -6,6 +6,7 @@ import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.model.ReflectionQuestions;
 import com.example.cs320EthicsPlayer.model.Reflections;
+import com.example.cs320EthicsPlayer.model.ScenariosFor;
 import com.example.cs320EthicsPlayer.model.Stakeholders;
 import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
@@ -30,6 +31,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/bt/v1")
 public class IntegrationController {
+
+    @Autowired
+    private ScenariosForController scenariosForController;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -321,6 +325,31 @@ public class IntegrationController {
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
             obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
+    //GET: Get the scenarios and versions assigned to a course, will return the first index
+    @GetMapping("value = /course/{course_id}")
+    public JSONObject getScenarios(@PathVariable int course_id){
+        try{
+            List<ScenariosFor> scenarios = scenariosForController.getScenariosForCourse(course_id);
+            List<Integer> scenario_ids = new ArrayList<Integer>();
+            JSONObject obj = new JSONObject();
+            JSONObject body = new JSONObject();
+
+            //put the scenario ids into a list
+            for(int i = 0; i < scenarios.size(); i ++){
+                scenario_ids.add(scenarios.get(i).getScenarioID());
+            }
+            body.put("scenario_id", scenario_ids.get(0));
+            obj.put("status_code", 200);
+            obj.put("body", body);
             return obj;
         }
         catch(Exception e){
