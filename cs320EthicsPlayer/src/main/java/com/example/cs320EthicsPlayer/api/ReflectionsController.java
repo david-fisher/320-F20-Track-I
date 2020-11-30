@@ -32,6 +32,13 @@ public class ReflectionsController {
         return reflectionRepository.findAll();
     }
 
+    @GetMapping("/reflections/{id}")
+    public ResponseEntity<Reflections> getReflectionById(@PathVariable(value = "id") ReflectionsID id) throws Exception {
+        Reflections reflect = reflectionRepository.findById(id)
+            .orElseThrow(() -> new Exception("Reflection "+ id + " not found"));
+        return ResponseEntity.ok().body(reflect);
+    }
+
     @PostMapping("/reflections")
     public Reflections createReflection(@Validated @RequestBody Reflections reflect){
         return reflectionRepository.save(reflect);
@@ -46,7 +53,6 @@ public class ReflectionsController {
         reflect.setCID(reflectDetails.getCID());
         reflect.setEID(reflectDetails.getSID());
         reflect.setDate(reflectDetails.getDate());
-        reflect.setVersion(reflectDetails.getVersion());
 
         final Reflections updatedReflection= reflectionRepository.save(reflect);
         return ResponseEntity.ok(updatedReflection);
