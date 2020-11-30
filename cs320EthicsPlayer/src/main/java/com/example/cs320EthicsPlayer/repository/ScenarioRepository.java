@@ -7,5 +7,5 @@ import com.example.cs320EthicsPlayer.model.ScenarioID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScenarioRepository extends JpaRepository<Scenario, ScenarioID> {
-//    List<Scenario> findByis_public(boolean isPublic);
+    List<Scenario> findByisPublic(boolean isPublic);
 }

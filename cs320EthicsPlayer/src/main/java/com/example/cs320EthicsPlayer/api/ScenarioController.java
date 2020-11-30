@@ -27,11 +27,12 @@ public class ScenarioController {
             .orElseThrow(()-> new Exception("Scenario "+ eID+ ", " + vID + " not found"));
         return s.getNAME();
     }
+    
     //getPublicScenarios()
-//    @GetMapping("/PublicScenarios")
-//    public List<Scenario> getPublicScenarios(){
-//        return scenarioRepository.findByis_public(true);
-//    }
+    @GetMapping("/PublicScenarios")
+    public List<Scenario> getPublicScenarios(){
+        return scenarioRepository.findByisPublic(true);
+    }
 
     //getMaxNumOfConvos()
     @GetMapping("MaxNumConvos{eID}/{vID}")
