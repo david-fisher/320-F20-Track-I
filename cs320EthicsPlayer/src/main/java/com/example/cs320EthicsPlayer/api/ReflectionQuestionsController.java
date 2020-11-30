@@ -30,11 +30,17 @@ public class ReflectionQuestionsController {
         return reflectQRepository.findAll();
     }    
 
+//    @GetMapping("/reflectionquestions/{page_ID}")
+//    public ResponseEntity<ReflectionQuestions> getReflectionById(@PathVariable(value = "page_ID") int page_ID) throws Exception {
+//        ReflectionQuestions reflectQs = reflectQRepository.findById(page_ID)
+//            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+//        return ResponseEntity.ok().body(reflectQs);
+//    }
+    
     @GetMapping("/reflectionquestions/{page_ID}")
-    public ResponseEntity<ReflectionQuestions> getReflectionById(@PathVariable(value = "page_ID") int page_ID) throws Exception {
-        ReflectionQuestions reflectQs = reflectQRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
-        return ResponseEntity.ok().body(reflectQs);
+    public List<ReflectionQuestions> getReflectionById(@PathVariable(value = "page_ID") int page_ID) throws Exception {
+        List<ReflectionQuestions> reflecQs = reflectQRepository.findByPageID(page_ID);
+        return reflecQs;
     }
 
     @PostMapping("/reflectionquestions")
@@ -42,26 +48,26 @@ public class ReflectionQuestionsController {
         return reflectQRepository.save(reflectQ);
     }
 
-    @PutMapping("/reflectionquestions/{page_ID}")
-    public ResponseEntity<ReflectionQuestions> updateReflection(@PathVariable(value="page_ID")int page_ID,@RequestBody ReflectionQuestions reflectQDetails) throws Exception {
-        ReflectionQuestions reflectQ =reflectQRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
-        
-        reflectQ.setReflectionQuestion(reflectQDetails.getReflectionQuestion());    
-
-
-        final ReflectionQuestions updatedReflectionQ= reflectQRepository.save(reflectQ);
-        return ResponseEntity.ok(updatedReflectionQ);
-    }
-
-    @DeleteMapping("/reflectionquestions/{id}")
-    public Map<String,Boolean> deleteReflection(@PathVariable(value = "id") int page_ID) throws Exception{
-        ReflectionQuestions reflectQ =reflectQRepository.findById(page_ID)
-            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
-        
-            reflectQRepository.delete(reflectQ);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
-    }
+//    @PutMapping("/reflectionquestions/{page_ID}")
+//    public ResponseEntity<ReflectionQuestions> updateReflection(@PathVariable(value="page_ID")int page_ID,@RequestBody ReflectionQuestions reflectQDetails) throws Exception {
+//        ReflectionQuestions reflectQ =reflectQRepository.findById(page_ID)
+//            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+//        
+//        reflectQ.setReflectionQuestion(reflectQDetails.getReflectionQuestion());    
+//
+//
+//        final ReflectionQuestions updatedReflectionQ= reflectQRepository.save(reflectQ);
+//        return ResponseEntity.ok(updatedReflectionQ);
+//    }
+//
+//    @DeleteMapping("/reflectionquestions/{id}")
+//    public Map<String,Boolean> deleteReflection(@PathVariable(value = "id") int page_ID) throws Exception{
+//        ReflectionQuestions reflectQ =reflectQRepository.findById(page_ID)
+//            .orElseThrow(() -> new Exception("Reflection questions from " + page_ID + " not found"));
+//        
+//            reflectQRepository.delete(reflectQ);
+//        Map<String, Boolean> response = new HashMap<>();
+//        response.put("deleted", Boolean.TRUE);
+//        return response;
+//    }
 }
