@@ -10,8 +10,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 @IdClass(ScenariosForID.class)
 @Table(name = "scenarios_for")
 @EntityListeners(AuditingEntityListener.class)
