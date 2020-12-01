@@ -220,8 +220,8 @@ public class IntegrationController {
     /**
      * (GET)4 initial action -- IN PROGRESS!!!!
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
-    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction/page_id/{page_id}")
+    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
             List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
             int page_ID = pagesList.get(0).getPageID();
@@ -273,7 +273,7 @@ public class IntegrationController {
 
             body.put("StakeHolders", stakeholders);
             // body.put("max_conversations", scenarioController.getMaxNumOfConvos(scenario_id, version_id));
-            body.put("max_conversations", stakeholders.size() - 1); // Just for now, can be replaced with line above, once it's figured out.
+            body.put("max_conversations", scenarioController.getMaxNumOfConvos(scenario_id, version_id)); // Just for now, can be replaced with line above, once it's figured out.
             obj.put("status_code", 200);
             obj.put("body", body);
 
