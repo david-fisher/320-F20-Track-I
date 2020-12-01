@@ -335,7 +335,7 @@ public class IntegrationController {
     }
 
     //GET: Get the scenarios and versions assigned to a course, will return the first index
-    @GetMapping("value = /course/{course_id}")
+    @GetMapping(value = "/course/{course_id}")
     public JSONObject getScenarios(@PathVariable int course_id){
         try{
             List<ScenariosFor> scenarios = scenariosForController.getScenariosForCourse(course_id);
