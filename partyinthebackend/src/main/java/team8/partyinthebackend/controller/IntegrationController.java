@@ -33,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class IntegrationController {
 
     @Autowired
+    private ActionPageController actionPageController;
+
+    @Autowired
     private ScenariosForController scenariosForController;
 
     @Autowired
@@ -190,19 +193,19 @@ public class IntegrationController {
      *
      * (GET)3 Initial Reflection -- IN PROGRESS!!!!
      */
-    @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
-    public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/page_id/{page_id}/initialreflection")
+    public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id){
         try{
             // List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
-            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(203);
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
             // 203 is in the DB, will update later
             //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
             JSONObject obj = new JSONObject();
             JSONObject o = new JSONObject();
             List<String> questions_asked = new ArrayList<>();
 
-            o.put("page_title", "Initial Reflection");
-            o.put("text", "initial reflection page content");
+            o.put("page_title", pagesController.getPageTitle(page_id));
+            o.put("text", reflectionQuestionsController.getReflectionById(page_id));
             for(int i = 0; i < allReflections.size(); i++){
                 questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
@@ -231,13 +234,13 @@ public class IntegrationController {
             List<String> questions_asked = new ArrayList<>();
 
             o.put("page_title", pagesController.getPageTitle(page_id));
-            o.put("text", pagesController.getPageType(page_id));// Need to get the text content for this particular page. This is just page type. 
+            o.put("text", "What Would you like to do?");// Need to get the text content for this particular page. This is just page type. 
             for(int i = 0; i < allReflections.size(); i++){
                 questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
-            obj.put("status_code", 200);
+            obj.put("choices", actionPageController.getPageInfoById(page_id));
             return obj;
         }
         catch(Exception e) {
@@ -315,13 +318,13 @@ public class IntegrationController {
             List<String> questions_asked = new ArrayList<>();
 
             o.put("page_title", pagesController.getPageTitle(page_id));
-            o.put("text", pagesController.getPageType(page_id));// Need to get the text content for this particular page. This is just page type.
+            o.put("text", "What would you like to do?");// Need to get the text content for this particular page. This is just page type.
             for(int i = 0; i < allReflections.size(); i++){
                 questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
-            obj.put("status_code", 200);
+            obj.put("choices", actionPageController.getPageInfoById(page_id));
             return obj;
         }
         catch(Exception e){
@@ -385,7 +388,7 @@ public class IntegrationController {
                 Reflections reflection = new Reflections();
                 reflection.setSID(student_id);
                 reflection.setCID(course.getCID()); // Unsure how to get the course ID
-                reflection.setEID(eventPage.getPageID()); // Unsure how to get the event ID.
+                reflection.setEID(scenario_id); // Unsure how to get the event ID.
                 reflection.setDate(current_date);
                 reflection.setReflections(answers[i]);
                 reflectionsController.createReflection(reflection);
