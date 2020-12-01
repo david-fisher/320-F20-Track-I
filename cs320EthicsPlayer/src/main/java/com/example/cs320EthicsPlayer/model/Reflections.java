@@ -77,6 +77,10 @@ public class Reflections {
     public Date getDate(){
         return date;
     }
+    
+    public int getVersion(){
+        return version;
+    }
 
     public void setReflections(String reflect){
         reflections=reflect;
@@ -92,6 +96,10 @@ public class Reflections {
 
     public void setEID(int eID){
         scenario=eID;
+    }
+    
+    public void setVersion(int version_){
+        version=version_;
     }
 
     public void setDate(Date newDate){
