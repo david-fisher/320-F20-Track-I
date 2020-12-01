@@ -53,7 +53,8 @@ public class IntegrationController {
     @Autowired
     private EventPageController eventPageController;
 
-    @Autowired PagesController pagesController;
+    @Autowired 
+    private PagesController pagesController;
 
     @Autowired
     private ReflectionQuestionsController reflectionQuestionsController;
@@ -223,21 +224,17 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction/page_id/{page_id}")
     public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
-            int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesList.get(0).getPageTitle();
-
-            String text = eventPageController.getIntroPageText(page_ID).get(0).getPageInfo();
-
-
             JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
             JSONObject o = new JSONObject();
-            o.put("page_title", "initial action page");
-            o.put("text", "initial action page content");
-            String[] questions_asked = new String[3];
-            questions_asked[0] = "question1";
-            questions_asked[1] = "question2";
-            questions_asked[2] = "question3";
+            List<String> questions_asked = new ArrayList<>();
+
+            o.put("page_title", pagesController.getPageTitle(page_id));
+            o.put("text", pagesController.getPageType(page_id));// Need to get the text content for this particular page. This is just page type. 
+            for(int i = 0; i < allReflections.size(); i++){
+                questions_asked.add(allReflections.get(i).getReflectionQuestion());
+            }
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
             obj.put("status_code", 200);
@@ -317,8 +314,8 @@ public class IntegrationController {
             JSONObject o = new JSONObject();
             List<String> questions_asked = new ArrayList<>();
 
-            o.put("page_title", "Final Action");
-            o.put("text", "Final action question");
+            o.put("page_title", pagesController.getPageTitle(page_id));
+            o.put("text", pagesController.getPageType(page_id));// Need to get the text content for this particular page. This is just page type.
             for(int i = 0; i < allReflections.size(); i++){
                 questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
