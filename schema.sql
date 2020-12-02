@@ -118,8 +118,10 @@ CREATE TABLE reflections_taken(
 	Scenario	INTEGER,
 	Version INTEGER,
 	DATE_TAKEN	DATE,
+	REFLECTION_PAGE INTEGER, 
 	PRIMARY KEY(REFLECTIONS, STUDENT, COURSE, Scenario, Version, DATE_TAKEN),
-	FOREIGN KEY (STUDENT, Scenario, Version, COURSE, DATE_TAKEN) references responses(STUDENT, Scenario, Version, COURSE, DATE_TAKEN)
+	FOREIGN KEY (STUDENT, Scenario, Version, COURSE, DATE_TAKEN) references responses(STUDENT, Scenario, Version, COURSE, DATE_TAKEN),
+	FOREIGN KEY(REFLECTION_PAGE) references pages(PAGE)
 );
 
 CREATE TABLE conversations(
