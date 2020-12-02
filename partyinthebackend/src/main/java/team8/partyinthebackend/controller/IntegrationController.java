@@ -146,12 +146,12 @@ public class IntegrationController {
     /**
      * (GET)2 project task assignment
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/page_id.{page_id}/pta")
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/{page_id}/pta")
     public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
             List<EventPage> pagesList = eventPageController.getPtaPageText(page_id);
             int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesController.get;
+            String page_title = pagesController.getPageTitle(page_ID);
             String text = eventPageController.getPtaPageText(page_ID).get(0).getPageInfo();
             JSONObject rst = new JSONObject();
             rst.put("text", text);
@@ -478,23 +478,23 @@ public class IntegrationController {
     }
 
     //GET: Courses
-    // @GetMapping(value = "/student/{student_id}")
-    // public JSONObject getCourses(@PathVariable int student_id){
-    //     try{
-    //         JSONObject rst = new JSONObject();
-    //         rst.put("status_code", 200);
-    //         List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
-    //         JSONObject body = new JSONObject();
+    //@GetMapping(value = "/student/{student_id}")
+    //public JSONObject getCourses(@PathVariable int student_id){
+    //    try{
+    //        JSONObject rst = new JSONObject();
+    //        rst.put("status_code", 200);
+    //        List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
+    //        JSONObject body = new JSONObject();
     //         body.put("courses", courses);
-    //         rst.put("body", body);
-    //         return rst;
-    //     }
-    //     catch(Exception e){
-    //         JSONObject obj = new JSONObject();
-    //         obj.put("status_code", 404);
-    //         return obj;
-    //     }
-    // }
+    //        rst.put("body", body);
+    //        return rst;
+    //    }
+    //    catch(Exception e){
+    //        JSONObject obj = new JSONObject();
+    //        obj.put("status_code", 404);
+    //        return obj;
+    //    }
+    //}
 
     //GET: Next Page ID
     @GetMapping(value="/scenario/{scenario_id}/version/{version_id}/page_id/{page_id}")
