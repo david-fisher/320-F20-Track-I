@@ -114,10 +114,9 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/introduction")
     public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id) throws Exception {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Intro");
+            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "INTRO");
             int page_ID = pagesList.get(0).getPageID();
             String page_title = pagesList.get(0).getPageTitle();
-
             String text = eventPageController.getIntroPageText(page_ID).get(0).getPageInfo();
 
             JSONObject rst = new JSONObject();
