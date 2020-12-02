@@ -6,7 +6,6 @@ import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.model.ReflectionQuestions;
 import com.example.cs320EthicsPlayer.model.Reflections;
-import com.example.cs320EthicsPlayer.model.Responses;
 import com.example.cs320EthicsPlayer.model.Stakeholders;
 import com.example.cs320EthicsPlayer.model.Student;
 import com.example.cs320EthicsPlayer.model.ScenariosFor;
@@ -75,9 +74,6 @@ public class IntegrationController {
     @Autowired
     private EventPage eventPage;
 
-    @Autowired
-    private ResponsesController responsesController;
-
     @GetMapping(value = "/ss")
     public List<Student> test1() throws Exception {
         return studentRepository.findAll();
@@ -122,9 +118,11 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/introduction")
     public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id) throws Exception {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Intro");
-            int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesList.get(0).getPageTitle();
+            //List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Intro");
+            //int page_ID = pagesList.get(0).getPageID();
+            int page_ID = pagesController.getIntroPageID(scenario_id, version_id);
+            //String page_title = pagesList.get(0).getPageTitle();
+            String page_title = pagesController.getPageTitle(page_ID);
 
             String text = eventPageController.getIntroPageText(page_ID).get(0).getPageInfo();
 
@@ -153,7 +151,7 @@ public class IntegrationController {
         try {
             List<EventPage> pagesList = eventPageController.getPtaPageText(page_id);
             int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesController.getPageTitle(page_id);
+            String page_title = pagesController.get;
             String text = eventPageController.getPtaPageText(page_ID).get(0).getPageInfo();
             JSONObject rst = new JSONObject();
             rst.put("text", text);
@@ -366,34 +364,37 @@ public class IntegrationController {
     /**
      * (POST) 20 Reflection on consequences student response
      */
-    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/course_id/{course_id}/page_id/{page_id}/consequences")
-    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "course_id") int course_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/consequences")
+    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
         try{
             List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
+            // Unsure how to get page numbers
+            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
 
             // Instantiating the date object to store current date and time
             Date current_date = new Date(System.currentTimeMillis());
+            // SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
             JSONObject obj = new JSONObject();
+
             // JSON array to store question_answer objects
             JSONObject[] questions_answers = new JSONObject[answers.length];
+
             // JSON object to store the array of question_answer objects
             JSONObject body_object = new JSONObject();
 
             // Storing question_answer objects in the JSON array
             for(int i = 0; i < allReflections.size(); i++){
-                // Creating a response object to store an answer in that table
-                Responses response = new Responses(student_id, scenario_id, version_id, course_id, current_date, answers[i]);
-                responsesController.addStudentResponse(response);
-                // Creating a reflection object to store reflection
+
+                // Storing this reflection in the database
                 Reflections reflection = new Reflections();
                 reflection.setSID(student_id);
-                reflection.setCID(course_id);
-                reflection.setEID(scenario_id);
-                reflection.setVersion(version_id);
+                reflection.setCID(course.getCID()); // Unsure how to get the course ID
+                reflection.setEID(scenario_id); // Unsure how to get the event ID.
                 reflection.setDate(current_date);
                 reflection.setReflections(answers[i]);
                 reflectionsController.createReflection(reflection);
-        
+
                 // For the JSON object
                 JSONObject pair = new JSONObject();
                 pair.put("question", allReflections.get(i).getReflectionQuestion());
@@ -421,14 +422,19 @@ public class IntegrationController {
     /**
      * (POST) 17 Reflection on conversation student response
      */
-    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/course_id/{course_id}/page_id/{page_id}/convoreflection")
-    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value="course_id") int course_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/convoreflection")
+    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
         try{
             List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
+            // Unsure how to get page numbers
+            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
 
             // Instantiating the date object to store current date and time
             Date current_date = new Date(System.currentTimeMillis());
+            // SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
             JSONObject obj = new JSONObject();
+
             // JSON array to store question_answer objects
             JSONObject[] questions_answers = new JSONObject[answers.length];
 
@@ -437,15 +443,12 @@ public class IntegrationController {
 
             // Storing question_answer objects in the JSON array
             for(int i = 0; i < allReflections.size(); i++){
+
                 // Storing this reflection in the database
-                Responses response = new Responses(student_id, scenario_id, version_id, course_id, current_date, answers[i]);
-                responsesController.addStudentResponse(response);
-                // Creating a reflection object to store reflection
                 Reflections reflection = new Reflections();
                 reflection.setSID(student_id);
-                reflection.setCID(course_id);
-                reflection.setEID(scenario_id);
-                reflection.setVersion(version_id);
+                reflection.setCID(1);
+                reflection.setEID(0);
                 reflection.setDate(current_date);
                 reflection.setReflections(answers[i]);
                 reflectionsController.createReflection(reflection);
