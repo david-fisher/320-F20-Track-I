@@ -2,10 +2,13 @@ package com.example.cs320EthicsPlayer.api;
 
 import java.util.List;
 
+import com.example.cs320EthicsPlayer.model.Conversations;
+import com.example.cs320EthicsPlayer.model.ConversationsID;
 import com.example.cs320EthicsPlayer.repository.ConversationsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +21,13 @@ public class ConversationsController {
 
     //getSpecificStakeholderConversations()
 
-    @GetMapping("/getSpecificStakeholdersConvos/{cID}/{scen}/{vers}")
-    public List<Integer> getSpecificStakeholderConversations(){
-        return null;
+    @GetMapping("/getSpecificStakeholdersConvos/{stk}/{convo}")
+    public Conversations getSpecificStakeholderConversations(@PathVariable(value="stk") int stk, @PathVariable(value="convo") int convo)
+        throws Exception{
+        ConversationsID a = new ConversationsID(stk, convo);
+        Conversations b = conversationsRepository.findById(a)
+            .orElseThrow(() -> new Exception("Conversation not found"));
+        return b;
     }
     
 }
