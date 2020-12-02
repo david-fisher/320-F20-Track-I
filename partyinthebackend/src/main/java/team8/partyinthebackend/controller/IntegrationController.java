@@ -144,12 +144,12 @@ public class IntegrationController {
     /**
      * (GET)2 project task assignment
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
-    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/page_id.{page_id}/pta")
+    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "PTA");
+            List<EventPage> pagesList = eventPageController.getPtaPageText(page_id);
             int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesList.get(0).getPageTitle();
+            String page_title = pagesController.getPageTitle(page_id);
             String text = eventPageController.getPtaPageText(page_ID).get(0).getPageInfo();
             JSONObject rst = new JSONObject();
             rst.put("text", text);
