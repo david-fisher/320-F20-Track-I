@@ -27,8 +27,6 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin
@@ -371,6 +369,24 @@ public class IntegrationController {
             return obj;
         }
         catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+    
+    /**
+     * (POST) 16 posts a students answer to the initial action
+     * Currently no know database functionality for storing action answers ¯\_(ツ)_/¯
+     */
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/initialaction")
+    public @ResponseBody JSONObject postInitialReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
             return obj;
