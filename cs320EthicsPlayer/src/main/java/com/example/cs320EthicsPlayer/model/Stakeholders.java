@@ -67,5 +67,9 @@ public class Stakeholders {
 	
 	public String getIntroduction() {
 		return introduction;
-	}
+    }
+    
+    public int getStakeHolderID(){
+        return stakeholder_ID;
+    }
 }

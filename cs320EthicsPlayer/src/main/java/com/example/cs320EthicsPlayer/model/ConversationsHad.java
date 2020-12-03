@@ -12,8 +12,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 @IdClass(ConversationsHadID.class)
 @Table(name="conversations_had")
 @EntityListeners(AuditingEntityListener.class)
