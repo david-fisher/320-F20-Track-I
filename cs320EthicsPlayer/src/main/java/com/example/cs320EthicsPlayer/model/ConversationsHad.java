@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@IdClass(ConversationsHadID.class)
 @Table(name="conversations_had")
 @EntityListeners(AuditingEntityListener.class)
 public class ConversationsHad {
@@ -46,6 +48,10 @@ public class ConversationsHad {
     @Column(name="CONVERSATION")
     int convo;
 
+    public ConversationsHad(){
+        super();
+    }
+    
     public ConversationsHad(@JsonProperty("sID") int student, @JsonProperty("cID") int course, @JsonProperty("scenario") int scenario, @JsonProperty("version") int version, @JsonProperty("Date") Date date, @JsonProperty("STK") int stakeholder, @JsonProperty("score") double score, @JsonProperty("convo") int convo){
         this.student=student;
         this.course=course;
@@ -60,6 +66,9 @@ public class ConversationsHad {
 
     public int getStakeholder(){
         return stakeholder;
+    }
+    public int getConvo(){
+        return convo;
     }
 
 }

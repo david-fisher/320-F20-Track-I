@@ -20,14 +20,17 @@ public class ConversationsController {
     ConversationsRepository conversationsRepository;
 
     //getSpecificStakeholderConversations()
-
-    @GetMapping("/getSpecificStakeholdersConvos/{stk}/{convo}")
-    public Conversations getSpecificStakeholderConversations(@PathVariable(value="stk") int stk, @PathVariable(value="convo") int convo)
-        throws Exception{
-        ConversationsID a = new ConversationsID(stk, convo);
-        Conversations b = conversationsRepository.findById(a)
-            .orElseThrow(() -> new Exception("Conversation not found"));
-        return b;
+//
+//    @GetMapping("/getSpecificStakeholdersConvos/{stk}/{convo}")
+//    public Conversations getSpecificStakeholderConversations(@PathVariable(value="stk") int stk, @PathVariable(value="convo") int convo) {
+//        ConversationsID a = new ConversationsID(stk, convo);
+//        Conversations b = conversationsRepository.findById(a);
+//        return b;
+//    }
+    
+    @GetMapping("/getSpecificStakeholdersConvos/{stk}")
+    public List<Conversations> getStakeholderConversations(@PathVariable(value="stk") int stk){
+        return conversationsRepository.findByStakeholder(stk);
     }
     
 }

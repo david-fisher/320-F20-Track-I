@@ -37,24 +37,30 @@ public class ConversationsHadController {
         conversationsHadRepository.save(a);
         return 1;
     }
+    
+  @GetMapping("/getStakeholders/{sID}")
+  public List<ConversationsHad> getStudentsStakeholderList(@PathVariable(value="sID") int sID){
+      List<ConversationsHad> a = conversationsHadRepository.findByStudent(sID);
+      return a;
+  }
 
-    @GetMapping("/getStakeholders/{sID}/{cID}/{scen}/{vers}/{date}")
-    public List<Integer> getStudentsStakeholderList(@PathVariable(value="sID") int sID, @PathVariable(value="cID") int cID, @PathVariable(value="scen") int scen, @PathVariable(value="vers") int vers, @PathVariable(value="date") Date date){
-        List<ConversationsHad> a = conversationsHadRepository.findByStudentANDCourseANDScenarioANDVersionANDDate(sID,cID,scen,vers,date);
-        List<Integer> b= new ArrayList<Integer>();
-        for(ConversationsHad t: a){
-            b.add(t.getStakeholder());
-        }
-        return b;
-    }
-
-    @DeleteMapping("/removeStakeholder/{sID}/{cID}/{scen}/{vers}/{date}/{stk}")
-    public void removeStakeholderFromStudentsList(@PathVariable(value="sID") int sID, @PathVariable(value="cID") int cID, @PathVariable(value="scen") int scen, @PathVariable(value="vers") int vers, @PathVariable(value="date") Date date, @PathVariable(value="stk") int stakeholder)
-            throws Exception {
-        ConversationsHadID a = new ConversationsHadID(sID, cID, scen, vers, date);
-        ConversationsHad c = conversationsHadRepository.findById(a)
-            .orElseThrow(() -> new Exception("ConversationsHad not found") );
-        conversationsHadRepository.delete(c);
-    }
+//    @GetMapping("/getStakeholders/{sID}/{cID}/{scen}/{vers}/{date}")
+//    public List<Integer> getStudentsStakeholderList(@PathVariable(value="sID") int sID, @PathVariable(value="cID") int cID, @PathVariable(value="scen") int scen, @PathVariable(value="vers") int vers, @PathVariable(value="date") Date date){
+//        List<ConversationsHad> a = conversationsHadRepository.findByStudentANDCourseANDScenarioANDVersionANDDate(sID,cID,scen,vers,date);
+//        List<Integer> b= new ArrayList<Integer>();
+//        for(ConversationsHad t: a){
+//            b.add(t.getStakeholder());
+//        }
+//        return b;
+//    }
+//
+//    @DeleteMapping("/removeStakeholder/{sID}/{cID}/{scen}/{vers}/{date}/{stk}")
+//    public void removeStakeholderFromStudentsList(@PathVariable(value="sID") int sID, @PathVariable(value="cID") int cID, @PathVariable(value="scen") int scen, @PathVariable(value="vers") int vers, @PathVariable(value="date") Date date, @PathVariable(value="stk") int stakeholder)
+//            throws Exception {
+//        ConversationsHadID a = new ConversationsHadID(sID, cID, scen, vers, date);
+//        ConversationsHad c = conversationsHadRepository.findById(a)
+//            .orElseThrow(() -> new Exception("ConversationsHad not found") );
+//        conversationsHadRepository.delete(c);
+//    }
 
 }
