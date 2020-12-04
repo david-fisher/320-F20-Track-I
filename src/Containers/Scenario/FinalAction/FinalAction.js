@@ -14,7 +14,7 @@ const FinalAction = () => {
 
   const handleClick = () => {
 
-    axios.post('',
+    axios.post('http://localhost:8080/bt/v1/student/1000/scenario/5000/1/page_id/202/initialaction',
         [choice.toString()]
       )
       .then(response => {
