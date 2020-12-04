@@ -308,6 +308,53 @@ public class IntegrationController {
     }
 
     /**
+     * (GET) 9 consequences -- IN PROGRESS!!!!
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/dar ")
+    public JSONObject getConsequences(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            obj.put("summary_text", "Nice job. Probably. This is just filler text, so I don't have a way to know.");
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            JSONObject blank = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("summary_text", blank);
+            return obj;
+        }
+    }
+
+    /**
+     * (GET) 10 radar plot
+     */
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/finalscore")
+    public JSONObject getRadarPlot(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            JSONObject rPlot = new JSONObject();
+            rPlot.put("field1", 1);
+            rPlot.put("field2", 4);
+            rPlot.put("field3", 5);
+            rPlot.put("field4", 3);
+            rPlot.put("field5", 2);
+            rPlot.put("field6", 2);
+            obj.put("body", rPlot);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            JSONObject blank = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", blank);
+            return obj;
+        }
+    }
+
+    /**
      * Get: 13, Student ID on logging in -- IN PROGRESS!!!!
      */
     @GetMapping(value = "/student/{student_username}")
@@ -453,6 +500,23 @@ public class IntegrationController {
             obj.put("status_code", 404);
             obj.put("body", questions_answers);
 
+            return obj;
+        }
+    }
+
+    /**
+     * (POST) 21 posts a students answer to the feedback section
+     */
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/feedback")
+    public @ResponseBody JSONObject updateFeedbackResponse(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @RequestParam String response) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 400);
             return obj;
         }
     }
