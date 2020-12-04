@@ -67,8 +67,7 @@ const Feedback = () => {
             <Col offset={5} span={18}>
                 <Title style={{color: "black"}}>Feedback</Title>
                 <Radar data={data} options={options} />
-                <Paragraph>Words about the plot<br/><br/>
-                </Paragraph>
+                
                 <Divider />
             </Col>
           </Row>

@@ -14,8 +14,8 @@ const InitialAction = () => {
 
   const handleClick = () => {
 
-    axios.post('http://localhost:8080/student/2/scenario/1/2/initialaction',
-        choice.toString()
+    axios.post('http://localhost:8080/bt/v1/student/1000/scenario/5000/1/page_id/202/initialaction',
+        [choice.toString()]
       )
       .then(response => {
         console.log("SENT",response);

@@ -14,8 +14,8 @@ const FinalAction = () => {
 
   const handleClick = () => {
 
-    axios.post('http://localhost:8080/bt/v1/student/1/scenario/5000/1/page_id/203/finalaction',
-        choice.toString()
+    axios.post('',
+        [choice.toString()]
       )
       .then(response => {
         console.log("SENT",response);
@@ -54,7 +54,7 @@ const FinalAction = () => {
       <Row>
         <Col offset={5} span={18}>
             <Title style={{color: "black"}}>Choose Final Action</Title>
-            <Paragraph>Here lays some text about this quandry...
+            <Paragraph>After acquiring more information about your task, what do you do next?
             </Paragraph>
             <Text strong style={{marginTop: "15px"}}>Please select what you would like to do next.</Text>
         </Col>

@@ -231,8 +231,8 @@ public class FrontendIntegration {
         try {
             JSONObject obj = new JSONObject();
             String[] questions = new String[3];
-            questions[0] = "Final action question1";
-            questions[1] = "Final action question2";
+            questions[0] = "Continue asking questions";
+            questions[1] = "Begin working";
             questions[2] = "Final action question3";
             obj.put("body", questions);
             obj.put("status_code", 200);
@@ -276,12 +276,13 @@ public class FrontendIntegration {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 200);
             JSONObject rPlot = new JSONObject();
-            rPlot.put("field1", 1);
-            rPlot.put("field2", 4);
-            rPlot.put("field3", 5);
-            rPlot.put("field4", 3);
-            rPlot.put("field5", 2);
-            rPlot.put("field6", 2);
+            rPlot.put("Career success", 3);
+            rPlot.put("Company benefits", 1);
+            rPlot.put("Healthcare improvements", 2);
+            rPlot.put("improved efficiency for doctors and patients", 3);
+            rPlot.put("Outcome of inaccuracy", 1);
+            rPlot.put("Patient confidentiality", 4);
+            rPlot.put("Skin tone bias", 1);
             obj.put("body", rPlot);
             return obj;
         }

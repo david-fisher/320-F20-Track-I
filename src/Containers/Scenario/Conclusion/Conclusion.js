@@ -1,5 +1,6 @@
 import React, {useContext,useEffect} from 'react';
 import { Row, Col, Typography, Divider, Input, Button } from 'antd';
+import { useHistory } from "react-router-dom";
 import {SidebarContext} from '../../../component/SidebarContext';
 
 const Conclusion = () => {
@@ -15,6 +16,8 @@ const Conclusion = () => {
       // newSidebarState["conclusion"].clickable = true
       // update({newSidebarState})
     }, [])
+
+    const history = useHistory()
   
     return (
       <>
@@ -35,9 +38,9 @@ const Conclusion = () => {
                 </Paragraph>
                 <TextArea />
             </Col>
-          </Row>
+          </Row>    
           <Row>
-                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} >Submit</Button></Col>
+                <Col offset={5}><Button type="primary" htmlType="submit" style={{marginTop: "10px"}} onClick={() => history.push("/dashboard")}>Submit</Button></Col>
             </Row>
       </>
     );

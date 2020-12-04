@@ -42,7 +42,7 @@ const GatherInformation = () => {
     <>
         <Row>
           <Col offset={5} span={18}>
-              <Title style={{color: "black"}}>{giData.page_title}</Title>
+              <Title style={{color: "black"}}>{'Instructions'}</Title>
               <Paragraph>{giData.text}<br/><br/>
                   <Text strong>Make your selection on the next screen.</Text>
               </Paragraph>

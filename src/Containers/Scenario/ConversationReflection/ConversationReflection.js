@@ -37,7 +37,7 @@ const ConversationReflection = () => {
     }
 
     useEffect(() => {    
-        axios.get('http://localhost:8080/bt/v1/student/1/scenario/5000/1/page_id/203/initialreflection',{
+        axios.get('http://localhost:8080/bt/v1/student/1/scenario/5000/1/page_id/205/initialreflection',{
           headers: {
             "Access-Control-Allow-Origin": true
           }
@@ -55,19 +55,15 @@ const ConversationReflection = () => {
         <>
             <Row>
                 <Col offset={5} span={18}>
-                    <Title style={{color: "black"}}>Reflect on Conversations Information</Title>
-                    <Paragraph>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, 
-                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset 
-                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like 
-                        Aldus PageMaker including versions of Lorem Ipsum.
-                    </Paragraph>
-                    <Text strong> {questions[0]}</Text><br/>
+                    <Title style={{color: "black"}}>{'Reflect on Conversations Information'}</Title>
+                    
+                    {/* <Text strong> {questions[0]}</Text><br/> */}
+                    <Text strong> {'What influenced your choices?'}</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer1(e.target.value)}/>
-                    <Text strong> {questions[1]}</Text><br/>
+                    {/* <Text strong> {questions[1]}</Text><br/> */}
+                    <Text strong> {'Do you think you took the right course of action?'}</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer2(e.target.value)}/>
+                    
 
                 </Col>
             </Row>

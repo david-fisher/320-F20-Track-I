@@ -51,7 +51,7 @@ const ProjectTask = () => {
         
         <Col offset={5} span={18}>
             <Title style={{color: "black"}}>{ptaData.page_title}</Title>
-            <Text strong> 1. This is Task 1</Text><br/>
+            {/* <Text strong> 1. This is Task 1</Text><br/>
             <ul style={{marginLeft:"40px"}}>
               <li><Text>Posts by and about the user</Text></li>
               <li><Text>Pictures and videos</Text></li>
@@ -64,7 +64,7 @@ const ProjectTask = () => {
               <li><Text>Browser histories</Text></li>
               <li><Text>Email</Text></li>
             </ul>
-            <br/>
+            <br/> */}
             <Paragraph>{ptaData.text}</Paragraph>
         </Col>
       </Row>
