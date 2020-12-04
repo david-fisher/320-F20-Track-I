@@ -26,15 +26,8 @@ function Classes(props) {
     {
       classNumber: "CS240",
       classTitle: "Reasoning Under Uncertainty"
-    },
-    {
-      classNumber: "Civ249",
-      classTitle: "Introduction to Civil and Environmental Engineering Measurements"
-    },
-    {
-      classNumber: "CS240",
-      classTitle: "really loooooooooooooooooooooooo oooooooooooooooooooooooooooooooooog naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaame"
-    },
+    }
+    
   ]
 
   return (

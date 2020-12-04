@@ -45,13 +45,13 @@ const ScenarioSummary = () => {
       </Row>
       <Row>
         <Col offset={5}>
-          <Card style={{textAlign:"left", fontSize:15,width:"61vw",background:"#ECECEC"}}> 
+          
             <p>{summaryData.summary_text}</p>
             <p>Congratulations you have complete the Umass Amherst Ethics simulation. You can see
               your point coverage of different ethical attributes in the next page.
               </p>
             <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button>
-          </Card>
+        
         </Col>
       </Row>
     </>
