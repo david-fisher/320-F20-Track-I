@@ -33,7 +33,7 @@ const InitialAction = () => {
   }
 
   useEffect(() => {    
-    axios.get('http://localhost:8080/student/2/scenario/1/2/initialaction',{
+    axios.get('http://localhost:8080/bt/v1/student/1000/scenario/5000/1/initialaction/page_id/202',{
       headers: {
         "Access-Control-Allow-Origin": true
       }

@@ -50,7 +50,7 @@ const ProjectTask = () => {
       <Row>
         
         <Col offset={5} span={18}>
-            <Title style={{color: "black"}}>{ptaData.page_title}</Title>
+            <Title style={{color: "black"}}>{'Project Task Assignment'}</Title>
             {/* <Text strong> 1. This is Task 1</Text><br/>
             <ul style={{marginLeft:"40px"}}>
               <li><Text>Posts by and about the user</Text></li>

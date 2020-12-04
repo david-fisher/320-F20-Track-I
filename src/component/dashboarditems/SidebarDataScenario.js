@@ -11,7 +11,7 @@ export const SidebarDataScenario = {
     routeTo: "initial-reflection"
   },
   gatherInformation: {
-    title: 'Gather Information',
+    title: 'Instructions',
     path: '/scenario/gather-information',
     clickable: false
   },
