@@ -21,8 +21,7 @@ const ScenarioIntro = () => {
     newSidebarState["introduction"].clickable = true
     update({newSidebarState})
 
-    //axios.get('http://localhost:8080/bt/v1/student/2/scenario/5000/1/introduction'
-    axios.get('http://localhost:8080/bt/v1/student/200/scenario/5000/1/Intro'
+    axios.get('http://localhost:8080/bt/v1/student/2/scenario/5000/1/introduction'
 ,{
       headers: {
         "Access-Control-Allow-Origin": true

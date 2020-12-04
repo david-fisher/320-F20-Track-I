@@ -38,7 +38,7 @@ const InitialRelection = () => {
     }
 
     useEffect(() => {    
-        axios.get('http://localhost:8080/student/2/scenario/1/2/initialreflection',{
+        axios.get('http://localhost:8080/bt/v1/student/1/scenario/5000/1/page_id/203/initialreflection',{
           headers: {
             "Access-Control-Allow-Origin": true
           }
@@ -59,7 +59,8 @@ const InitialRelection = () => {
             <Row>
                 <Col offset={5} span={18}>
                     <Title style={{color: "black"}}>{irData.page_title}</Title>
-                    <Paragraph>{irData.text}
+                    {/* {irData.text} */}
+                    <Paragraph>
                     </Paragraph>
                     <Text strong> {questions[0]}</Text><br/>
                     <TextArea rows={4} onChange={e => setAnswer1(e.target.value)}/>

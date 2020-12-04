@@ -28,7 +28,7 @@ const ScenarioRouter = () => {
 
 
   useEffect(() => {    
-    axios.get('http://localhost:8080/student/1/scenario/2/3/stakeholderinfo',{
+    axios.get('http://localhost:8080/bt/v1//student/1/scenario/5000/1/stakeholderinfo',{
       headers: {
         "Access-Control-Allow-Origin": true
       }

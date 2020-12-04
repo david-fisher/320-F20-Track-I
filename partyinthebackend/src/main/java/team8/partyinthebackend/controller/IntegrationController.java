@@ -159,7 +159,7 @@ public class IntegrationController {
     /**
      * (GET)2 project task assignment
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/page_id/{page_id}/pta")
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/{page_id}/pta")
     public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
             List<EventPage> pagesList = eventPageController.getPtaPageText(page_id);
@@ -220,7 +220,7 @@ public class IntegrationController {
             List<String> questions_asked = new ArrayList<>();
 
             o.put("page_title", pagesController.getPageTitle(page_id));
-            o.put("text", reflectionQuestionsController.getReflectionById(page_id));
+            o.put("text", reflectionQuestionsController.getReflectionById(page_id).get(0));
             for(int i = 0; i < allReflections.size(); i++){
                 questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
@@ -384,7 +384,7 @@ public class IntegrationController {
      * Currently no know database functionality for storing action answers ¯\_(ツ)_/¯
      */
     @PostMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/initialaction")
-    public @ResponseBody JSONObject postInitialReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers) {
+    public @ResponseBody JSONObject postInitialReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestBody String[] answers) {
         try {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 200);
@@ -401,7 +401,7 @@ public class IntegrationController {
      * (POST) 20 Reflection on consequences student response
      */
     @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/course_id/{course_id}/page_id/{page_id}/consequences")
-    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @PathVariable(value="course_id") int course_id, @RequestParam String[] answers){
+    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @PathVariable(value="course_id") int course_id, @RequestBody String[] answers){
         try{
             List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
 
@@ -461,7 +461,7 @@ public class IntegrationController {
      * (POST) 17 Reflection on conversation student response
      */
     @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/course_id/{course_id}/page_id/{page_id}/convoreflection")
-    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="course_id") int course_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
+    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="course_id") int course_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestBody String[] answers){
         try{
             List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
 
@@ -504,7 +504,7 @@ public class IntegrationController {
 
             obj.put("status_code", 200);
             obj.put("body", body_object);
-
+            
             return obj;
         }
         catch(Exception e){
@@ -512,7 +512,7 @@ public class IntegrationController {
             JSONObject questions_answers = new JSONObject();
             obj.put("status_code", 404);
             obj.put("body", questions_answers);
-
+            obj.put("error", e);
             return obj;
         }
     }

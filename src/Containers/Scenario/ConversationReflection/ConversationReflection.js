@@ -18,7 +18,7 @@ const ConversationReflection = () => {
 
     const handleClick = () => {
 
-    axios.post('http://localhost:8080/student/2/scenario/1/2/convoreflection',
+    axios.post('http://localhost:8080/bt/v1/student/1000/scenario/5000/1/course_id/320/page_id/205/convoreflection',
         [answer1,answer2]
       )
       .then(response => {
@@ -37,7 +37,7 @@ const ConversationReflection = () => {
     }
 
     useEffect(() => {    
-        axios.get('http://localhost:8080/scenario/1/2/convoreflection',{
+        axios.get('http://localhost:8080/bt/v1/student/1/scenario/5000/1/page_id/203/initialreflection',{
           headers: {
             "Access-Control-Allow-Origin": true
           }

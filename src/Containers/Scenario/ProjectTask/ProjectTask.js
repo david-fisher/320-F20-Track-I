@@ -30,7 +30,7 @@ const ProjectTask = () => {
     newSidebarState["projectTask"].clickable = true
     update({newSidebarState})
 
-    axios.get('http://localhost:8080/bt/v1/student/2/scenario/5000/1/pta',{
+    axios.get('http://localhost:8080/bt/v1/student/1/scenario/5000/1/201/pta',{
       headers: {
         "Access-Control-Allow-Origin": true
       }
