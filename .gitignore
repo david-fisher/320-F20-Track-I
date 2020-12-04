@@ -3,3 +3,4 @@ Postgres Installer/postgresql-13.0-1-windows-x64.exe
 .DS_Store
 cs320EthicsPlayer/src/main/java/com/example/cs320EthicsPlayer/model/.vs/slnx.sqlite
 cs320EthicsPlayer/src/main/java/com/example/cs320EthicsPlayer/model/.vs/model/v16/.suo
+partyinthebackend/src/main/resources/application.properties
