@@ -12,8 +12,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 @IdClass(ReflectionsID.class)
 @Table(name="reflections_taken")
 @EntityListeners(AuditingEntityListener.class)
@@ -75,6 +77,10 @@ public class Reflections {
     public Date getDate(){
         return date;
     }
+    
+    public int getVersion(){
+        return version;
+    }
 
     public void setReflections(String reflect){
         reflections=reflect;
@@ -90,6 +96,10 @@ public class Reflections {
 
     public void setEID(int eID){
         scenario=eID;
+    }
+    
+    public void setVersion(int version_){
+        version=version_;
     }
 
     public void setDate(Date newDate){

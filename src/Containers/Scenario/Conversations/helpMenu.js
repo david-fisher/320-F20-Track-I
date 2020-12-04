@@ -17,7 +17,7 @@ const HelpMenu = () => {
             <h2>Help Menu</h2>
                 <Collapse>
                     <Panel header="What is the Simulation about?">
-                        <p>This simulation will test tou ethical situation aware ess. Please choose carefully
+                        <p>This simulation will test you ethical situation awareness. Please choose carefully
                             and consciously on what you would really do in a given situation. Your answers
                             will be recorded so answer wisely.
                         </p>
@@ -37,7 +37,7 @@ const HelpMenu = () => {
                         <p>This depends on your teacher, look back into (insert place)</p>
                     </Panel>
                     <Panel header="Can I revert my decision?">
-                        <p>...No, ya done son</p>
+                        <p>No you cannot</p>
                     </Panel>
                 </Collapse>
             </Modal>

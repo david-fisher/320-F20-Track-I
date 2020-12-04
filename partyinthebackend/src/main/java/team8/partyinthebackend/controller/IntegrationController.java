@@ -1,19 +1,25 @@
 package team8.partyinthebackend.controller;
 
 import com.example.cs320EthicsPlayer.api.*;
+import com.example.cs320EthicsPlayer.model.ConversationsHad;
 import com.example.cs320EthicsPlayer.model.Courses;
 import com.example.cs320EthicsPlayer.model.EventPage;
 import com.example.cs320EthicsPlayer.model.Pages;
 import com.example.cs320EthicsPlayer.model.ReflectionQuestions;
 import com.example.cs320EthicsPlayer.model.Reflections;
+import com.example.cs320EthicsPlayer.model.Responses;
 import com.example.cs320EthicsPlayer.model.Stakeholders;
 import com.example.cs320EthicsPlayer.model.Student;
+import com.example.cs320EthicsPlayer.model.ScenariosFor;
+import com.example.cs320EthicsPlayer.model.Conversations;
 import com.example.cs320EthicsPlayer.repository.EventPageRepository;
 import com.example.cs320EthicsPlayer.repository.PagesRepository;
 import com.example.cs320EthicsPlayer.repository.StakeholderRepository;
 import com.example.cs320EthicsPlayer.repository.StudentRepository;
 import net.minidev.json.JSONObject;
 import team8.partyinthebackend.controller.FrontendIntegration.Data;
+
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +28,24 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @CrossOrigin
 @RestController
 @RequestMapping("/bt/v1")
 public class IntegrationController {
+
+    @Autowired
+    private ConversationsController conversations;
+
+    @Autowired
+    private ConversationsHadController conversationsHad;
+
+    @Autowired
+    private ActionPageController actionPageController;
+
+    @Autowired
+    private ScenariosForController scenariosForController;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -49,7 +65,8 @@ public class IntegrationController {
     @Autowired
     private EventPageController eventPageController;
 
-    @Autowired PagesController pagesController;
+    @Autowired
+    private PagesController pagesController;
 
     @Autowired
     private ReflectionQuestionsController reflectionQuestionsController;
@@ -57,14 +74,17 @@ public class IntegrationController {
     @Autowired
     private ReflectionsController reflectionsController;
 
-    @Autowired 
+    @Autowired
     private StudentsInController studentsInController;
 
-//    @Autowired
-//    private Courses course;
-//
-//    @Autowired
-//    private EventPage eventPage;
+    @Autowired
+    private Courses course;
+
+    @Autowired
+    private EventPage eventPage;
+
+    @Autowired
+    private ResponsesController responsesController;
 
     @GetMapping(value = "/ss")
     public List<Student> test1() throws Exception {
@@ -110,9 +130,12 @@ public class IntegrationController {
     @GetMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/introduction")
     public JSONObject getIntroduction(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id) throws Exception {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Intro");
-            int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesList.get(0).getPageTitle();
+            //List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "INTRO");
+            //int page_ID = pagesList.get(0).getPageID();
+
+            int page_ID = pagesController.getIntroPageID(scenario_id, version_id);
+            //String page_title = pagesList.get(0).getPageTitle();
+            String page_title = pagesController.getPageTitle(page_ID);
 
             String text = eventPageController.getIntroPageText(page_ID).get(0).getPageInfo();
 
@@ -134,17 +157,17 @@ public class IntegrationController {
     }
 
     /**
-     * (GET)2 project task assignment -- IN PROGRESS!!!!
+     * (GET)2 project task assignment
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/pta")
-    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/page_id/{page_id}/pta")
+    public JSONObject getPTA(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
-            List<Pages> pagesList = pagesRepository.findByScenarioIDAndScenarioVerIDAndPageType(scenario_id, version_id, "Event");
+            List<EventPage> pagesList = eventPageController.getPtaPageText(page_id);
             int page_ID = pagesList.get(0).getPageID();
-            String page_title = pagesList.get(0).getPageTitle();
-
+            String page_title = pagesController.getPageTitle(page_ID);
+            String text = eventPageController.getPtaPageText(page_ID).get(0).getPageInfo();
             JSONObject rst = new JSONObject();
-            rst.put("text", "Ultrices gravida dictum fusce ut. At lectus urna duis convallis convallis tellus id interdum. Faucibus in ornare quam viverra orci. Sit amet tellus cras adipiscing enim eu turpis egestas pretium. Pellentesque elit eget gravida cum sociis natoque. Aliquet eget sit amet tellus cras adipiscing enim. Fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel. Orci nulla pellentesque dignissim enim sit amet.\n" + "\n" + "Sit amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing. ");
+            rst.put("text", text);
             rst.put("page_title", page_title);
             JSONObject obj = new JSONObject();
             obj.put("body", rst);
@@ -155,6 +178,7 @@ public class IntegrationController {
         catch(Exception e) {
             JSONObject obj = new JSONObject();
             obj.put("status_code", 404);
+            obj.put("error", e);
             return obj;
         }
     }
@@ -184,24 +208,22 @@ public class IntegrationController {
      *
      * (GET)3 Initial Reflection -- IN PROGRESS!!!!
      */
-    @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/initialreflection")
-    public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id){
+    @GetMapping(value="/student/{student_id}/scenario/{scenario_id}/{version_id}/page_id/{page_id}/initialreflection")
+    public JSONObject getInitialReflection(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id){
         try{
-            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            // List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
             // 203 is in the DB, will update later
             //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
             JSONObject obj = new JSONObject();
             JSONObject o = new JSONObject();
             List<String> questions_asked = new ArrayList<>();
 
-            o.put("page_title", "Initial Reflection");
-            o.put("text", "initial reflection page content");
+            o.put("page_title", pagesController.getPageTitle(page_id));
+            o.put("text", reflectionQuestionsController.getReflectionById(page_id));
             for(int i = 0; i < allReflections.size(); i++){
-                questions_asked.add(allReflections.get(0).getReflectionQuestion());
+                questions_asked.add(allReflections.get(i).getReflectionQuestion());
             }
-            // String[] questions_asked = new String[2];
-            // questions_asked[0] = allReflections.get(0).getReflectionQuestion();
-            // questions_asked[1] = allReflections.get(1).getReflectionQuestion();
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
             obj.put("status_code", 200);
@@ -217,20 +239,23 @@ public class IntegrationController {
     /**
      * (GET)4 initial action -- IN PROGRESS!!!!
      */
-    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction")
-    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id) {
+    @GetMapping(value = "/student/{student_id}/scenario/{scenario_id}/{version_id}/initialaction/page_id/{page_id}")
+    public JSONObject getInitialAction(@PathVariable int student_id, @PathVariable int scenario_id, @PathVariable int version_id, @PathVariable int page_id) {
         try {
             JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
             JSONObject o = new JSONObject();
-            o.put("page_title", "initial action page");
-            o.put("text", "initial action page content");
-            String[] questions_asked = new String[3];
-            questions_asked[0] = "question1";
-            questions_asked[1] = "question2";
-            questions_asked[2] = "question3";
+            List<String> questions_asked = new ArrayList<>();
+
+            o.put("page_title", pagesController.getPageTitle(page_id));
+            o.put("text", "What Would you like to do?");// Need to get the text content for this particular page. This is just page type.
+            for(int i = 0; i < allReflections.size(); i++){
+                questions_asked.add(allReflections.get(i).getReflectionQuestion());
+            }
             o.put("questions_asked", questions_asked);
             obj.put("body", o);
-            obj.put("status_code", 200);
+            obj.put("choices", actionPageController.getPageInfoById(page_id));
             return obj;
         }
         catch(Exception e) {
@@ -250,20 +275,25 @@ public class IntegrationController {
             List<JSONObject> stakeholders = new ArrayList<JSONObject>();
             JSONObject body = new JSONObject();
             JSONObject obj = new JSONObject();
+            Date current_date = new Date(System.currentTimeMillis());
 
             for(int i = 0; i < stakeholderList.size(); i++){
                 JSONObject indInfo = new JSONObject();
                 String bio = stakeholderList.get(i).getJob() + ", " + stakeholderList.get(i).getDescription();
                 indInfo.put("name", stakeholderList.get(i).getName());
                 indInfo.put("conversation", stakeholderList.get(i).getIntroduction());
+                /*Code for the future
+                indInfo.put("question", conversations.getStakeholderConversations(stakeholderList.get(i).getStakeHolderID()).get(0).getQuestion());
+                indInfo.put("response", conversations.getStakeholderConversations(stakeholderList.get(i).getStakeHolderID()).get(0).getResponse());
+                */
                 indInfo.put("bio", bio);
-
                 stakeholders.add(indInfo);
             }
 
             body.put("StakeHolders", stakeholders);
+            body.put("date", current_date);
             // body.put("max_conversations", scenarioController.getMaxNumOfConvos(scenario_id, version_id));
-            body.put("max_conversations", stakeholders.size() - 1); // Just for now, can be replaced with line above, once it's figured out.
+            body.put("max_conversations", stakeholderList.size() - 1); // Just for now, can be replaced with line above, once it's figured out.
             obj.put("status_code", 200);
             obj.put("body", body);
 
@@ -303,10 +333,18 @@ public class IntegrationController {
         try{
             JSONObject obj = new JSONObject();
             obj.put("status_code", 200);
-            JSONObject body = new JSONObject();
-            ResponseEntity<ReflectionQuestions> reflections = reflectionQuestionsController.getReflectionById(page_id);
-            body.put("reflections", reflections);
-            obj.put("body", body);
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
+            JSONObject o = new JSONObject();
+            List<String> questions_asked = new ArrayList<>();
+
+            o.put("page_title", pagesController.getPageTitle(page_id));
+            o.put("text", "What would you like to do?");// Need to get the text content for this particular page. This is just page type.
+            for(int i = 0; i < allReflections.size(); i++){
+                questions_asked.add(allReflections.get(i).getReflectionQuestion());
+            }
+            o.put("questions_asked", questions_asked);
+            obj.put("body", o);
+            obj.put("choices", actionPageController.getPageInfoById(page_id));
             return obj;
         }
         catch(Exception e){
@@ -316,77 +354,59 @@ public class IntegrationController {
         }
     }
 
+    //GET: Get the scenarios and versions assigned to a course, will return the first index
+    @GetMapping(value = "/course/{course_id}")
+    public JSONObject getScenarios(@PathVariable int course_id){
+        try{
+            List<ScenariosFor> scenarios = scenariosForController.getScenariosForCourse(course_id);
+            List<Integer> scenario_ids = new ArrayList<Integer>();
+            JSONObject obj = new JSONObject();
+            JSONObject body = new JSONObject();
+
+            //put the scenario ids into a list
+            for(int i = 0; i < scenarios.size(); i ++){
+                scenario_ids.add(scenarios.get(i).getScenarioID());
+            }
+            body.put("scenario_id", scenario_ids.get(0));
+            obj.put("status_code", 200);
+            obj.put("body", body);
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+    
+    /**
+     * (POST) 16 posts a students answer to the initial action
+     * Currently no know database functionality for storing action answers ¯\_(ツ)_/¯
+     */
+    @PostMapping(value = "/student/{student_id}/scenario/{scenario}/{scenarioVer}/page_id/{page_id}/initialaction")
+    public @ResponseBody JSONObject postInitialReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers) {
+        try {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 200);
+            return obj;
+        }
+        catch(Exception e) {
+            JSONObject obj = new JSONObject();
+            obj.put("status_code", 404);
+            return obj;
+        }
+    }
+
     /**
      * (POST) 20 Reflection on consequences student response
      */
-//    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/consequences")
-//    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @RequestParam String[] answers){
-//        try{
-//            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
-//            // Unsure how to get page numbers
-//            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
-//
-//            // Instantiating the date object to store current date and time
-//            Date current_date = new Date(System.currentTimeMillis());
-//            // SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//
-//            JSONObject obj = new JSONObject();
-//
-//            // JSON array to store question_answer objects
-//            JSONObject[] questions_answers = new JSONObject[answers.length];
-//
-//            // JSON object to store the array of question_answer objects
-//            JSONObject body_object = new JSONObject();
-//
-//            // Storing question_answer objects in the JSON array
-//            for(int i = 0; i < allReflections.size(); i++){
-//
-//                // Storing this reflection in the database
-//                Reflections reflection = new Reflections();
-//                reflection.setSID(student_id);
-//                reflection.setCID(course.getCID()); // Unsure how to get the course ID
-//                reflection.setEID(eventPage.getPageID()); // Unsure how to get the event ID.
-//                reflection.setDate(current_date);
-//                reflection.setReflections(answers[i]);
-//                reflectionsController.createReflection(reflection);
-//
-//                // For the JSON object
-//                JSONObject pair = new JSONObject();
-//                pair.put("question", allReflections.get(i).getReflectionQuestion());
-//                pair.put("answer", answers[i]);
-//                questions_answers[i] = pair;
-//            }
-//            // Adding the questions_answers array to the body_object JSON object
-//            body_object.put("questions_answers", questions_answers);
-//
-//            obj.put("status_code", 200);
-//            obj.put("body", body_object);
-//
-//            return obj;
-//        }
-//        catch(Exception e){
-//            JSONObject obj = new JSONObject();
-//            JSONObject questions_answers = new JSONObject();
-//            obj.put("status_code", 404);
-//            obj.put("body", questions_answers);
-//
-//            return obj;
-//        }
-//    }
-
-    /**
-     * (POST) 17 Reflection on conversation student response
-     */
-    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/convoreflection")
-    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @RequestParam String[] answers){
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/course_id/{course_id}/page_id/{page_id}/consequences")
+    public @ResponseBody JSONObject consequencesReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @PathVariable(value="course_id") int course_id, @RequestParam String[] answers){
         try{
-            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getAllReflections();
-            // Unsure how to get page numbers
-            //ResponseEntity<ReflectionQuestions> questions = reflectionQuestionsController.getReflectionById(203);
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
 
             // Instantiating the date object to store current date and time
             Date current_date = new Date(System.currentTimeMillis());
-            // SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
             JSONObject obj = new JSONObject();
 
@@ -400,10 +420,75 @@ public class IntegrationController {
             for(int i = 0; i < allReflections.size(); i++){
 
                 // Storing this reflection in the database
+                // Creating a response object to store an answer in that table
+                Responses response = new Responses(student_id, scenario_id, version_id, course_id, current_date, answers[i]);
+                responsesController.addStudentResponse(response);
+                // Creating a reflection object to store reflection
                 Reflections reflection = new Reflections();
                 reflection.setSID(student_id);
-                reflection.setCID(1);
-                reflection.setEID(0);
+                reflection.setCID(course_id);
+                reflection.setEID(scenario_id);
+                reflection.setVersion(version_id);
+                reflection.setDate(current_date);
+                reflection.setReflections(answers[i]);
+                reflectionsController.createReflection(reflection);
+
+                // For the JSON object
+                JSONObject pair = new JSONObject();
+                pair.put("question", allReflections.get(i).getReflectionQuestion());
+                pair.put("answer", answers[i]);
+                questions_answers[i] = pair;
+            }
+            // Adding the questions_answers array to the body_object JSON object
+            body_object.put("questions_answers", questions_answers);
+
+            obj.put("status_code", 200);
+            obj.put("body", body_object);
+
+            return obj;
+        }
+        catch(Exception e){
+            JSONObject obj = new JSONObject();
+            JSONObject questions_answers = new JSONObject();
+            obj.put("status_code", 404);
+            obj.put("body", questions_answers);
+
+            return obj;
+        }
+    }
+
+    /**
+     * (POST) 17 Reflection on conversation student response
+     */
+    @PostMapping(value="/student/{student_id}/scenario/{scenario}/{scenarioVer}/course_id/{course_id}/page_id/{page_id}/convoreflection")
+    public @ResponseBody JSONObject conversationReflection(@PathVariable int student_id, @PathVariable(value="scenario") int scenario_id, @PathVariable(value="course_id") int course_id, @PathVariable(value="scenarioVer") int version_id, @PathVariable(value = "page_id") int page_id, @RequestParam String[] answers){
+        try{
+            List<ReflectionQuestions> allReflections = reflectionQuestionsController.getReflectionById(page_id);
+
+            // Instantiating the date object to store current date and time
+            Date current_date = new Date(System.currentTimeMillis());
+
+            JSONObject obj = new JSONObject();
+
+            // JSON array to store question_answer objects
+            JSONObject[] questions_answers = new JSONObject[answers.length];
+
+            // JSON object to store the array of question_answer objects
+            JSONObject body_object = new JSONObject();
+
+            // Storing question_answer objects in the JSON array
+            for(int i = 0; i < allReflections.size(); i++){
+
+                // Storing this reflection in the database
+                // Creating a response object to store an answer in that table
+                Responses response = new Responses(student_id, scenario_id, version_id, course_id, current_date, answers[i]);
+                responsesController.addStudentResponse(response);
+                // Creating a reflection object to store reflection
+                Reflections reflection = new Reflections();
+                reflection.setSID(student_id);
+                reflection.setCID(course_id);
+                reflection.setEID(scenario_id);
+                reflection.setVersion(version_id);
                 reflection.setDate(current_date);
                 reflection.setReflections(answers[i]);
                 reflectionsController.createReflection(reflection);
@@ -433,23 +518,23 @@ public class IntegrationController {
     }
 
     //GET: Courses
-    @GetMapping(value = "/student/{student_id}")
-    public JSONObject getCourses(@PathVariable int student_id){
-        try{
-            JSONObject rst = new JSONObject();
-            rst.put("status_code", 200);
-            List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
-            JSONObject body = new JSONObject();
-            body.put("courses", courses);
-            rst.put("body", body);
-            return rst;
-        }
-        catch(Exception e){
-            JSONObject obj = new JSONObject();
-            obj.put("status_code", 404);
-            return obj;
-        }
-    }
+    //@GetMapping(value = "/student/{student_id}")
+    //public JSONObject getCourses(@PathVariable int student_id){
+    //    try{
+    //        JSONObject rst = new JSONObject();
+    //        rst.put("status_code", 200);
+    //        List<Integer> courses = studentsInController.getCoursesInStudent(student_id);
+    //        JSONObject body = new JSONObject();
+    //         body.put("courses", courses);
+    //        rst.put("body", body);
+    //        return rst;
+    //    }
+    //    catch(Exception e){
+    //        JSONObject obj = new JSONObject();
+    //        obj.put("status_code", 404);
+    //        return obj;
+    //    }
+    //}
 
     //GET: Next Page ID
     @GetMapping(value="/scenario/{scenario_id}/version/{version_id}/page_id/{page_id}")
@@ -469,5 +554,5 @@ public class IntegrationController {
             return obj;
         }
     }
-    
+
 }

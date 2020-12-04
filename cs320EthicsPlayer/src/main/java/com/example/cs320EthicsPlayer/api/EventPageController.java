@@ -44,7 +44,7 @@ public class EventPageController {
             //.orElseThrow(() -> new Exception("Event page " + page_ID + " not found"));
             Pages p = pagesRepository.findById(page_ID)
                 .orElseThrow(() -> new Exception("Page " + page_ID + " not found"));
-        if(!(p.getPageType().equals("Intro"))){ throw new Exception("Incorrect Page Type");}
+        if(!(p.getPageType().equals("INTRO"))){ throw new Exception("Incorrect Page Type");}
         return ePage;
     }
 

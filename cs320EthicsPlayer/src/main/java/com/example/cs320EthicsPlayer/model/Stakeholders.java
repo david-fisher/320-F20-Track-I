@@ -9,8 +9,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 @Table(name="stakeholders")
 @EntityListeners(AuditingEntityListener.class)
 public class Stakeholders {
@@ -65,5 +67,9 @@ public class Stakeholders {
 	
 	public String getIntroduction() {
 		return introduction;
-	}
+    }
+    
+    public int getStakeHolderID(){
+        return stakeholder_ID;
+    }
 }
