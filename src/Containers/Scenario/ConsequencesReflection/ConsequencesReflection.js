@@ -29,6 +29,10 @@ const ConsequencesReflection = () => {
         });
 
         history.push("/scenario/conclusion")
+
+        let newSidebarState = state
+        newSidebarState["feedback"].routeTo = "conclusion"
+        update({newSidebarState})
     }
 
     

@@ -46,11 +46,11 @@ const ScenarioIntro = () => {
       </Row>
       <Row>
         <Col offset={5}>
-          <Card style={{textAlign:"left", fontSize:15,width:"61vw",background:"#ECECEC"}}> 
+      
               {introData.text}<br/>
 
             <Button type="primary" htmlType="submit" onClick={handleClick}>Next Page</Button><Col offset={23}></Col>
-          </Card>
+          
         </Col>
       </Row>
     </>
